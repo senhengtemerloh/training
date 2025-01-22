@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Grand Senheng Temerloh Training Kit</title>
-  
+
   <style>
     /* BASIC RESET AND STYLING */
     * {
@@ -14,483 +15,431 @@
     }
 
     body {
-      background-color: #f0f2f5;
+      background-color: #f8f9fa;
       color: #333;
       line-height: 1.6;
       padding: 20px;
     }
 
-    h1, h2, h3, h4, h5 {
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
     h1 {
       text-align: center;
       text-transform: uppercase;
-      color: #d32f2f;
+      color: #dc3545;
       margin-bottom: 30px;
     }
-    
-    /* SECTION WRAPPER */
+
     .section {
       background-color: #fff;
       padding: 20px;
       margin-bottom: 25px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-left: 5px solid #007bff;
     }
 
     .section h2 {
       margin-bottom: 15px;
-      color: #00796b;
+      color: #007bff;
       text-transform: uppercase;
       border-bottom: 2px solid #e0e0e0;
       padding-bottom: 6px;
     }
 
-    /* COLOR BOXES FOR TIPS, WARNINGS, NOTES */
-    .info-box {
-      background-color: #e3f2fd; /* Light blue */
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      border-left: 5px solid #2196f3; /* Blue accent */
-    }
-    .warning-box {
-      background-color: #fff8e1; /* Light yellow */
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      border-left: 5px solid #ffeb3b; /* Yellow accent */
-    }
+    .info-box,
+    .warning-box,
     .note-box {
-      background-color: #fce4ec; /* Light pink */
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 15px;
-      border-left: 5px solid #e91e63; /* Pink accent */
+      border-left: 5px solid;
     }
 
-    /* TABLE FOR MEMBERSHIP TIERS */
+    .info-box {
+      background-color: #e3f2fd;
+      border-color: #2196f3;
+    }
+
+    .warning-box {
+      background-color: #fff8e1;
+      border-color: #ffeb3b;
+    }
+
+    .note-box {
+      background-color: #fce4ec;
+      border-color: #e91e63;
+    }
+
+    ul {
+      list-style: disc inside;
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 15px 0;
     }
+
     table thead {
-      background-color: #004d40; 
+      background-color: #343a40;
       color: #fff;
     }
-    table th, table td {
+
+    table th,
+    table td {
       text-align: left;
       padding: 10px;
       border: 1px solid #ccc;
     }
 
-    /* FLOWCHART LIST STYLE */
-    .flowchart {
-      list-style: none;
-      padding-left: 20px;
-      position: relative;
+    .highlight {
+      background-color: #d4edda;
+      padding: 10px;
+      border-radius: 5px;
+      border-left: 5px solid #28a745;
+      margin: 10px 0;
     }
-    .flowchart li {
+
+    .mind-map {
       margin: 20px 0;
-      position: relative;
-      padding-left: 35px;
-      line-height: 1.4;
-    }
-    .flowchart li::before {
-      content: "•";
-      color: #ff5722; 
-      font-size: 20px;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    /* MAP CONTAINER */
-    .map-container {
-      margin-top: 20px;
       text-align: center;
     }
 
-    /* FOOTER */
-    .footer {
-      background-color: #c8e6c9; /* light green */
-      padding: 20px;
+    .mind-map img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
       border-radius: 10px;
-      margin-top: 20px;
-      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* LINKS */
-    a {
-      color: #d81b60;
+    .button {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #28a745;
+      color: white;
+      border-radius: 5px;
       text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* SMALL STYLE TWEAKS */
-    .subnote {
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 5px;
+      text-align: center;
+      margin-top: 10px;
     }
 
+    .button:hover {
+      background-color: #218838;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      table th, table td {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* FLOWCHART STYLES */
+    .flowchart {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .flowchart .step {
+      flex: 1 1 300px;
+      background-color: #fff3cd;
+      border-left: 5px solid #ffa000;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    .flowchart .step-icon {
+      background-color: #ffc107;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-right: 10px;
+    }
+    .flowchart .step-content h4 {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .flowchart .step-content p,
+    .flowchart .step-content ul {
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- MAIN TITLE -->
   <h1>Grand Senheng Temerloh Training Kit</h1>
 
-  <!-- 1. GREETING & ENGAGEMENT -->
+  <!-- 1. Greeting & Qualifying Customer Needs -->
   <div class="section" id="greeting">
-    <h2>1. Greeting & Engagement</h2>
+    <h2>1. Salam & Memahami Keperluan Pelanggan</h2>
     <div class="info-box">
-      <strong>Greeting Example:</strong><br>
-      “Selamat datang ke Grand Senheng Temerloh! How can I help you today?”
+      <strong>Contoh Salam:</strong><br />
+      "Selamat datang ke Grand Senheng Temerloh! Bagaimana saya boleh bantu encik/cik hari ini?"
     </div>
-    <p>
-      Pastikan customer rasa selesa. Tanyakan soalan terbuka untuk faham keperluan mereka 
-      (<em>contoh:</em> “Encik nak cari TV saiz berapa? Bajet sekitar berapa?”).
-    </p>
-    <p>
-      Jika mereka belum pasti apa nak beli, beri cadangan mengikut bajet atau keperluan 
-      (contoh: “Nak Smart TV? Ada perlu 4K?”).
-    </p>
+    <p>Fahami keperluan pelanggan dengan bertanya soalan terbuka:</p>
+    <ul>
+      <li><strong>Soalan:</strong> "Encik nak cari produk apa hari ini? TV? Smartphone? Barang dapur elektrik?"</li>
+      <li><strong>Susulan:</strong> "Saiz atau spesifikasi bagaimana yang encik berminat?"</li>
+    </ul>
+  </div>
 
-    <div class="note-box">
-      <strong>Check Membership (P1):</strong><br>
-      • Kalau belum ada, introduce kelebihan Senheng PlusOne® (P1).<br>
-      • Kalau dah ada, suruh buka <strong>Senheng App</strong> untuk check status & S-Coin balance.
+  <!-- 2. Semakan Stok (Stock Checking) -->
+  <div class="section" id="stock-checking">
+    <h2>2. Semakan Stok (Stock Checking)</h2>
+    <div class="highlight">
+      <p><strong>Tip:</strong> Pastikan pelanggan tahu bahawa stok perlu disahkan sebelum pembelian.</p>
+    </div>
+
+    <div class="flowchart">
+      <!-- STEP 1: Tawarkan Semakan -->
+      <div class="step">
+        <div class="step-icon">1</div>
+        <div class="step-content">
+          <h4>Tawarkan Semakan Stok</h4>
+          <p>"Encik, jika ada barang yang encik berkenan, beritahu saya ya. Saya akan semak stok untuk encik."</p>
+          <p>Minta pelanggan menunggu sebentar sementara semakan stok dijalankan.</p>
+        </div>
+      </div>
+
+      <!-- STEP 2: Stok Ada -->
+      <div class="step">
+        <div class="step-icon">2</div>
+        <div class="step-content">
+          <h4>Jika Stok Ada</h4>
+          <p>Maklumkan pelanggan dengan segera untuk meneruskan pembelian.</p>
+        </div>
+      </div>
+
+      <!-- STEP 3: Stok Tiada -->
+      <div class="step">
+        <div class="step-icon">3</div>
+        <div class="step-content">
+          <h4>Jika Stok Tiada</h4>
+          <ul>
+            <li>"Barang perlu ditempah dari CDC dan biasanya sampai keesokan hari."</li>
+            <li>"Encik perlu buat bayaran penuh untuk tempahan ini."</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- 2. MEMBERSHIP P1 -->
+  <!-- 3. Semakan Keahlian P1 (Membership) -->
   <div class="section" id="membership">
-    <h2>2. Senheng PlusOne (P1) Membership</h2>
-    <p>
-      Keahlian P1 ada empat peringkat: <strong>Basic</strong>, <strong>Classic</strong>, 
-      <strong>Gold</strong>, dan <strong>Corporate</strong>. 
-      Setiap tier ada manfaat berbeza, termasuk <em>discounts</em>, 
-      <em>extra warranty</em>, dan <em>S-Coin</em>.
-    </p>
-    
+    <h2>3. Semakan Keahlian P1 (Membership)</h2>
+    <div class="highlight">
+      <p>
+        <strong>Tip:</strong> Jika pelanggan menolak pilihan berbayar, cadangkan mendaftar sebagai
+        <em>P1 Basic</em>.
+      </p>
+    </div>
+
+    <!-- Visual Flowchart for Membership Checking -->
+    <div class="flowchart">
+      <!-- STEP 1: Semak Status Pelanggan -->
+      <div class="step">
+        <div class="step-icon">1</div>
+        <div class="step-content">
+          <h4>Semak Status Pelanggan</h4>
+          <ul>
+            <li>Minta <strong>IC</strong> atau bantu pelanggan semak melalui <strong>aplikasi Senheng</strong>.</li>
+            <li>
+              Jika <strong>OTP dihantar ke telefon</strong> pelanggan, itu tanda mereka sudah berdaftar.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 2: Kemas Kini / Pembaharuan -->
+      <div class="step">
+        <div class="step-icon">2</div>
+        <div class="step-content">
+          <h4>Kemas Kini & Pembaharuan</h4>
+          <ul>
+            <li>
+              <strong>Tempoh Keahlian Tamat:</strong> Terangkan faedah pembaharuan dan bantu proses
+              <em>renewal</em>.
+            </li>
+            <li>
+              <strong>OTP Hantar ke Nombor Lama:</strong> Bantu pelanggan kemaskini nombor telefon dan
+              info lain di <strong>sistem showroom</strong>.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 3: Daftar Keahlian Baharu -->
+      <div class="step">
+        <div class="step-icon">3</div>
+        <div class="step-content">
+          <h4>Daftar Keahlian Baharu</h4>
+          <ul>
+            <li>
+              <strong>Jika belum berdaftar:</strong> Terangkan jenis keahlian (Basic, Classic, Gold) &
+              bantu pendaftaran.
+            </li>
+            <li>
+              Kos pendaftaran dan faedah berbeza mengikut tier. 
+              (Contoh: <em>Basic</em> percuma, <em>Classic</em> RM24, <em>Gold</em> RM36).
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 4: Nikmati Aplikasi Senheng -->
+      <div class="step">
+        <div class="step-icon">4</div>
+        <div class="step-content">
+          <h4>Nikmati Aplikasi Senheng</h4>
+          <ul>
+            <li>
+              <strong>Super App:</strong> Boleh beli barang, tiket wayang, pesan makanan, main permainan, 
+              dan banyak lagi.
+            </li>
+            <li>
+              <strong>Maklumat Keahlian Lengkap:</strong> Paparan tier, tarikh luput, baki S-Coin, baucar,
+              dan promosi eksklusif.
+            </li>
+            <li>
+              <strong>Invoice / Resit Elektronik:</strong> Semua resit disimpan dalam app; hanya
+              pelanggan boleh akses.
+            </li>
+            <li>
+              <strong>Privasi Pelanggan:</strong> Staf di outlet hanya dapat lihat sejarah pembelian,
+              waranti, dan tarikh luput keahlian — bukan baucar atau baki S-Coin.
+            </li>
+            <li>
+              <strong>Galakkan Pelanggan:</strong> “Jom muat turun app Senheng untuk promosi 
+              terkini & pelbagai keistimewaan!”
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>Yuran & Faedah Keahlian</h3>
     <table>
       <thead>
         <tr>
           <th>Tier</th>
-          <th>Yuran/Daftar</th>
+          <th>Pendaftaran</th>
           <th>Renewal</th>
-          <th>Ringkasan Manfaat</th>
+          <th>Faedah</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Basic</td>
-          <td>Percuma (tiada tamat)</td>
-          <td>Tidak Berkenaan</td>
+          <td>Percuma</td>
+          <td>Tiada</td>
           <td>
-            - Member Price only<br>
-            - Tiada S-Coin<br>
-            - Extra 1-year warranty (≥ RM500) perlu RM9.90
+            - Harga ahli sahaja<br/>
+            - Tiada S-Coin<br/>
+            - Waranti tambahan (RM9.90)
           </td>
         </tr>
         <tr>
           <td>Classic</td>
+          <td>RM24 (4 tahun)</td>
+          <td>RM24 (4 tahun)</td>
           <td>
-            RM24 (4 tahun)<br>
-            <span class="subnote">Atau daftar terus Lifetime (untuk customer baru) = RM72</span>
-          </td>
-          <td>
-            RM24 (4 tahun)<br> 
-            <span class="subnote">Atau RM60 (lifetime) hanya untuk existing P1 member</span>
-          </td>
-          <td>
-            - Member Price + promosi<br>
-            - Extra 1-year warranty (≥ RM500) percuma<br>
-            - Boleh earn S-Coin untuk produk terpilih
+            - Harga ahli + promosi<br/>
+            - Waranti tambahan percuma<br/>
+            - S-Coin untuk produk terpilih
           </td>
         </tr>
         <tr>
           <td>Gold</td>
-          <td>Jemputan sahaja</td>
-          <td>RM36 (4 tahun) / RM90 (seumur hidup)</td>
+          <td>Jemputan</td>
+          <td>RM36 (4 tahun)</td>
           <td>
-            - Semua faedah Classic<br>
-            - +2% S-Coin untuk setiap pembelian<br>
-            - Biasanya diberi kepada customer yang kerap beli/jumlah tinggi
+            - Semua faedah Classic<br/>
+            - 2% tambahan S-Coin
           </td>
-        </tr>
-        <tr>
-          <td>Corporate</td>
-          <td>Bergantung pada perjanjian</td>
-          <td>Bergantung pada perjanjian</td>
-          <td>Tier khas untuk syarikat</td>
         </tr>
       </tbody>
     </table>
-
-    <h3>Check Membership di App</h3>
-    <ul>
-      <li>Download <strong>Senheng App</strong> (Google Play / App Store)</li>
-      <li>Log masuk dengan IC; OTP dihantar via WhatsApp</li>
-      <li>Kalau dah ada membership, jangan tekan “Register”</li>
-      <li>Jika OTP tak sampai, tolong customer update no. telefon di sistem</li>
-      <li>Dalam app, boleh tengok jenis membership (Basic/Classic/Gold), 
-          status (aktif/expired), dan bila nak renew</li>
-    </ul>
-
-    <div class="warning-box">
-      <strong>Showroom system</strong> hanya boleh check purchase history, warranty, 
-      dan status keahlian secara ringkas. 
-      <em>S-Coin balance hanya</em> boleh dilihat oleh customer dalam Senheng App.
-    </div>
   </div>
 
-  <!-- 3. S-COIN -->
-  <div class="section" id="scoin">
-    <h2>3. S-Coin: Dapat & Guna</h2>
-    <p>
-      S-Coin ni macam “cashback” atau “reward points.” 
-      Cara pengiraan dan redemption ada syarat tertentu.
-    </p>
-
-    <h3>Cara Earn (Dapatkan) S-Coin</h3>
-    <ul>
-      <li>
-        <strong>Gold:</strong> +2% S-Coin untuk semua pembelian. 
-        <br><em>Contoh:</em> Kalau produk biasa offer 10% S-Coin, Gold akan dapat 12%.
-      </li>
-      <li>
-        <strong>Classic:</strong> Dapat S-Coin hanya untuk produk “eligible” (terpilih).
-      </li>
-      <li>
-        <strong>Basic:</strong> Tak dapat S-Coin. 
-        <em>Kena upgrade ke Classic atau Gold (jika dijemput).</em>
-      </li>
-    </ul>
-
+  <!-- 4. Pelan Pembayaran Ansuran (Installment Payment) -->
+  <div class="section" id="installment-plan">
+    <h2>4. Pelan Pembayaran Ansuran (Installment Payment)</h2>
     <div class="info-box">
-      <strong>Bila S-Coin Masuk?</strong><br>
-      - S-Coin akan dikreditkan ke akaun customer <strong>keesokan hari</strong> 
-      selepas pembelian.<br>
-      - Tak boleh guna on the same day.
+      <p>
+        <strong>Panduan:</strong> Jika pelanggan bertanya tentang ansuran, semak terlebih dahulu sama ada mereka mempunyai kad kredit atau tidak.
+      </p>
+    </div>
+    <div class="mind-map">
+      <img 
+        src="https://via.placeholder.com/800x400?text=Installment+Payment+Flowchart" 
+        alt="Flowchart Pelan Ansuran"
+      />
     </div>
 
-    <h3>Cara Redeem (Guna) S-Coin</h3>
-    <ul>
-      <li>
-        <strong>Produk Terpilih:</strong> Sesetengah produk boleh ditebus penuh guna S-Coin 
-        (kalau balance mencukupi).
-      </li>
-      <li>
-        <strong>Pembelian ≥ RM1,000:</strong> Boleh tebus hingga 10% dari harga item 
-        (contoh: jika TV RM2,000, boleh tebus max RM200).
-      </li>
-      <li>
-        Kalau nak tebus produk2 khusus (contoh: “My Rewards My Choice” corner), 
-        pastikan S-Coin cukup untuk bayar <em>full price</em> barang tu. 
-        <strong>Tidak boleh top-up cash</strong> jika S-Coin tak mencukupi.
-      </li>
-    </ul>
-    <div class="warning-box">
-      <strong>My Rewards My Choice</strong><br>
-      - Sila rujuk katalog atau corner yang pihak showroom sudah sediakan.<br>
-      - Staff telah susun dan display senarai barang yang customer boleh redeem dengan S-Coin penuh.<br>
-      - Jika S-Coin tak cukup, redemption tak boleh proceed (tiada topup).
+    <div class="flowchart">
+      <!-- STEP 1: Credit Card -->
+      <div class="step">
+        <div class="step-icon">1</div>
+        <div class="step-content">
+          <h4>Semak Kad Kredit</h4>
+          <p>Jika pelanggan <strong>mempunyai kad kredit</strong>:</p>
+          <ul>
+            <li>Terangkan perbezaan dengan kad debit (tiada ansuran kad debit).</li>
+            <li>Jelaskan pelan 0% faedah untuk kad kredit terpilih.</li>
+            <li>Caj pemprosesan sekali bergantung pada bank & tempoh (12, 24, atau 36 bulan).</li>
+            <li>Barang boleh terus diambil jika transaksi berjaya & had mencukupi.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 2: No Credit Card -->
+      <div class="step">
+        <div class="step-icon">2</div>
+        <div class="step-content">
+          <h4>Jika Tiada Kad Kredit</h4>
+          <p>Pilihan seperti Aeon Credit atau Chailease:</p>
+          <ul>
+            <li>Minta IC untuk semakan kelayakan.</li>
+            <li>Kelulusan bergantung kepada syarikat pinjaman.</li>
+            <li>Jika belum pernah memohon, perlu dokumen pendapatan (3 bulan slip gaji).</li>
+            <li>Proses kelulusan mengambil masa 2–3 hari bekerja.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 3: BNPL -->
+      <div class="step">
+        <div class="step-icon">3</div>
+        <div class="step-content">
+          <h4>BNPL (Buy Now Pay Later)</h4>
+          <p>Pilihan seperti Atome, Shopee PayLater, atau GrabPay Later:</p>
+          <ul>
+            <li>Muat turun aplikasi BNPL & lengkapkan e-KYC.</li>
+            <li>Dapatkan had kelulusan daripada penyedia BNPL.</li>
+            <li>Pembayaran dibuat berdasarkan had yang diluluskan.</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <!-- 4. WARRANTY & REPLACEMENT WARRANTY -->
-  <div class="section" id="warranty">
-    <h2>4. Waranti & Replacement Warranty (RW)</h2>
-
-    <p>
-      <em>Electrical / mechanical faults sahaja</em> yang dilindungi waranti. 
-      Kerosakan luaran (external damage) tidak ditanggung.
-    </p>
-
-    <h3>Barang ≥ RM500</h3>
-    <ul>
-      <li><strong>Manufacturer Warranty:</strong> 1–2 tahun (ikut jenama)</li>
-      <li>
-        <strong>Extra 1-Year (Classic & Gold):</strong> Percuma, 
-        jadi total waranti boleh jadi 2–3 tahun bergantung jenama
-      </li>
-      <li>
-        Untuk tuntutan waranti, barang akan dihantar repair. 
-        Jika tak boleh dibaiki (tiada sparepart/cost tinggi), 
-        insurans akan ganti barang baharu.
-      </li>
-    </ul>
-
-    <h3>Barang &lt; RM500</h3>
-    <ul>
-      <li><strong>Manufacturer Warranty:</strong> Selalunya 1 tahun</li>
-      <li>
-        <strong>Replacement Warranty (RW):</strong> 
-        Bayar caj tambahan untuk tambah 1 tahun, 
-        di mana kerosakan akan diganti baru (one-to-one).
-      </li>
-      <li>
-        Kalau <em>tak ambil RW</em>, barang rosak perlu dihantar ke pengeluar (2–3 bulan).
-      </li>
-    </ul>
-
-    <div class="note-box">
-      <strong>Pastikan barang bersih bila claim</strong> 
-      (contoh: blender, vacuum). 
-      Kalau terlalu kotor, boleh menyebabkan claim susah diproses.
-    </div>
-  </div>
-
-  <!-- 5. STOCK & ORDER -->
-  <div class="section" id="stock-order">
-    <h2>5. Stock & Order</h2>
-    <p>
-      Mula-mula, semak stok di stor dalaman. Kalau stok habis, semak 
-      <strong>central logistics (CDC)</strong>. 
-      Barang dari CDC biasanya tiba keesokan hari (kecuali hari Ahad).
-    </p>
-    <p>
-      Untuk barang besar (≥ RM500), kebiasaannya tak disimpan di showroom. 
-      <strong>Full payment</strong> diperlukan untuk order. 
-      Beritahu customer bila anggaran stok sampai.
-    </p>
-    <div class="info-box">
-      <strong>TIP:</strong> Kalau pelanggan nak cepat, boleh cadangkan model alternatif 
-      (yang ada ready-stock) jika sesuai dengan bajet dan spesifikasi yang diingini.
-    </div>
-  </div>
-
-  <!-- 6. DELIVERY & SELF-COLLECT -->
-  <div class="section" id="delivery">
-    <h2>6. Delivery & Self-Collect</h2>
-    <ul>
-      <li>
-        <strong>Big Items (≥ RM500):</strong> 
-        Delivery fee RM25 (flat rate, seluruh Malaysia). 
-        Staf showroom akan atur jadual penghantaran.
-      </li>
-      <li>
-        <strong>Digital Gadgets:</strong> 
-        Walaupun harganya melebihi RM500 (contoh: smartphone), 
-        kami <em>tak</em> buat penghantaran. Customer <strong>mesti ambil sendiri</strong> di showroom.
-      </li>
-    </ul>
-    <p>
-      Sentiasa semak alamat dan no. telefon sebelum aturkan delivery. 
-      Pastikan customer tahu tempoh anggaran ketibaan (ETA).
-    </p>
-  </div>
-
-  <!-- 7. PAYMENT METHODS -->
-  <div class="section" id="payment">
-    <h2>7. Payment Methods</h2>
-    <p>
-      Bila <strong>customer dah pilih barang</strong>, tanya mereka <em>nak bayar guna apa</em>.  
-      Kalau <strong>cash atau kad</strong>, boleh terus ke kaunter. 
-      Jika customer tanya pasal <em>bayar bulanan</em> (ansuran), 
-      tanya dulu sama ada mereka ada <strong>credit card</strong> atau tidak.
-    </p>
-
-    <div class="info-box">
-      <strong>Installment dengan Credit Card:</strong><br>
-      - 0% interest (0% installment plan).<br>
-      - Pilih tempoh 12, 24 atau 36 bulan (bergantung bank).<br>
-      - Ada <em>yuran proses sekali sahaja</em>, kadar berbeza ikut bank dan tenure.<br>
-      - Harga barang dibahagi secara rata mengikut tempoh (contoh: 12 bulan).
-    </div>
-
-    <div class="note-box">
-      <strong>Kalau tiada Credit Card?</strong><br>
-      - Boleh jelaskan pasal <strong>Aeon Credit Service</strong> atau <strong>Chailease</strong> (1.25% interest, perlukan 3 bulan slip gaji).<br>
-      - Sesuai untuk pelanggan tanpa kad kredit yang mahu bayaran ansuran lebih lama.
-    </div>
-
-    <ul>
-      <li>
-        <strong>Cash & Card:</strong> 
-        Tunai, debit card, atau credit card.
-      </li>
-      <li>
-        <strong>Voucher & S-Coin:</strong> 
-        <br>- <em>Voucher</em> boleh wujud dalam Senheng App (e-Voucher) atau fizikal (selalu RM50 / RM100).  
-        <br>- Pastikan semak <em>terma & syarat</em> untuk setiap voucher.  
-        <br>- Gunakan jumlah voucher yang sah untuk pembelian.  
-        <br>- <em>S-Coin</em> pula adalah cashback, rujuk bahagian S-Coin di atas.
-      </li>
-      <li>
-        <strong>BNPL (Buy Now Pay Later):</strong> 
-        Atome, Shopee PayLater, GrabPay Later, BoostFlex 
-        <br><em>
-          (Kebanyakan BNPL 3 bulan sahaja, tak digalakkan untuk barang mahal, 
-          sebab bayaran bulanan jadi tinggi. Contoh phone RM3,000 → RM1,000 sebulan).
-        </em>
-      </li>
-      <li>
-        <strong>Cheque:</strong> 
-        Tertakluk pada approval dan tempoh proses.
-      </li>
-    </ul>
-  </div>
-
-  <!-- 8. SALES FLOW -->
-  <div class="section" id="sales-flow">
-    <h2>8. Sales Flow (Ringkasan)</h2>
-    <ol class="flowchart">
-      <li><strong>Greet & Qualify</strong> – Sambut customer, tanya keperluan</li>
-      <li><strong>Explain P1 Membership</strong> – Kalau tiada, promote & daftarkan</li>
-      <li><strong>Product & Warranty</strong> – Terangkan features, promos, S-Coin, RW</li>
-      <li><strong>Stock & Payment</strong> – Semak stok, pilih kaedah pembayaran (cash/card, installment, voucher, etc.)</li>
-      <li><strong>Finalize Sale</strong> – Confirm purchase, minta payment, atur delivery/self-collect</li>
-    </ol>
-  </div>
-
-  <!-- MAP SECTION -->
-  <div class="section" id="map">
-    <h2>Lokasi Grand Senheng Temerloh</h2>
-    <p>
-      Di bawah adalah lokasi kami di Temerloh (rujuk Google Maps untuk navigasi penuh):
-    </p>
-    <div class="map-container">
-      <!-- You can adjust the coordinates/zoom in the src below to refine the exact location -->
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63709.34205239602!2d102.42150007320851!3d3.449288372224271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31c66d5db386ad81%3A0x253a0d47063e59f0!2sSenheng%20Temerloh%20(Pekan%20Sehari)!5e0!3m2!1sen!2smy!4v1687529024329!5m2!1sen!2smy"
-        width="600"
-        height="400"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy">
-      </iframe>
-    </div>
-  </div>
-
-  <!-- REFERENCES -->
-  <div class="section" id="references">
-    <h2>References</h2>
-    <ul>
-      <li><a href="https://www.senheng.com.my/" target="_blank">Senheng Official Website (BM & EN)</a></li>
-      <li><a href="https://www.senheng.com.my/plusone" target="_blank">Senheng PlusOne (P1)</a></li>
-      <li><a href="https://play.google.com/store/apps/details?id=my.com.senheng" target="_blank">Senheng App - Google Play</a></li>
-      <li><a href="https://apps.apple.com/my/app/senheng-app/id1479048295" target="_blank">Senheng App - App Store</a></li>
-    </ul>
-  </div>
-
-  <!-- FOOTER / PENUTUP -->
-  <div class="footer">
-    <h2>Penutup</h2>
-    <p>
-      Dengan panduan ini, <strong>new joiners di Grand Senheng Temerloh</strong> 
-      akan lebih faham proses sales, membership P1, waranti, S-Coin, 
-      dan kaedah pembayaran (termasuk voucher dan BNPL). 
-      <em>Always be friendly, pantas dalam urus keperluan pelanggan, dan selamat bertugas!</em>
-    </p>
   </div>
 
 </body>
