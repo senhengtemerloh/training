@@ -289,14 +289,51 @@
       color: #ff5722;
     }
 
-    /* FAQ STYLES */
-    .faq-item {
-      margin-bottom: 20px;
+    /* FAQ ACCORDION STYLES */
+    .accordion {
+      margin-top: 20px;
     }
-    .faq-item h4 {
-      font-size: 1rem;
+
+    /* Hide the checkbox input */
+    .accordion-item input[type="checkbox"] {
+      display: none;
+    }
+
+    /* The clickable question label */
+    .accordion-title {
+      display: block;
+      background: #dc3545; /* red background (adjust if needed) */
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
       margin-bottom: 8px;
-      color: #dc3545;
+      transition: background 0.2s ease;
+    }
+    /* On hover, slightly darken the background */
+    .accordion-title:hover {
+      background: #c82333;
+    }
+
+    /* The answer container hidden by default */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 15px;
+      background-color: #f8f9fa; /* light grey background */
+      border-left: 4px solid #dc3545; /* matching red accent */
+      border-radius: 0 0 6px 6px;
+      transition: max-height 0.3s ease;
+    }
+    .accordion-content p {
+      padding: 10px 0;
+      margin: 0;
+    }
+
+    /* When checkbox is checked, expand the answer */
+    .accordion-item input[type="checkbox"]:checked ~ .accordion-content {
+      max-height: 300px; /* adjust if needed for more content */
     }
   </style>
 </head>
@@ -744,131 +781,184 @@
     </div>
   </div>
 
-  <!-- 6. FAQ (Frequently Asked Questions) -->
+  <!-- 6. FAQ (Frequently Asked Questions) with Accordion -->
   <div class="section" id="faq">
     <h2>6. FAQ</h2>
+    <div class="accordion">
 
-    <!-- FAQ 1 -->
-    <div class="faq-item">
-      <h4>1. Berapa lama tempoh yang diambil untuk penghantaran?</h4>
-      <p>
-        Biasanya barang akan tiba di showroom keesokan hari selepas bayaran dan
-        tempahan dibuat (contoh: beli Isnin, barang tiba Selasa). Penghantaran
-        ke rumah pelanggan pula bergantung pada <strong>jadual pemandu</strong>
-        dan <strong>jarak lokasi</strong>. Lokasi yang jauh (>50km) mungkin
-        mempunyai jadual khusus. Rujuk
-        <em>jadual dalaman Senheng</em> untuk info terkini.
-      </p>
-    </div>
+      <!-- FAQ 1 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq1" />
+        <label class="accordion-title" for="faq1">
+          1. Berapa lama tempoh yang diambil untuk penghantaran?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Biasanya barang akan tiba di showroom keesokan hari selepas bayaran
+            dan tempahan dibuat (contoh: beli Isnin, barang tiba Selasa).
+            Penghantaran ke rumah pelanggan pula bergantung pada
+            <strong>jadual pemandu</strong> dan <strong>jarak lokasi</strong>.
+            Lokasi yang jauh (>50km) mungkin mempunyai jadual khusus. Rujuk
+            <em>jadual dalaman Senheng</em> untuk info terkini.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 2 -->
-    <div class="faq-item">
-      <h4>2. Jika TV ingin dipasang di dinding, apa yang perlu disediakan?</h4>
-      <p>
-        Pelanggan perlu menyediakan <strong>bracket</strong> yang sesuai dengan
-        saiz TV. Jika tiada bracket, pelanggan boleh membeli bracket baharu
-        (caj pemasangan RM60). Pastikan bracket sedia ada tidak terlalu kecil
-        untuk model TV baharu dan <em>VESA pattern</em> serasi.
-      </p>
-    </div>
+      <!-- FAQ 2 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq2" />
+        <label class="accordion-title" for="faq2">
+          2. Jika TV ingin dipasang di dinding, apa yang perlu disediakan?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Pelanggan perlu menyediakan <strong>bracket</strong> yang sesuai
+            dengan saiz TV. Jika tiada bracket, pelanggan boleh membeli bracket
+            baharu (caj pemasangan RM60). Pastikan bracket sedia ada tidak
+            terlalu kecil untuk model TV baharu dan <em>VESA pattern</em>
+            serasi.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 3 -->
-    <div class="faq-item">
-      <h4>3. Apa beza antara P1 Basic, Classic, dan Gold?</h4>
-      <p>
-        <strong>P1 Basic</strong> ialah keahlian percuma yang turut layak
-        menerima <em>S-Coin cashback</em>, promosi ahli, dan waranti tambahan
-        (RM9.90). 
-        <strong>P1 Classic</strong> menawarkan waranti tambahan percuma,
-        promosi ahli, dan S-Coin untuk produk terpilih.
-        <strong>P1 Gold</strong> pula hanya <u>melalui jemputan</u>; staf tidak
-        tahu kriteria tepat pemilihan (diandaikan atas kekerapan atau jumlah
-        belian besar), dan memberi tambahan 2% S-Coin. 
-        Rujuk
-        <a href="https://www.senheng.com.my/p1-membership" target="_blank">
-          laman rasmi Senheng
-        </a> untuk info terkini.
-      </p>
-    </div>
+      <!-- FAQ 3 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq3" />
+        <label class="accordion-title" for="faq3">
+          3. Apa beza antara P1 Basic, Classic, dan Gold?
+        </label>
+        <div class="accordion-content">
+          <p>
+            <strong>P1 Basic</strong> ialah keahlian percuma yang turut layak
+            menerima <em>S-Coin cashback</em>, promosi ahli, dan waranti tambahan
+            (RM9.90). 
+            <strong>P1 Classic</strong> menawarkan waranti tambahan percuma,
+            promosi ahli, dan S-Coin untuk produk terpilih.
+            <strong>P1 Gold</strong> pula hanya <u>melalui jemputan</u>; staf
+            tidak tahu kriteria tepat pemilihan (diandaikan atas kekerapan
+            atau jumlah belian besar), dan memberi tambahan 2% S-Coin.
+            Rujuk
+            <a href="https://www.senheng.com.my/p1-membership" target="_blank">
+              laman rasmi Senheng
+            </a> untuk info terkini.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 4 -->
-    <div class="faq-item">
-      <h4>4. Jika keahlian P1 saya tamat tempoh, adakah saya boleh renew untuk 4 tahun terus?</h4>
-      <p>
-        Ya. Walaupun ada pilihan untuk renew 12 bulan (RM12) bagi Classic P1,
-        <strong>kami galakkan anda terus renew 4 tahun (RM24)</strong> kerana
-        ia lebih menjimatkan dan tidak perlu memperbaharui setiap tahun.
-      </p>
-    </div>
+      <!-- FAQ 4 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq4" />
+        <label class="accordion-title" for="faq4">
+          4. Jika keahlian P1 saya tamat tempoh, adakah saya boleh renew untuk 4 tahun terus?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Ya. Walaupun ada pilihan untuk renew 12 bulan (RM12) bagi Classic P1,
+            <strong>kami galakkan anda terus renew 4 tahun (RM24)</strong> kerana
+            ia lebih menjimatkan dan tidak perlu memperbaharui setiap tahun.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 5 -->
-    <div class="faq-item">
-      <h4>5. Bolehkah saya mengambil barang lebih awal sebelum bayaran penuh dibuat?</h4>
-      <p>
-        Tidak. <strong>Barang hanya boleh dikeluarkan</strong> selepas bayaran
-        penuh diterima atau pelan ansuran/kad kredit disahkan. Untuk ansuran
-        bukan kad kredit (contoh AEON Credit), tempoh kelulusan mengambil masa
-        <strong>2–3 hari bekerja</strong> bergantung pada pihak pembiaya.
-      </p>
-    </div>
+      <!-- FAQ 5 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq5" />
+        <label class="accordion-title" for="faq5">
+          5. Bolehkah saya mengambil barang lebih awal sebelum bayaran penuh dibuat?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Tidak. <strong>Barang hanya boleh dikeluarkan</strong> selepas bayaran
+            penuh diterima atau pelan ansuran/kad kredit disahkan. Untuk ansuran
+            bukan kad kredit (contoh AEON Credit), tempoh kelulusan mengambil masa
+            <strong>2–3 hari bekerja</strong> bergantung pada pihak pembiaya.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 6 -->
-    <div class="faq-item">
-      <h4>6. Adakah kakitangan boleh akses baucar atau baki S-Coin pelanggan?</h4>
-      <p>
-        Tidak. Untuk menjaga <strong>privasi</strong> pelanggan, staf cawangan
-        hanya dapat melihat <strong>sejarah pembelian, waranti</strong>, dan
-        <strong>tarikh luput keahlian</strong>. Mereka tidak boleh mengakses
-        baucar atau S-Coin yang ada dalam akaun pelanggan.
-      </p>
-    </div>
+      <!-- FAQ 6 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq6" />
+        <label class="accordion-title" for="faq6">
+          6. Adakah kakitangan boleh akses baucar atau baki S-Coin pelanggan?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Tidak. Untuk menjaga <strong>privasi</strong> pelanggan, staf cawangan
+            hanya dapat melihat <strong>sejarah pembelian, waranti</strong>, dan
+            <strong>tarikh luput keahlian</strong>. Mereka tidak boleh mengakses
+            baucar atau S-Coin yang ada dalam akaun pelanggan.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 7 -->
-    <div class="faq-item">
-      <h4>7. Bagaimana jika barangan pelanggan rosak atau bermasalah sebaik sahaja tiba?</h4>
-      <p>
-        Minta pelanggan hubungi pihak cawangan atau perkhidmatan pelanggan
-        <strong>secepat mungkin</strong>. Jika masih dalam tempoh DOA (dead on
-        arrival) atau waranti tambahan P1, staf akan membantu proses
-        <strong>tuntutan jaminan</strong> atau penukaran unit. Pastikan
-        pelanggan simpan semua resit dan dokumen yang berkaitan.
-      </p>
-    </div>
+      <!-- FAQ 7 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq7" />
+        <label class="accordion-title" for="faq7">
+          7. Bagaimana jika barangan pelanggan rosak atau bermasalah sebaik sahaja tiba?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Minta pelanggan hubungi pihak cawangan atau perkhidmatan pelanggan
+            <strong>secepat mungkin</strong>. Jika masih dalam tempoh DOA (dead on
+            arrival) atau waranti tambahan P1, staf akan membantu proses
+            <strong>tuntutan jaminan</strong> atau penukaran unit. Pastikan
+            pelanggan simpan semua resit dan dokumen yang berkaitan.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 8 -->
-    <div class="faq-item">
-      <h4>8. Bolehkah ahli keluarga berkongsi keahlian P1?</h4>
-      <p>
-        Setiap akaun P1 didaftarkan mengikut <strong>nombor IC</strong> 
-        individu. Ahli keluarga lain perlu mendaftar akaun sendiri 
-        untuk menikmati <em>S-Coin</em> dan baucar peribadi. Namun, 
-        pembelian untuk keluarga boleh dibuat di bawah satu akaun 
-        <strong>jika pemilik akaun hadir</strong> dan bersetuju.
-      </p>
-    </div>
+      <!-- FAQ 8 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq8" />
+        <label class="accordion-title" for="faq8">
+          8. Bolehkah ahli keluarga berkongsi keahlian P1?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Setiap akaun P1 didaftarkan mengikut <strong>nombor IC</strong> 
+            individu. Ahli keluarga lain perlu mendaftar akaun sendiri 
+            untuk menikmati <em>S-Coin</em> dan baucar peribadi. Namun, 
+            pembelian untuk keluarga boleh dibuat di bawah satu akaun 
+            <strong>jika pemilik akaun hadir</strong> dan bersetuju.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 9 -->
-    <div class="faq-item">
-      <h4>9. Pelanggan terlupa kata laluan untuk aplikasi Senheng, apa solusi?</h4>
-      <p>
-        Arahkan pelanggan menekan <strong>"Lupa Kata Laluan"</strong> di laman 
-        log masuk aplikasi Senheng. Sistem akan menghantar 
-        <strong>OTP (One-Time Password)</strong> ke nombor telefon berdaftar. 
-        Ikuti arahan untuk tetapkan kata laluan baharu. Jika ada masalah lain,
-        minta pelanggan hubungi <em>Senheng Customer Care</em> atau 
-        datang ke cawangan <strong>untuk bantuan lanjut</strong>.
-      </p>
-    </div>
+      <!-- FAQ 9 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq9" />
+        <label class="accordion-title" for="faq9">
+          9. Pelanggan terlupa kata laluan untuk aplikasi Senheng, apa solusi?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Arahkan pelanggan menekan <strong>"Lupa Kata Laluan"</strong> di laman 
+            log masuk aplikasi Senheng. Sistem akan menghantar 
+            <strong>OTP (One-Time Password)</strong> ke nombor telefon berdaftar. 
+            Ikuti arahan untuk tetapkan kata laluan baharu. Jika ada masalah lain,
+            minta pelanggan hubungi <em>Senheng Customer Care</em> atau 
+            datang ke cawangan <strong>untuk bantuan lanjut</strong>.
+          </p>
+        </div>
+      </div>
 
-    <!-- FAQ 10 -->
-    <div class="faq-item">
-      <h4>10. Bagaimana cara menaik taraf (upgrade) dari Basic ke Classic atau Gold?</h4>
-      <p>
-        Pelanggan boleh menaik taraf dengan membuat bayaran pendaftaran
-        perbezaan di <em>aplikasi Senheng</em> atau di cawangan berdekatan.
-        Staf perlu membantu proses migrasi keahlian dan pelanggan akan menikmati
-        kelebihan tier baharu (S-Coin tambahan, waranti percuma, dsb.).
-      </p>
+      <!-- FAQ 10 -->
+      <div class="accordion-item">
+        <input type="checkbox" id="faq10" />
+        <label class="accordion-title" for="faq10">
+          10. Bagaimana cara menaik taraf (upgrade) dari Basic ke Classic atau Gold?
+        </label>
+        <div class="accordion-content">
+          <p>
+            Pelanggan boleh menaik taraf dengan membuat bayaran pendaftaran
+            perbezaan di <em>aplikasi Senheng</em> atau di cawangan berdekatan.
+            Staf perlu membantu proses migrasi keahlian dan pelanggan akan menikmati
+            kelebihan tier baharu (S-Coin tambahan, waranti percuma, dsb.).
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
