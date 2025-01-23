@@ -140,7 +140,8 @@
       h1 {
         font-size: 1.5rem;
       }
-      table th, table td {
+      table th, 
+      table td {
         font-size: 0.9rem;
       }
     }
@@ -182,6 +183,112 @@
     .flowchart .step-content ul {
       margin-bottom: 8px;
     }
+
+    /* DELIVERY SECTION STYLES */
+    .delivery-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .delivery-step {
+      flex: 1 1 260px;
+      background-color: #d1ecf1; /* light teal background */
+      border-left: 5px solid #0c5460; /* dark teal border */
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      position: relative;
+    }
+    .delivery-step-icon {
+      background-color: #17a2b8;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .delivery-step h4 {
+      color: #0c5460;
+      margin-bottom: 10px;
+    }
+    .delivery-step p,
+    .delivery-step li {
+      font-size: 0.95rem;
+      margin: 5px 0;
+    }
+    .delivery-visual {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .delivery-visual img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+    }
+
+    /* MEMBERSHIP IMAGE GRID */
+    .membership-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: center; /* center align for aesthetics */
+    }
+    .membership-images .tier-card {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      max-width: 250px; /* control the card width */
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .membership-images .tier-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      border: 2px solid #eee;
+    }
+    .membership-images .tier-card h4 {
+      margin-bottom: 10px;
+      color: #007bff;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+    .membership-summary {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .membership-summary img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* NOTE BOX for disclaimers */
+    .disclaimer {
+      background-color: #fff8e1;
+      border-left: 5px solid #ffa000;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .disclaimer strong {
+      color: #ff5722;
+    }
+
   </style>
 </head>
 <body>
@@ -253,7 +360,7 @@
       </p>
     </div>
 
-    <!-- Visual Flowchart for Membership Checking -->
+    <!-- Flowchart for Membership Checking -->
     <div class="flowchart">
       <!-- STEP 1: Semak Status Pelanggan -->
       <div class="step">
@@ -342,7 +449,7 @@
         <tr>
           <th>Tier</th>
           <th>Pendaftaran</th>
-          <th>Renewal</th>
+          <th>Renewal (4 Tahun)</th>
           <th>Faedah</th>
         </tr>
       </thead>
@@ -378,7 +485,74 @@
         </tr>
       </tbody>
     </table>
-  </div>
+
+    <!-- NEW: P1 Membership Images -->
+    <h3>Visual P1 Membership Tiers</h3>
+    <div class="membership-images">
+      <!-- P1 Classic -->
+      <div class="tier-card">
+        <img 
+          src="https://static.wixstatic.com/media/0fff27_a4a65e0b0ab54d2c9b798585a0787a0b~mv2.png" 
+          alt="P1 Classic Membership Card Design"
+        />
+        <h4>P1 Classic</h4>
+        <p>Standard paid tier with additional benefits.</p>
+      </div>
+
+      <!-- P1 Gold -->
+      <div class="tier-card">
+        <img 
+          src="https://static.wixstatic.com/media/0fff27_5d80f510edaf409880b860da8657c3dc~mv2.png" 
+          alt="P1 Gold Membership Card Design"
+        />
+        <h4>P1 Gold</h4>
+        <p>Exclusive tier with 2% additional S-Coin.</p>
+      </div>
+
+      <!-- P1 Corporate -->
+      <div class="tier-card">
+        <img 
+          src="https://static.wixstatic.com/media/0fff27_5540e5fca4f54788bfbb77c1af587dc1~mv2.png" 
+          alt="P1 Corporate Membership Card Design"
+        />
+        <h4>P1 Corporate</h4>
+        <p>For corporate customers with specialized perks.</p>
+      </div>
+
+      <!-- P1 Lazada -->
+      <div class="tier-card">
+        <img 
+          src="https://static.wixstatic.com/media/0fff27_a49c3f95777b42babd94524da59819df~mv2.png" 
+          alt="P1 Lazada Membership Card Design"
+        />
+        <h4>P1 Lazada</h4>
+        <p>Special tie-in with Lazada for e-commerce advantages.</p>
+      </div>
+    </div>
+
+    <!-- NEW: Summary Benefit Chart -->
+    <div class="membership-summary">
+      <h3>Summary of P1 Benefits</h3>
+      <img 
+        src="https://www.senheng.com.my/assets/images/benefit-chart.png"
+        alt="Summary Chart of P1 Membership Benefits"
+      />
+
+      <!-- Clarifying the Renewal Durations -->
+      <div class="disclaimer">
+        <strong>Note:</strong> The image above shows a 12-month renewal fee for each P1 tier.  
+        However, we generally focus on <em>4-year renewals</em> (or longer).  
+        <br /><br />
+        <strong>Example:</strong> If a Classic P1 membership expires, the member can choose:
+        <ul>
+          <li>Pay RM12 for a <em>12-month</em> renewal, <strong>OR</strong></li>
+          <li>Pay RM24 for a <em>4-year</em> (48-month) renewal.</li>
+        </ul>
+        We highly recommend the 4-year renewal for better value and fewer renewals.
+      </div>
+    </div>
+
+  </div> <!-- End of Membership Section -->
 
   <!-- 4. Pelan Pembayaran Ansuran (Installment Payment) -->
   <div class="section" id="installment-plan">
@@ -438,6 +612,82 @@
             <li>Pembayaran dibuat berdasarkan had yang diluluskan.</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Penghantaran (Delivery) -->
+  <div class="section" id="delivery">
+    <h2>5. Penghantaran (Delivery)</h2>
+    <!-- Info-Box for Quick Tips -->
+    <div class="info-box">
+      <strong>Tip:</strong> Pastikan alamat pelanggan disahkan dan jadual penghantaran dipersetujui sebelum bayaran dibuat.
+    </div>
+
+    <div class="delivery-visual">
+      <img 
+        src="https://via.placeholder.com/400x250?text=Delivery+Process" 
+        alt="Delivery Process Illustration"
+      />
+    </div>
+
+    <div class="delivery-flow">
+      <div class="delivery-step">
+        <div class="delivery-step-icon">1</div>
+        <h4>Sahkan Alamat & Caj</h4>
+        <ul>
+          <li><strong>Caj Tetap:</strong> RM25 di seluruh negara (flat rate).</li>
+          <li>Jika lokasi jauh (>50km), semak jadual penghantaran khas.</li>
+        </ul>
+      </div>
+
+      <div class="delivery-step">
+        <div class="delivery-step-icon">2</div>
+        <h4>Proses Stok & Pembayaran</h4>
+        <ul>
+          <li>Buat tempahan (booking) dari CDC selepas bayaran diterima.</li>
+          <li>Barang tiba di showroom keesokan hari (contoh: beli Isnin, tiba Selasa).</li>
+          <li>Penghantaran tidak dibuat pada hari yang sama barang tiba.</li>
+        </ul>
+      </div>
+
+      <div class="delivery-step">
+        <div class="delivery-step-icon">3</div>
+        <h4>Pemasangan TV</h4>
+        <ul>
+          <li>Pemandu hanya pasang peralatan asas yang disertakan (kaki TV).</li>
+          <li>
+            <strong>Wall Mount Bracket:</strong>
+            <ul>
+              <li>Jika pelanggan belum ada bracket, perlu beli bracket baharu.</li>
+              <li>Memasang bracket lama adalah percuma jika serasi.</li>
+              <li>Pastikan bracket yang sudah ada sesuai untuk saiz TV baharu (jangan terlalu kecil).</li>
+              <li>Jika bracket baharu diperlukan, caj pemasangan adalah RM60 (standard installation).</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="delivery-step">
+        <div class="delivery-step-icon">4</div>
+        <h4>Pemasangan Washing Machine / Tumble Dryer</h4>
+        <ul>
+          <li>Pemandu hanya pasang peralatan asas yang disertakan (hos dsb.).</li>
+          <li>Tiada servis paip atau penukaran faucet disediakan.</li>
+          <li>
+            Jika paip/faucet tidak serasi, pelanggan perlu baiki/ganti 
+            terlebih dahulu sebelum pemasangan.
+          </li>
+        </ul>
+      </div>
+
+      <div class="delivery-step">
+        <div class="delivery-step-icon">5</div>
+        <h4>Penghantaran & Tindak Lanjut</h4>
+        <ul>
+          <li>Hantar barang mengikut jadual setempat / jarak jauh.</li>
+          <li>Hubungi pelanggan selepas penghantaran untuk pastikan keadaan barang.</li>
+        </ul>
       </div>
     </div>
   </div>
