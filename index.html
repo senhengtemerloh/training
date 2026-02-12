@@ -1,1091 +1,607 @@
-<!DOCTYPE html>
-<html lang="ms">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kit Latihan Staf Baru Senheng</title>
+import React, { useState } from 'react';
+import { 
+  ShieldCheck, 
+  Smartphone, 
+  FileWarning, 
+  Award, 
+  CreditCard, 
+  PackageCheck, 
+  CheckCircle2, 
+  AlertCircle,
+  MonitorPlay,
+  ClipboardList,
+  Store,
+  Star,
+  Truck,
+  Box,
+  ShoppingBag,
+  Info,
+  Wallet,
+  Banknote,
+  Percent,
+  QrCode,
+  Landmark,
+  Coins,
+  RefreshCcw,
+  Wrench,
+  ThumbsUp,
+  ThumbsDown,
+  XCircle,
+  ShieldAlert,
+  ChevronRight,
+  AlertTriangle
+} from 'lucide-react';
 
-  <style>
-    /* BASIC RESET AND STYLING */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    }
+export default function App() {
+  const [activeTab, setActiveTab] = useState('pengenalan');
 
-    body {
-      background-color: #f8f9fa;
-      color: #333;
-      line-height: 1.6;
-      padding: 20px;
-    }
+  const tabs = [
+    { id: 'pengenalan', label: 'Polisi Asas', icon: Store },
+    { id: 'operasi', label: 'Operasi Jualan', icon: ShoppingBag },
+    { id: 'pembayaran', label: 'Pembayaran', icon: Wallet },
+    { id: 'waranti', label: 'Waranti (RW)', icon: RefreshCcw },
+    { id: 'keahlian', label: 'PlusOne®', icon: Award },
+    { id: 'tugas', label: 'Tugas Staf', icon: ClipboardList },
+  ];
 
-    h1 {
-      text-align: center;
-      text-transform: uppercase;
-      color: #dc3545;
-      margin-bottom: 30px;
-    }
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-emerald-200 pb-20 md:pb-8">
+      {/* Header - Compact for Mobile */}
+      <header className="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
+        <div className="px-4 py-4 md:py-6">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+              <Store className="w-6 h-6 md:w-8 md:h-8 text-emerald-300" />
+              Kit Latihan New Joiner
+            </h1>
+            <p className="text-emerald-100 text-xs md:text-sm opacity-90">
+              Grand Senheng Temerloh
+            </p>
+          </div>
+        </div>
+        
+        {/* Navigation Tabs - Mobile Optimized Swipeable */}
+        <div className="bg-emerald-800/60 shadow-inner">
+          <div className="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 ${
+                    isActive 
+                      ? 'border-emerald-300 text-white bg-emerald-800/80' 
+                      : 'border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40'
+                  }`}
+                >
+                  <Icon className="w-4 h-4 md:w-5 md:h-5" />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </header>
 
-    .section {
-      background-color: #fff;
-      padding: 20px;
-      margin-bottom: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      border-left: 5px solid #007bff;
-    }
-
-    .section h2 {
-      margin-bottom: 15px;
-      color: #007bff;
-      text-transform: uppercase;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 6px;
-    }
-
-    .info-box,
-    .warning-box,
-    .note-box {
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      border-left: 5px solid;
-    }
-
-    .info-box {
-      background-color: #e3f2fd;
-      border-color: #2196f3;
-    }
-
-    .warning-box {
-      background-color: #fff8e1;
-      border-color: #ffeb3b;
-    }
-
-    .note-box {
-      background-color: #fce4ec;
-      border-color: #e91e63;
-    }
-
-    ul {
-      list-style: disc inside;
-      margin: 15px 0;
-      padding-left: 20px;
-    }
-
-    li {
-      margin: 10px 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-    }
-
-    table thead {
-      background-color: #343a40;
-      color: #fff;
-    }
-
-    table th,
-    table td {
-      text-align: left;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
-    .highlight {
-      background-color: #d4edda;
-      padding: 10px;
-      border-radius: 5px;
-      border-left: 5px solid #28a745;
-      margin: 10px 0;
-    }
-
-    .mind-map {
-      margin: 20px 0;
-      text-align: center;
-    }
-
-    .mind-map img {
-      max-width: 100%;
-      height: auto;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .button {
-      display: inline-block;
-      padding: 10px 15px;
-      background-color: #28a745;
-      color: white;
-      border-radius: 5px;
-      text-decoration: none;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .button:hover {
-      background-color: #218838;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 10px;
-      }
-      h1 {
-        font-size: 1.5rem;
-      }
-      table th, 
-      table td {
-        font-size: 0.9rem;
-      }
-    }
-
-    /* FLOWCHART STYLES */
-    .flowchart {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .flowchart .step {
-      flex: 1 1 300px;
-      background-color: #fff3cd;
-      border-left: 5px solid #ffa000;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-    }
-    .flowchart .step-icon {
-      background-color: #ffc107;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-right: 10px;
-    }
-    .flowchart .step-content h4 {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-    .flowchart .step-content p,
-    .flowchart .step-content ul {
-      margin-bottom: 8px;
-    }
-
-    /* DELIVERY SECTION STYLES */
-    .delivery-flow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin: 20px 0;
-    }
-    .delivery-step {
-      flex: 1 1 260px;
-      background-color: #d1ecf1; 
-      border-left: 5px solid #0c5460; 
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      position: relative;
-    }
-    .delivery-step-icon {
-      background-color: #17a2b8;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      color: #fff;
-      font-weight: bold;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .delivery-step h4 {
-      color: #0c5460;
-      margin-bottom: 10px;
-    }
-    .delivery-step p,
-    .delivery-step li {
-      font-size: 0.95rem;
-      margin: 5px 0;
-    }
-    .delivery-visual {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .delivery-visual img {
-      max-width: 400px;
-      width: 100%;
-      border-radius: 10px;
-      border: 2px solid #ccc;
-    }
-
-    /* MEMBERSHIP IMAGE GRID */
-    .membership-images {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 20px;
-      justify-content: center; 
-    }
-    .membership-images .tier-card {
-      background-color: #f9f9f9;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 15px;
-      max-width: 250px; 
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .membership-images .tier-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      border: 2px solid #eee;
-    }
-    .membership-images .tier-card h4 {
-      margin-bottom: 10px;
-      color: #007bff;
-      font-size: 1rem;
-      text-transform: uppercase;
-    }
-    .membership-summary {
-      margin: 20px 0;
-      text-align: center;
-    }
-    .membership-summary img {
-      max-width: 100%;
-      height: auto;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    /* NOTE BOX for disclaimers */
-    .disclaimer {
-      background-color: #fff8e1;
-      border-left: 5px solid #ffa000;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-    .disclaimer strong {
-      color: #ff5722;
-    }
-
-    /* FAQ ACCORDION STYLES */
-    .accordion {
-      margin-top: 20px;
-    }
-    .accordion-item input[type="checkbox"] {
-      display: none;
-    }
-    .accordion-title {
-      display: block;
-      background: #dc3545;
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 8px;
-      transition: background 0.2s ease;
-    }
-    .accordion-title:hover {
-      background: #c82333;
-    }
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 15px;
-      background-color: #f8f9fa; 
-      border-left: 4px solid #dc3545;
-      border-radius: 0 0 6px 6px;
-      transition: max-height 0.3s ease;
-    }
-    .accordion-content p {
-      padding: 10px 0;
-      margin: 0;
-    }
-    .accordion-item input[type="checkbox"]:checked ~ .accordion-content {
-      max-height: 300px; 
-    }
-
-    /* EXTRA: WARRANTY VISUALS */
-    .warranty-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin: 20px 0;
-      justify-content: center;
-    }
-    .warranty-card {
-      flex: 1 1 250px;
-      background-color: #fafafa;
-      border-left: 5px solid #007bff;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 15px;
-      text-align: center;
-    }
-    .warranty-card img {
-      max-width: 100px;
-      margin-bottom: 10px;
-    }
-    .warranty-card h4 {
-      color: #007bff;
-      margin-bottom: 10px;
-      font-size: 1.1rem;
-    }
-    .warranty-card p {
-      font-size: 0.95rem;
-      margin-bottom: 5px;
-    }
-
-    /* OPTIONAL STYLING FOR RW IMAGE */
-    .rw-table-image {
-      text-align: center;
-      margin: 15px 0;
-    }
-    .rw-table-image img {
-      max-width: 100%;
-      height: auto;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Kit Latihan Staf Baru Senheng</h1>
-
-  <!-- INTRODUCTION / NOTE FOR NEW STAFF -->
-  <div class="section">
-    <h2>Pengenalan</h2>
-    <p>
-      Selamat datang ke <strong>Senheng</strong>, dan terima kasih kerana menyertai pasukan kami!
-      Halaman ini disediakan khusus untuk <strong>staf baru</strong> bagi memahami aliran kerja, 
-      polisi keahlian P1, pelan ansuran, proses penghantaran, waranti tambahan, 
-      dan soalan lazim yang biasa ditanya pelanggan. 
-      Sila rujuk panduan ini untuk membantu anda melayani pelanggan dengan profesional dan cekap.
-    </p>
-    <p>
-      Jika ada sebarang kemusykilan, sila rujuk <em>Team Leader</em> atau Pengurus Cawangan anda.
-      Selamat bertugas!
-    </p>
-  </div>
-
-  <!-- 1. Greeting & Qualifying Customer Needs -->
-  <div class="section" id="greeting">
-    <h2>1. Salam & Memahami Keperluan Pelanggan</h2>
-    <div class="info-box">
-      <strong>Contoh Salam:</strong><br />
-      "Selamat datang ke Senheng! Bagaimana saya boleh bantu encik/cik hari ini?"
+      {/* Main Content Area */}
+      <main className="max-w-4xl mx-auto px-4 py-6 md:py-8">
+        {activeTab === 'pengenalan' && <PengenalanSection />}
+        {activeTab === 'operasi' && <OperasiJualanSection />}
+        {activeTab === 'pembayaran' && <PembayaranSection />}
+        {activeTab === 'waranti' && <WarantiSection />}
+        {activeTab === 'tugas' && <TugasStaffSection />}
+        {activeTab === 'keahlian' && <KeahlianSection />}
+      </main>
     </div>
-    <p>Fahami keperluan pelanggan dengan bertanya soalan terbuka:</p>
-    <ul>
-      <li><strong>Soalan:</strong> "Encik nak cari produk apa hari ini? TV? Smartphone? Barang dapur elektrik?"</li>
-      <li><strong>Susulan:</strong> "Saiz atau spesifikasi bagaimana yang encik berminat?"</li>
-    </ul>
-  </div>
+  );
+}
 
-  <!-- 2. Semakan Stok (Stock Checking) -->
-  <div class="section" id="stock-checking">
-    <h2>2. Semakan Stok (Stock Checking)</h2>
-    <div class="highlight">
-      <p><strong>Tip:</strong> Pastikan pelanggan tahu bahawa stok perlu disahkan sebelum pembelian.</p>
-    </div>
+// --- SECTION: PENGENALAN & POLISI ---
+function PengenalanSection() {
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-slate-800 mb-2">Polisi Kedai & Aplikasi</h2>
+        <p className="text-sm text-slate-600">Perkara paling asas yang staf wajib tahu tentang operasi digital Senheng.</p>
+      </div>
 
-    <div class="flowchart">
-      <!-- STEP 1: Tawarkan Semakan -->
-      <div class="step">
-        <div class="step-icon">1</div>
-        <div class="step-content">
-          <h4>Tawarkan Semakan Stok</h4>
-          <p>"Encik, jika ada barang yang encik berkenan, beritahu saya ya. Saya akan semak stok untuk encik."</p>
-          <p>Minta pelanggan menunggu sebentar sementara semakan stok dijalankan.</p>
+      {/* Card 1: 100% Digital */}
+      <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
+        <div className="flex items-center gap-3 mb-3 border-b border-slate-100 pb-3">
+          <div className="bg-emerald-100 p-2 rounded-full">
+            <Smartphone className="w-5 h-5 text-emerald-600" />
+          </div>
+          <h3 className="font-bold text-slate-800">Senheng 100% Digital</h3>
         </div>
-      </div>
-
-      <!-- STEP 2: Stok Ada -->
-      <div class="step">
-        <div class="step-icon">2</div>
-        <div class="step-content">
-          <h4>Jika Stok Ada</h4>
-          <p>Maklumkan pelanggan dengan segera untuk meneruskan pembelian.</p>
-        </div>
-      </div>
-
-      <!-- STEP 3: Stok Tiada -->
-      <div class="step">
-        <div class="step-icon">3</div>
-        <div class="step-content">
-          <h4>Jika Stok Tiada</h4>
-          <ul>
-            <li>"Barang perlu ditempah dari CDC dan biasanya sampai keesokan hari."</li>
-            <li>"Encik perlu buat bayaran penuh untuk tempahan ini."</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3. Semakan Keahlian P1 (Membership) -->
-  <div class="section" id="membership">
-    <h2>3. Semakan Keahlian P1 (Membership)</h2>
-    <div class="highlight">
-      <p>
-        <strong>Tip Staf Baru:</strong> Semua P1 Membership kini 
-        <u>digital sahaja</u>. Pelanggan perlu memuat turun 
-        <em>Senheng App</em> untuk mengakses maklumat keahlian, promosi, S-Coin, dan waranti.
-      </p>
-    </div>
-
-    <!-- Flowchart for Membership Checking -->
-    <div class="flowchart">
-      <!-- STEP 1: Semak Status Pelanggan -->
-      <div class="step">
-        <div class="step-icon">1</div>
-        <div class="step-content">
-          <h4>Semak Status Pelanggan</h4>
-          <ul>
-            <li>
-              Minta <strong>IC</strong> atau bantu pelanggan semak melalui 
-              <strong>aplikasi Senheng</strong>.
-            </li>
-            <li>
-              Jika <strong>OTP dihantar ke telefon</strong> pelanggan, itu tanda mereka sudah berdaftar.
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- STEP 2: Kemas Kini / Pembaharuan -->
-      <div class="step">
-        <div class="step-icon">2</div>
-        <div class="step-content">
-          <h4>Kemas Kini & Pembaharuan</h4>
-          <ul>
-            <li>
-              <strong>Tempoh Keahlian Tamat:</strong> Terangkan faedah pembaharuan dan bantu proses
-              <em>renewal</em>.
-            </li>
-            <li>
-              <strong>OTP Hantar ke Nombor Lama:</strong> Bantu pelanggan kemaskini nombor telefon dan
-              info lain di <strong>sistem showroom</strong>.
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- STEP 3: Daftar Keahlian Baharu -->
-      <div class="step">
-        <div class="step-icon">3</div>
-        <div class="step-content">
-          <h4>Daftar Keahlian Baharu</h4>
-          <ul>
-            <li>
-              <strong>Jika belum berdaftar:</strong> Terangkan jenis keahlian (Basic, Classic, Gold) &
-              bantu pendaftaran terus melalui <em>Senheng App</em>.
-            </li>
-            <li>
-              Kos pendaftaran dan faedah berbeza mengikut tier. 
-              (Contoh: <em>Basic</em> percuma, <em>Classic</em> RM24, <em>Gold</em> RM36).
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- STEP 4: Nikmati Aplikasi Senheng -->
-      <div class="step">
-        <div class="step-icon">4</div>
-        <div class="step-content">
-          <h4>Nikmati Aplikasi Senheng</h4>
-          <ul>
-            <li>
-              <strong>All-Digital Membership:</strong> Tiada kad fizikal; semua maklumat 
-              (keahlian, baucar, promosi) tersedia dalam app.
-            </li>
-            <li>
-              <strong>Maklumat Keahlian Lengkap:</strong> Paparan tier, tarikh luput, baki S-Coin, baucar,
-              dan promosi eksklusif.
-            </li>
-            <li>
-              <strong>Invoice / Resit Elektronik:</strong> Semua resit disimpan dalam app; hanya
-              pelanggan boleh akses.
-            </li>
-            <li>
-              <strong>Privasi Pelanggan:</strong> Staf di outlet hanya dapat lihat sejarah pembelian,
-              waranti, dan tarikh luput keahlian — bukan baucar atau baki S-Coin.
-            </li>
-            <li>
-              <strong>Galakkan Pelanggan:</strong> “Jom muat turun app Senheng untuk promosi 
-              terkini & pelbagai keistimewaan!”
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- NOTE SECTION: P1 Benefits & Renewal (Bahasa Malaysia) -->
-    <div class="note-box">
-      <strong>Nota Penting (P1 Benefits & Renewal):</strong> <br/>
-      - P1 Basic kini <em>percuma</em> dan pelanggan turut layak menerima <em>S-Coin</em>.  
-      - P1 Classic & P1 Gold menawarkan lebih banyak faedah, termasuk waranti tambahan percuma (Classic) dan 2% tambahan S-Coin (Gold).  
-      - <strong>Gold Membership</strong> adalah <u>invitation only</u>. Staf tidak mempunyai maklumat tepat bagaimana pemilihan dibuat, namun kita <em>mengandaikan</em> ia bergantung kepada kekerapan pembelian atau nilai pembelian yang tinggi.  
-      - Renewal keahlian selalunya dalam tempoh <strong>4 tahun</strong> (contoh: RM24 untuk Classic). Pelanggan juga boleh pilih tempoh 12 bulan (RM12) tetapi kurang digalakkan kerana kos jangka panjang lebih tinggi.  
-      - Terangkan pada pelanggan bahawa <strong>4 tahun lebih menjimatkan</strong> kerana tidak perlu perbaharui setiap tahun.
-    </div>
-
-    <h3>Yuran & Faedah Keahlian</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Tier</th>
-          <th>Pendaftaran</th>
-          <th>Renewal (4 Tahun)</th>
-          <th>Faedah</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Basic</td>
-          <td>Percuma</td>
-          <td>N/A</td>
-          <td>
-            - Harga ahli + promosi terpilih <br/>
-            - <strong>Layak dapat S-Coin cashback</strong><br/>
-            - Waranti tambahan (RM9.90)
-          </td>
-        </tr>
-        <tr>
-          <td>Classic</td>
-          <td>RM24 (4 tahun)</td>
-          <td>RM24 (4 tahun)</td>
-          <td>
-            - Harga ahli + promosi<br/>
-            - Waranti tambahan percuma<br/>
-            - S-Coin untuk produk terpilih
-          </td>
-        </tr>
-        <tr>
-          <td>Gold</td>
-          <td>Jemputan Sahaja</td>
-          <td>RM36 (4 tahun)</td>
-          <td>
-            - Semua faedah Classic<br/>
-            - 2% tambahan S-Coin
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Visual P1 Membership Tiers -->
-    <h3>Visual P1 Membership Tiers</h3>
-    <div class="membership-images">
-      <!-- P1 Classic -->
-      <div class="tier-card">
-        <img 
-          src="https://static.wixstatic.com/media/0fff27_a4a65e0b0ab54d2c9b798585a0787a0b~mv2.png" 
-          alt="P1 Classic Membership Card Design"
-        />
-        <h4>P1 Classic</h4>
-        <p>Tier dengan faedah promosi khas dan waranti tambahan percuma.</p>
-      </div>
-
-      <!-- P1 Gold -->
-      <div class="tier-card">
-        <img 
-          src="https://static.wixstatic.com/media/0fff27_5d80f510edaf409880b860da8657c3dc~mv2.png" 
-          alt="P1 Gold Membership Card Design"
-        />
-        <h4>P1 Gold</h4>
-        <p>
-          Tier eksklusif (invitation only) dengan 2% tambahan S-Coin 
-          untuk pembelian terpilih.
+        <p className="text-sm text-slate-600 leading-relaxed">
+          Semua urusan resit, waranti, dan ganjaran P1 diuruskan terus melalui <strong>Senheng App</strong>. Tiada lagi penggunaan kad keahlian fizikal.
         </p>
       </div>
 
-      <!-- P1 Corporate -->
-      <div class="tier-card">
-        <img 
-          src="https://static.wixstatic.com/media/0fff27_5540e5fca4f54788bfbb77c1af587dc1~mv2.png" 
-          alt="P1 Corporate Membership Card Design"
-        />
-        <h4>P1 Corporate</h4>
-        <p>Khas untuk pelanggan korporat dengan pelbagai kelebihan tambahan.</p>
-      </div>
-
-      <!-- P1 Lazada -->
-      <div class="tier-card">
-        <img 
-          src="https://static.wixstatic.com/media/0fff27_a49c3f95777b42babd94524da59819df~mv2.png" 
-          alt="P1 Lazada Membership Card Design"
-        />
-        <h4>P1 Lazada</h4>
-        <p>Pakej kerjasama khas dengan Lazada untuk ganjaran e-dagang.</p>
-      </div>
-    </div>
-
-  </div> <!-- End of Membership Section -->
-
-  <!-- 4. Pelan Pembayaran Ansuran (Installment Payment) -->
-  <div class="section" id="installment-plan">
-    <h2>4. Pelan Pembayaran Ansuran (Installment Payment)</h2>
-    <div class="info-box">
-      <p>
-        <strong>Panduan Staf Baru:</strong> Jika pelanggan bertanya tentang ansuran, 
-        semak terlebih dahulu sama ada mereka mempunyai kad kredit atau tidak.
-      </p>
-    </div>
-    <div class="mind-map">
-      <img 
-        src="https://via.placeholder.com/800x400?text=Installment+Payment+Flowchart" 
-        alt="Flowchart Pelan Ansuran"
-      />
-    </div>
-
-    <div class="flowchart">
-      <!-- STEP 1: Credit Card -->
-      <div class="step">
-        <div class="step-icon">1</div>
-        <div class="step-content">
-          <h4>Semak Kad Kredit</h4>
-          <p>Jika pelanggan <strong>mempunyai kad kredit</strong>:</p>
-          <ul>
-            <li>Terangkan perbezaan dengan kad debit (tiada ansuran kad debit).</li>
-            <li>Jelaskan pelan 0% faedah untuk kad kredit terpilih.</li>
-            <li>Caj pemprosesan sekali bergantung pada bank & tempoh (12, 24, atau 36 bulan).</li>
-            <li>Barang boleh terus diambil jika transaksi berjaya & had mencukupi.</li>
-          </ul>
+      {/* Card 2: Larangan Resit (CRITICAL) */}
+      <div className="bg-rose-50 rounded-xl p-5 shadow-sm border border-rose-200 relative overflow-hidden">
+        <div className="absolute right-[-10px] top-[-10px] opacity-10">
+          <FileWarning className="w-24 h-24 text-rose-600" />
         </div>
-      </div>
-
-      <!-- STEP 2: No Credit Card -->
-      <div class="step">
-        <div class="step-icon">2</div>
-        <div class="step-content">
-          <h4>Jika Tiada Kad Kredit</h4>
-          <p>Pilihan seperti Aeon Credit atau Chailease:</p>
-          <ul>
-            <li>Minta IC untuk semakan kelayakan.</li>
-            <li>Kelulusan bergantung kepada syarikat pinjaman.</li>
-            <li>Jika belum pernah memohon, perlu dokumen pendapatan (3 bulan slip gaji).</li>
-            <li>Proses kelulusan mengambil masa 2–3 hari bekerja.</li>
-          </ul>
+        <div className="flex items-center gap-2 mb-3">
+          <AlertTriangle className="w-5 h-5 text-rose-600" />
+          <h3 className="font-bold text-rose-800">LARANGAN Resit Fizikal</h3>
         </div>
-      </div>
-
-      <!-- STEP 3: BNPL -->
-      <div class="step">
-        <div class="step-icon">3</div>
-        <div class="step-content">
-          <h4>BNPL (Buy Now Pay Later)</h4>
-          <p>Pilihan seperti Atome, Shopee PayLater, atau GrabPay Later:</p>
-          <ul>
-            <li>Muat turun aplikasi BNPL & lengkapkan e-KYC.</li>
-            <li>Dapatkan had kelulusan daripada penyedia BNPL.</li>
-            <li>Pembayaran dibuat berdasarkan had yang diluluskan.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. Penghantaran (Delivery) -->
-  <div class="section" id="delivery">
-    <h2>5. Penghantaran (Delivery)</h2>
-    <div class="info-box">
-      <strong>Tip Staf Baru:</strong> Pastikan alamat pelanggan disahkan dan jadual penghantaran dipersetujui sebelum bayaran dibuat.
-    </div>
-
-    <div class="delivery-visual">
-      <img 
-        src="https://via.placeholder.com/400x250?text=Delivery+Process" 
-        alt="Delivery Process Illustration"
-      />
-    </div>
-
-    <div class="delivery-flow">
-      <div class="delivery-step">
-        <div class="delivery-step-icon">1</div>
-        <h4>Sahkan Alamat & Caj</h4>
-        <ul>
-          <li><strong>Caj Tetap:</strong> RM25 di seluruh negara (flat rate).</li>
-          <li>Jika lokasi jauh (>50km), semak jadual penghantaran khas.</li>
+        <ul className="space-y-2.5 text-sm text-rose-900/80 relative z-10">
+          <li className="flex items-start gap-2">
+            <span className="text-rose-500 font-bold mt-[-1px]">×</span>
+            <span>Outlet <strong>TIDAK BOLEH</strong> print resit fizikal atau bagi softcopy. Sistem di-block.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-emerald-500 font-bold mt-[-1px]">✓</span>
+            <span>Ajar customer <strong>download Senheng App</strong> untuk check dan download resit mereka sendiri.</span>
+          </li>
         </ul>
       </div>
 
-      <div class="delivery-step">
-        <div class="delivery-step-icon">2</div>
-        <h4>Proses Stok & Pembayaran</h4>
-        <ul>
-          <li>Buat tempahan (booking) dari CDC selepas bayaran diterima.</li>
-          <li>Barang tiba di showroom keesokan hari (contoh: beli Isnin, tiba Selasa).</li>
-          <li>Penghantaran tidak dibuat pada hari yang sama barang tiba.</li>
+      {/* Card 3: Privasi S-Coin */}
+      <div className="bg-orange-50 rounded-xl p-5 shadow-sm border border-orange-200 relative overflow-hidden">
+        <div className="absolute right-[-10px] top-[-10px] opacity-10">
+          <ShieldCheck className="w-24 h-24 text-orange-600" />
+        </div>
+        <div className="flex items-center gap-2 mb-3">
+          <AlertCircle className="w-5 h-5 text-orange-600" />
+          <h3 className="font-bold text-orange-800">Privasi Point / S-Coin</h3>
+        </div>
+        <ul className="space-y-2.5 text-sm text-orange-900/80 relative z-10">
+          <li className="flex items-start gap-2">
+            <span className="text-orange-500 font-bold mt-[-1px]">×</span>
+            <span>Staf <strong>TIDAK BOLEH</strong> check baki S-Coin customer guna sistem kedai.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-emerald-500 font-bold mt-[-1px]">✓</span>
+            <span>Hanya customer sahaja boleh check S-Coin dalam Senheng App masing-masing (atas faktor keselamatan).</span>
+          </li>
         </ul>
       </div>
 
-      <div class="delivery-step">
-        <div class="delivery-step-icon">3</div>
-        <h4>Pemasangan TV</h4>
-        <ul>
-          <li>Pemandu hanya pasang peralatan asas yang disertakan (kaki TV).</li>
-          <li>
-            <strong>Wall Mount Bracket:</strong>
-            <ul>
-              <li>Jika pelanggan belum ada bracket, perlu beli bracket baharu.</li>
-              <li>Memasang bracket lama adalah percuma jika serasi.</li>
-              <li>Pastikan bracket sedia ada sesuai dengan saiz TV baharu (jangan terlalu kecil).</li>
-              <li>
-                Jika bracket baharu diperlukan, caj pemasangan adalah RM60 (standard installation).
+    </div>
+  );
+}
+
+// --- SECTION: OPERASI & JUALAN ---
+function OperasiJualanSection() {
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      
+      {/* Info Penghantaran */}
+      <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
+        <h3 className="font-bold text-blue-900 mb-4 flex items-center gap-2">
+          <Truck className="w-5 h-5" /> Caj Penghantaran (Delivery)
+        </h3>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
+            <span className="text-sm font-medium text-slate-700">Kadar Rata (Flat Rate)</span>
+            <span className="font-black text-blue-700">RM 35</span>
+          </div>
+          <p className="text-xs text-blue-800 px-1">*Jauh atau dekat caj tetap sama RM35.</p>
+          
+          <div className="flex items-center justify-between bg-gradient-to-r from-amber-100 to-amber-50 p-3 rounded-lg border border-amber-200 mt-2">
+            <span className="text-sm font-bold text-amber-900 flex items-center gap-1">
+              <Star className="w-4 h-4 text-amber-500" /> P1 Prime Member
+            </span>
+            <span className="font-black text-emerald-600">FREE</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Set Display */}
+      <div className="bg-purple-50 rounded-xl p-5 border border-purple-200">
+        <h3 className="font-bold text-purple-900 mb-2 flex items-center gap-2">
+          <MonitorPlay className="w-5 h-5" /> Jualan Set Display
+        </h3>
+        <p className="text-sm text-purple-800 leading-relaxed mb-3">
+          Kadangkala ada customer nak beli barang pameran (display).
+        </p>
+        <div className="bg-white p-3 rounded-lg border border-purple-100 flex items-start gap-2">
+          <AlertTriangle className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
+          <span className="text-xs font-semibold text-slate-700">
+            Wajib pastikan customer tengok depan-depan dan BERSETUJU penuh dengan keadaan fizikal barang sebelum bayar.
+          </span>
+        </div>
+      </div>
+
+      {/* SOP Check Stock */}
+      <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
+        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-3">
+          <Box className="w-5 h-5 text-emerald-600" /> SOP Check & Order Stok
+        </h3>
+        
+        <div className="space-y-4 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-emerald-300 before:to-slate-200">
+          
+          {/* Step 1 */}
+          <div className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-emerald-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">1</div>
+            <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
+              <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <h4 className="font-bold text-slate-800 text-sm">Check Kedai Dulu</h4>
+                <p className="text-xs text-slate-600 mt-1">Rak produk atau stor cawangan. Biasanya Small Appliances (SA) adalah <em>ready stock</em>.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-amber-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">2</div>
+            <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
+              <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                <h4 className="font-bold text-amber-900 text-sm">Kalau Kedai Kosong?</h4>
+                <p className="text-xs text-amber-800 mt-1">Cuba <em>push</em> customer tukar ke model lain yang <em>ready stock</em>, ATAU model <em>clearance</em>.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-blue-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">3</div>
+            <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
+              <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                <h4 className="font-bold text-blue-900 text-sm">Customer Nak Order Juga</h4>
+                <p className="text-xs text-blue-800 mt-1 mb-2">Check sistem stok di <strong>CDC (Pusat Pengedaran)</strong>.</p>
+                <div className="space-y-1 text-xs">
+                  <div className="bg-white p-1.5 rounded flex gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0"/> Ada di CDC: Boleh sampai esok (kecuali Ahad).</div>
+                  <div className="bg-white p-1.5 rounded flex gap-2"><XCircle className="w-3.5 h-3.5 text-rose-500 shrink-0"/> Tiada di CDC: JANGAN janji tarikh sampai! Minta customer tunggu.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// --- SECTION: PEMBAYARAN ---
+function PembayaranSection() {
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      
+      {/* Amaran Debit vs Kredit */}
+      <div className="bg-rose-600 rounded-xl p-4 text-white shadow-sm flex gap-3">
+        <AlertTriangle className="w-8 h-8 shrink-0 opacity-90" />
+        <div>
+          <h3 className="font-bold text-sm mb-1 uppercase tracking-wider">Penting: Semak Kad!</h3>
+          <p className="text-xs text-rose-100 leading-relaxed">
+            Staf wajib mahir bezakan antara <strong>Kad Debit</strong> dan <strong>Kad Kredit</strong>. Customer selalu keliru. Pelan ansuran 0% IPP HANYA sah untuk Kad Kredit sahaja.
+          </p>
+        </div>
+      </div>
+
+      {/* Pilihan Ansuran */}
+      <h3 className="font-bold text-slate-800 pt-2 border-b pb-2 flex items-center gap-2">
+        <Banknote className="w-5 h-5 text-emerald-600" /> Pilihan Ansuran Bulanan
+      </h3>
+
+      <div className="grid gap-4">
+        {/* Hire Purchase */}
+        <div className="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
+          <div className="bg-blue-100 p-2.5 rounded-lg shrink-0 h-fit">
+            <Landmark className="w-5 h-5 text-blue-700" />
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-800 text-sm">Sewa Beli (Aeon/Chailease)</h4>
+            <ul className="text-xs text-slate-600 mt-2 space-y-1.5">
+              <li>• Interest Flat Rate <strong>1.25% sebulan</strong> (Max)</li>
+              <li>• Perlu hantar dokumen (slip gaji dll)</li>
+              <li>• Proses kelulusan makan masa 2-3 hari bekerja</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* BNPL */}
+        <div className="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
+          <div className="bg-orange-100 p-2.5 rounded-lg shrink-0 h-fit">
+            <QrCode className="w-5 h-5 text-orange-700" />
+          </div>
+          <div className="w-full">
+            <h4 className="font-bold text-slate-800 text-sm">BNPL (Atome/SPayLater/Grab)</h4>
+            <div className="bg-orange-50 p-2 rounded text-xs text-orange-800 mt-2 mb-2">
+              SOP: Pilih barang &rarr; Buka QR Code &rarr; Customer Scan & Key-in Amaun &rarr; Customer nampak tenure di app mereka.
+            </div>
+            <p className="text-[11px] text-rose-600 font-medium leading-tight">
+              *Jika ditanya berapa bulanan? Jawab kita TIDAK TAHU. Customer kena check kelayakan dalam app BNPL mereka sendiri.
+            </p>
+          </div>
+        </div>
+
+        {/* 0% IPP */}
+        <div className="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
+          <div className="bg-purple-100 p-2.5 rounded-lg shrink-0 h-fit">
+            <Percent className="w-5 h-5 text-purple-700" />
+          </div>
+          <div className="w-full">
+            <h4 className="font-bold text-slate-800 text-sm">0% IPP (Kad Kredit)</h4>
+            <ul className="text-xs text-slate-600 mt-2 space-y-1.5 mb-3">
+              <li>• Sah untuk hampir semua bank.</li>
+              <li>• Ada caj Yuran Proses (Admin Fee) sekali sahaja. Rujuk jadual.</li>
+            </ul>
+            <div className="bg-purple-600 text-white text-xs p-2 rounded-lg flex items-start gap-2">
+              <Info className="w-4 h-4 shrink-0 mt-0.5" />
+              <span><strong>PROMO:</strong> Beli barang Apple, Yuran Proses PERCUMA (waived) buat masa ini!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Points & S-Coin */}
+      <h3 className="font-bold text-slate-800 pt-4 border-b pb-2 flex items-center gap-2">
+        <Coins className="w-5 h-5 text-emerald-600" /> Bayaran Guna Points
+      </h3>
+
+      <div className="grid gap-4">
+        <div className="bg-indigo-50 rounded-xl p-4 border border-indigo-100">
+          <h4 className="font-bold text-indigo-900 text-sm mb-2">Bank Treat Points</h4>
+          <p className="text-xs text-indigo-800 mb-2">Maybank, CIMB, Hong Leong, RHB. (Boleh check di terminal kad).</p>
+          <div className="bg-white text-indigo-900 font-bold text-xs p-2 rounded text-center border border-indigo-200">
+            Formula: 500 Points = RM 1
+          </div>
+          <p className="text-[11px] text-slate-500 mt-2 text-center">Anggap seperti tunai, tiada syarat minimun belian.</p>
+        </div>
+
+        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
+          <h4 className="font-bold text-emerald-900 text-sm mb-2 flex items-center gap-2">
+            <Coins className="w-4 h-4" /> Senheng S-Coins
+          </h4>
+          
+          <div className="space-y-2">
+            <div className="bg-white p-2 rounded border border-emerald-100">
+              <span className="text-xs font-bold text-emerald-800 block">Beli Barang "Selected Items"</span>
+              <span className="text-xs text-slate-600">Boleh guna S-Coin bayar 100% full amount (Rujuk Redemption Corner).</span>
+            </div>
+            
+            <div className="bg-white p-2 rounded border border-emerald-100">
+              <span className="text-xs font-bold text-amber-800 block">Beli Barang BIASA (Bukan selected)</span>
+              <span className="text-xs text-slate-600 block mt-1">Syarat: Harga barang wajib <strong>RM1,000 ke atas</strong>.</span>
+              <span className="text-xs text-slate-600 block mt-1">Syarat: Hanya boleh tolak <strong>Max 10%</strong> dari harga barang.</span>
+              
+              <div className="mt-2 bg-slate-50 p-2 rounded border border-slate-200 text-[11px] leading-tight text-slate-600">
+                <strong>Cth:</strong> Beli TV RM2,000. Customer ada RM500 S-Coin.<br/>
+                Hanya boleh tolak <strong>RM200 sahaja</strong> (10% dari RM2000). Baki kena bayar tunai/kad.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// --- SECTION: WARANTI (RW) ---
+function WarantiSection() {
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-slate-800 mb-2">1-to-1 Replacement (RW)</h2>
+        <p className="text-sm text-slate-600">Fokus utama ketika menjual <strong>Small Appliances (SA)</strong>.</p>
+      </div>
+
+      <div className="grid gap-4">
+        {/* ADD ON RW - Prioritized */}
+        <div className="bg-blue-600 rounded-xl shadow-md border border-blue-700 relative overflow-hidden">
+          <div className="absolute right-[-10px] top-[-10px] opacity-10">
+            <RefreshCcw className="w-32 h-32 text-white" />
+          </div>
+          <div className="p-4 relative z-10 text-white">
+            <div className="flex justify-between items-center mb-4 border-b border-blue-500 pb-3">
+              <h3 className="font-bold text-lg flex items-center gap-2">
+                <ThumbsUp className="w-5 h-5 text-blue-200" /> Beli dengan RW
+              </h3>
+              <span className="bg-blue-800 text-xs px-2 py-1 rounded-full font-bold">Disarankan</span>
+            </div>
+            
+            <ul className="space-y-3 text-sm text-blue-50 mb-4">
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]" />
+                <span><strong>Extra 1 Tahun.</strong> (Cth: Kilang 1 Thn + RW 1 Thn = 2 Tahun).</span>
               </li>
-              <li>
-                <strong>Nota VESA Mounting:</strong> <br/>
-                VESA merujuk kepada jarak lubang skru di belakang TV. 
-                Pastikan <em>VESA pattern</em> bracket sepadan dengan VESA pattern 
-                TV (contohnya 200 x 200, 400 x 400) supaya TV boleh dipasang 
-                dengan selamat.
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]" />
+                <span>Rosak dalam tempoh? <strong>Tukar BARU On-The-Spot!</strong></span>
+              </li>
+              <li className="flex items-start gap-2">
+                <RefreshCcw className="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]" />
+                <span>Jika model lama dah habis (obsolete), customer boleh pilih model baru ikut harga asal masa beli.</span>
               </li>
             </ul>
-          </li>
-        </ul>
+            
+            <div className="bg-blue-800/50 p-3 rounded-lg text-xs flex gap-2">
+              <Info className="w-4 h-4 shrink-0" />
+              <span><strong>Contoh:</strong> Beli Periuk Nasi RM150. Customer cuma perlu add-on <strong>RM11</strong> sahaja untuk RW. Sangat berbaloi!</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Tanpa RW */}
+        <div className="bg-white rounded-xl shadow-sm border border-rose-200 p-4">
+          <h3 className="font-bold text-rose-800 text-sm mb-3 flex items-center gap-2">
+            <ThumbsDown className="w-4 h-4" /> Menolak (TIDAK) Add-on RW
+          </h3>
+          <ul className="space-y-2 text-xs text-slate-600">
+            <li className="flex items-start gap-2">
+              <span className="text-rose-500 font-bold mt-[-1px]">×</span>
+              <span>Hanya waranti kilang (biasa 1 tahun).</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-rose-500 font-bold mt-[-1px]">×</span>
+              <span><strong>TIADA</strong> tukar baru on-the-spot.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-rose-500 font-bold mt-[-1px]">×</span>
+              <span>Jika rosak, kena hantar kilang (repair/tunggu 1-2 bulan).</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div class="delivery-step">
-        <div class="delivery-step-icon">4</div>
-        <h4>Pemasangan Washing Machine / Tumble Dryer</h4>
-        <ul>
-          <li>Pemandu hanya pasang peralatan asas yang disertakan (hos dsb.).</li>
-          <li>Tiada servis paip atau penukaran faucet disediakan.</li>
-          <li>
-            Jika paip/faucet tidak serasi, pelanggan perlu baiki/ganti 
-            terlebih dahulu sebelum pemasangan.
-          </li>
-        </ul>
+      {/* Syarat Claim */}
+      <div className="bg-slate-100 rounded-xl p-4 border border-slate-200">
+        <h3 className="font-bold text-slate-800 text-sm mb-3">SOP Claim Waranti:</h3>
+        <div className="space-y-2 text-xs">
+          <div className="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><Store className="w-4 h-4 text-emerald-600"/> Boleh claim di mana-mana cawangan. (Wajib ada P1).</div>
+          <div className="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><CheckCircle2 className="w-4 h-4 text-emerald-600"/> <strong>Hanya cover:</strong> Kerosakan Mekanikal & Elektrikal kilang.</div>
+          <div className="bg-white p-2 rounded flex items-start gap-2 shadow-sm text-rose-700">
+            <XCircle className="w-4 h-4 shrink-0 mt-0.5"/> 
+            <span><strong>TIDAK cover:</strong> Jatuh pecah, kilat, masuk air, calar, bateri/filter.</span>
+          </div>
+        </div>
       </div>
 
-      <div class="delivery-step">
-        <div class="delivery-step-icon">5</div>
-        <h4>Penghantaran & Tindak Lanjut</h4>
-        <ul>
-          <li>Hantar barang mengikut jadual setempat / jarak jauh.</li>
-          <li>Hubungi pelanggan selepas penghantaran untuk pastikan keadaan barang.</li>
-        </ul>
+    </div>
+  );
+}
+
+// --- SECTION: PLUSONE MEMBERSHIP ---
+function KeahlianSection() {
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      
+      <div className="text-center mb-4">
+        <h2 className="text-2xl font-bold text-slate-800">Senheng PlusOne®</h2>
+        <p className="text-sm text-slate-600">3 Peringkat Keahlian Utama</p>
+      </div>
+
+      <div className="space-y-5">
+        
+        {/* Basic */}
+        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+          <div className="bg-slate-100 p-3 border-b border-slate-200 flex justify-between items-center">
+            <h3 className="font-bold text-slate-700">P1 Basic</h3>
+            <span className="bg-slate-200 text-slate-700 text-xs px-2 py-1 rounded font-bold">PERCUMA</span>
+          </div>
+          <div className="p-4 space-y-2">
+            <FeatureItem active={true} text="Kumpul S-Coin" />
+            <FeatureItem active={false} text="TAK BOLEH Redeem S-Coin" alert />
+            <FeatureItem active={false} text="TIADA Extra 1 Tahun Waranti" alert />
+            <div className="text-[11px] text-slate-500 mt-2 pt-2 border-t">
+              *Nak Extra Waranti / RW SA: Perlu Add-on RM9.90.
+            </div>
+          </div>
+        </div>
+
+        {/* Classic */}
+        <div className="bg-white border-2 border-emerald-500 rounded-xl overflow-hidden shadow-md">
+          <div className="bg-emerald-500 p-3 flex justify-between items-center text-white">
+            <h3 className="font-bold">P1 Classic</h3>
+            <span className="bg-white text-emerald-700 text-xs px-2 py-1 rounded font-bold shadow-sm">PILIHAN RAMAI</span>
+          </div>
+          <div className="p-4 space-y-3">
+            <div className="flex items-end gap-2 mb-2">
+              <span className="text-2xl font-black text-emerald-700">RM 12</span><span className="text-xs text-slate-500 pb-1">/ 1 Tahun</span>
+              <span className="text-xs text-slate-400 pb-1 px-1">atau</span>
+              <span className="text-lg font-bold text-emerald-600">RM 36</span><span className="text-xs text-slate-500 pb-1">/ 5 Tahun</span>
+            </div>
+            
+            <FeatureItem active={true} text="Kumpul & REDEEM S-Coin" />
+            <FeatureItem active={true} text="FREE Extra 1 Tahun Waranti" highlight="Contoh: Kilang 1 thn + P1 1 thn = 2 thn" />
+            
+            <div className="bg-emerald-50 p-2.5 rounded border border-emerald-100 mt-2">
+              <div className="text-[11px] font-bold text-rose-600 flex items-center gap-1 mb-1">
+                <AlertCircle className="w-3 h-3" /> Syarat Extra Waranti:
+              </div>
+              <ul className="text-[10px] text-slate-600 space-y-0.5 ml-4 list-disc">
+                <li>Sah untuk barang RM400 ke atas sahaja.</li>
+                <li><strong>TV TIDAK DAPAT</strong> Extra Waranti ini.</li>
+              </ul>
+              <div className="text-[10px] text-slate-600 mt-2 ml-1">
+                *RW Small Appliances (SA): Harga bergantung pada pricetag.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Prime */}
+        <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-lg">
+          <div className="p-4 border-b border-slate-700 flex justify-between items-center">
+            <h3 className="font-bold text-amber-400 flex items-center gap-1"><Star className="w-4 h-4 fill-amber-400" /> P1 Prime</h3>
+            <span className="text-xl font-black text-white">RM 120</span>
+          </div>
+          <div className="p-4 space-y-3">
+            <p className="text-xs font-bold text-amber-200 mb-2">Sah Seumur Hidup (Lifetime)</p>
+            <FeatureItem active={true} text="Semua benefit P1 Classic" lightText />
+            <FeatureItem active={true} text="FREE Delivery untuk 12 Tahun" iconColor="text-amber-400" lightText />
+            <p className="text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-700">
+              *Syarat Extra Waranti (Barang {'>'}RM400, Kecuali TV) sama seperti Classic.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
+  );
+}
 
-  <!-- 6. Waranti Lanjutan (Extended Warranty) & Replacement Warranty (RW) -->
-  <div class="section" id="extended-warranty">
-    <h2>6. Waranti Lanjutan & Replacement Warranty (RW)</h2>
+// --- SECTION: TUGAS STAFF ---
+function TugasStaffSection() {
+  const duties = [
+    { title: 'Key-in Pembelian', desc: 'Merekod transaksi jualan ke dalam sistem.', icon: MonitorPlay },
+    { title: 'Semak Warranty', desc: 'Check tempoh waranti barang customer.', icon: ShieldCheck },
+    { title: 'Report Claim', desc: 'Bantu customer masuk report claim waranti.', icon: FileWarning },
+    { title: 'Check Keahlian', desc: 'Semak tier dan status aktif PlusOne customer.', icon: Award },
+    { title: 'Check Stok', desc: 'Semak stok kedai atau CDC.', icon: PackageCheck },
+  ];
 
-    <div class="info-box">
-      <strong>Info Penting:</strong> P1 Classic & Gold selalunya mendapat 
-      <em>Free Extra 1 Tahun Waranti</em> untuk produk bernilai RM500 ke atas 
-      (kecuali TV). Pelanggan P1 Basic juga boleh menikmati waranti tambahan 
-      dengan <strong>RM9.90</strong> (jika bersetuju).
-    </div>
+  return (
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
+        <h2 className="text-xl font-bold text-slate-800 mb-3">Akses Sistem Outlet</h2>
+        <p className="text-sm text-slate-600 mb-5">
+          Tugas utama anda di kaunter (sistem hanya beri akses perkara di bawah):
+        </p>
 
-    <!-- Visual Grid for Warranty Explanation -->
-    <div class="warranty-grid">
-      <div class="warranty-card">
-        <img 
-          src="https://via.placeholder.com/100x100?text=Extra+Warranty+Icon" 
-          alt="Extra Warranty Icon"
-        />
-        <h4>Free Extra 1 Year</h4>
-        <p>Untuk barang ≥ RM500 (kecuali TV).</p>
-        <p>Contoh: Waranti asal 2 tahun → jadi 3 tahun.</p>
-      </div>
-      <div class="warranty-card">
-        <img 
-          src="https://via.placeholder.com/100x100?text=Extended+Warranty+Icon" 
-          alt="Extended Warranty Icon"
-        />
-        <h4>Extended Warranty</h4>
-        <p>Boleh tambah 2–3 tahun (berbayar).</p>
-        <p>Contoh: 1+1 (percuma) +3 = 5 tahun total.</p>
-      </div>
-      <div class="warranty-card">
-        <img 
-          src="https://via.placeholder.com/100x100?text=RW+Icon" 
-          alt="Replacement Warranty Icon"
-        />
-        <h4>Replacement Warranty</h4>
-        <p>Barang kecil (iron, blender, dsb.).</p>
-        <p>Tambah 1 tahun lagi → total 2 tahun.</p>
-      </div>
-    </div>
-
-    <h3>Free Extra 1 Tahun Waranti (Classic/Gold P1)</h3>
-    <ul>
-      <li>
-        Untuk produk RM500 ke atas <strong>(kecuali TV)</strong>. 
-        TV hanya ikut waranti pengeluar.
-      </li>
-      <li>
-        Contoh: Waranti pengeluar 2 tahun → +1 tahun = 3 tahun total.
-      </li>
-      <li>
-        P1 Basic boleh dapat extra 1 tahun ini jika membayar 
-        <strong>RM9.90</strong> (pilihan).
-      </li>
-    </ul>
-
-    <h3>Extended Warranty (Berbayar)</h3>
-    <ul>
-      <li>
-        Pelanggan boleh tambah 2–3 tahun waranti (contoh) dengan bayaran 
-        tambahan. Rujuk <strong>price tag</strong> atau <strong>SBClient</strong>.
-      </li>
-      <li>
-        Contoh: Mesin basuh (waranti 1 tahun + 1 tahun percuma = 2 tahun). 
-        Tambah 3 tahun = 5 tahun total.
-      </li>
-      <li>
-        Kurangkan risiko kos servis yang tinggi jika kerosakan di luar waranti.
-      </li>
-    </ul>
-
-    <h3>Replacement Warranty (RW)</h3>
-    <ul>
-      <li>
-        Sesuai untuk barang kecil: seterika, blender, vacuum, rice cooker, dsb.
-        Biasanya waranti pengeluar 1 tahun.
-      </li>
-      <li>
-        RW Fee tambah <strong>1 tahun</strong> lagi. Total 2 tahun. 
-        Jika rosak dalam tempoh RW, boleh dapat 
-        <strong>penukaran 1-untuk-1</strong> (T&C).
-      </li>
-      <li>
-        Kos RW ikut <strong>harga produk</strong>. Rujuk jadual di cawangan / 
-        SBClient.
-      </li>
-      <li>
-        Jika pelanggan <strong>tiada RW</strong> dan barang rosak, 
-        tiada gantian terus. Barang dihantar ke pengeluar, 
-        makan masa <strong>2–3 bulan</strong>.
-      </li>
-    </ul>
-
-    <!-- Table Image for RW Costs -->
-    <div class="rw-table-image">
-      <h4>Jadual Kos Replacement Warranty (RW)</h4>
-      <img 
-        src="https://static.wixstatic.com/media/adb15b_b12add6c0d56486e960922ad839a492d~mv2.png/v1/fill/w_403,h_416,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Table.png"
-        alt="RW Cost Table"
-      />
-    </div>
-
-    <div class="note-box">
-      <strong>Jangan Paksa Pelanggan:</strong> 
-      Terangkan kebaikan (lebih perlindungan, gantian cepat, dll.) 
-      dan hormati keputusan pelanggan. 
-      Pastikan pelanggan <strong>faham prosedur claim</strong> 
-      jika tiada RW atau Extended Warranty.
-    </div>
-
-  </div>
-
-  <!-- 7. FAQ (Frequently Asked Questions) with Accordion -->
-  <div class="section" id="faq">
-    <h2>7. FAQ</h2>
-    <div class="accordion">
-
-      <!-- FAQ 1 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq1" />
-        <label class="accordion-title" for="faq1">
-          1. Berapa lama tempoh yang diambil untuk penghantaran?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Biasanya barang akan tiba di showroom keesokan hari selepas bayaran
-            dan tempahan dibuat (contoh: beli Isnin, barang tiba Selasa).
-            Penghantaran ke rumah pelanggan pula bergantung pada
-            <strong>jadual pemandu</strong> dan <strong>jarak lokasi</strong>.
-            Lokasi yang jauh (>50km) mungkin mempunyai jadual khusus. Rujuk
-            <em>jadual dalaman Senheng</em> untuk info terkini.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 2 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq2" />
-        <label class="accordion-title" for="faq2">
-          2. Jika TV ingin dipasang di dinding, apa yang perlu disediakan?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Pelanggan perlu menyediakan <strong>bracket</strong> yang sesuai
-            dengan saiz TV. Jika tiada bracket, pelanggan boleh membeli bracket
-            baharu (caj pemasangan RM60). Pastikan bracket sedia ada tidak
-            terlalu kecil untuk model TV baharu dan <em>VESA pattern</em>
-            serasi.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 3 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq3" />
-        <label class="accordion-title" for="faq3">
-          3. Apa beza antara P1 Basic, Classic, dan Gold?
-        </label>
-        <div class="accordion-content">
-          <p>
-            <strong>P1 Basic</strong> ialah keahlian percuma yang turut layak
-            menerima <em>S-Coin cashback</em>, promosi ahli, dan waranti tambahan
-            (RM9.90). 
-            <strong>P1 Classic</strong> menawarkan waranti tambahan percuma,
-            promosi ahli, dan S-Coin untuk produk terpilih.
-            <strong>P1 Gold</strong> pula hanya <u>melalui jemputan</u>; staf
-            tidak tahu kriteria tepat pemilihan (diandaikan atas kekerapan
-            atau jumlah belian besar), dan memberi tambahan 2% S-Coin.
-            Rujuk
-            <a href="https://www.senheng.com.my/p1-membership" target="_blank">
-              laman rasmi Senheng
-            </a> untuk info terkini.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 4 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq4" />
-        <label class="accordion-title" for="faq4">
-          4. Jika keahlian P1 saya tamat tempoh, adakah saya boleh renew untuk 4 tahun terus?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Ya. Walaupun ada pilihan untuk renew 12 bulan (RM12) bagi Classic P1,
-            <strong>kami galakkan anda terus renew 4 tahun (RM24)</strong> kerana
-            ia lebih menjimatkan dan tidak perlu memperbaharui setiap tahun.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 5 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq5" />
-        <label class="accordion-title" for="faq5">
-          5. Bolehkah saya mengambil barang lebih awal sebelum bayaran penuh dibuat?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Tidak. <strong>Barang hanya boleh dikeluarkan</strong> selepas bayaran
-            penuh diterima atau pelan ansuran/kad kredit disahkan. Untuk ansuran
-            bukan kad kredit (contoh AEON Credit), tempoh kelulusan mengambil masa
-            <strong>2–3 hari bekerja</strong> bergantung pada pihak pembiaya.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 6 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq6" />
-        <label class="accordion-title" for="faq6">
-          6. Adakah kakitangan boleh akses baucar atau baki S-Coin pelanggan?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Tidak. Untuk menjaga <strong>privasi</strong> pelanggan, staf cawangan
-            hanya dapat melihat <strong>sejarah pembelian, waranti</strong>, dan
-            <strong>tarikh luput keahlian</strong>. Mereka tidak boleh mengakses
-            baucar atau S-Coin yang ada dalam akaun pelanggan.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 7 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq7" />
-        <label class="accordion-title" for="faq7">
-          7. Bagaimana jika barangan pelanggan rosak atau bermasalah sebaik sahaja tiba?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Minta pelanggan hubungi pihak cawangan atau perkhidmatan pelanggan
-            <strong>secepat mungkin</strong>. Jika masih dalam tempoh DOA (dead on
-            arrival) atau waranti tambahan P1, staf akan membantu proses
-            <strong>tuntutan jaminan</strong> atau penukaran unit. Pastikan
-            pelanggan simpan semua resit dan dokumen yang berkaitan.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 8 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq8" />
-        <label class="accordion-title" for="faq8">
-          8. Bolehkah ahli keluarga berkongsi keahlian P1?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Setiap akaun P1 didaftarkan mengikut <strong>nombor IC</strong> 
-            individu. Ahli keluarga lain perlu mendaftar akaun sendiri 
-            untuk menikmati <em>S-Coin</em> dan baucar peribadi. Namun, 
-            pembelian untuk keluarga boleh dibuat di bawah satu akaun 
-            <strong>jika pemilik akaun hadir</strong> dan bersetuju.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 9 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq9" />
-        <label class="accordion-title" for="faq9">
-          9. Pelanggan terlupa kata laluan untuk aplikasi Senheng, apa solusi?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Arahkan pelanggan menekan <strong>"Lupa Kata Laluan"</strong> di laman 
-            log masuk aplikasi Senheng. Sistem akan menghantar 
-            <strong>OTP (One-Time Password)</strong> ke nombor telefon berdaftar. 
-            Ikuti arahan untuk tetapkan kata laluan baharu. Jika ada masalah lain,
-            minta pelanggan hubungi <em>Senheng Customer Care</em> atau 
-            datang ke cawangan <strong>untuk bantuan lanjut</strong>.
-          </p>
-        </div>
-      </div>
-
-      <!-- FAQ 10 -->
-      <div class="accordion-item">
-        <input type="checkbox" id="faq10" />
-        <label class="accordion-title" for="faq10">
-          10. Bagaimana cara menaik taraf (upgrade) dari Basic ke Classic atau Gold?
-        </label>
-        <div class="accordion-content">
-          <p>
-            Pelanggan boleh menaik taraf dengan membuat bayaran pendaftaran
-            perbezaan di <em>aplikasi Senheng</em> atau di cawangan berdekatan.
-            Staf perlu membantu proses migrasi keahlian dan pelanggan akan menikmati
-            kelebihan tier baharu (S-Coin tambahan, waranti percuma, dsb.).
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {duties.map((duty, idx) => {
+            const Icon = duty.icon;
+            return (
+              <div key={idx} className="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
+                <div className="bg-white p-2 rounded shadow-sm shrink-0">
+                  <Icon className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm text-slate-800">{duty.title}</h3>
+                  <p className="text-[11px] text-slate-500 mt-0.5">{duty.desc}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
-  </div>
+  );
+}
 
-</body>
-</html>
+// Utility component for list items
+function FeatureItem({ active, text, alert = false, highlight, iconColor = "text-emerald-500", lightText = false }) {
+  const textColorClass = lightText 
+    ? (active ? 'text-slate-200' : 'text-slate-400')
+    : (alert ? 'text-rose-600' : (active ? 'text-slate-700' : 'text-slate-400'));
+
+  return (
+    <div className="flex items-start gap-2 text-sm">
+      {active ? (
+        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-[2px] ${iconColor}`} />
+      ) : (
+        <AlertCircle className={`w-4 h-4 shrink-0 mt-[2px] ${alert ? 'text-rose-500' : 'text-slate-300'}`} />
+      )}
+      <div>
+        <span className={`font-medium ${textColorClass}`}>{text}</span>
+        {highlight && (
+          <p className="text-[11px] text-emerald-600 mt-1 font-medium bg-emerald-50/50 p-1 rounded inline-block border border-emerald-100">
+            {highlight}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
