@@ -1,607 +1,631 @@
-import React, { useState } from 'react';
-import { 
-  ShieldCheck, 
-  Smartphone, 
-  FileWarning, 
-  Award, 
-  CreditCard, 
-  PackageCheck, 
-  CheckCircle2, 
-  AlertCircle,
-  MonitorPlay,
-  ClipboardList,
-  Store,
-  Star,
-  Truck,
-  Box,
-  ShoppingBag,
-  Info,
-  Wallet,
-  Banknote,
-  Percent,
-  QrCode,
-  Landmark,
-  Coins,
-  RefreshCcw,
-  Wrench,
-  ThumbsUp,
-  ThumbsDown,
-  XCircle,
-  ShieldAlert,
-  ChevronRight,
-  AlertTriangle
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit Latihan Grand Senheng Temerloh</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.292.0"></script>
+    
+    <style>
+        /* Custom scrollbar hiding for mobile swipeable tabs */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Custom animation for tab switching */
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-slide-up {
+            animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-emerald-200 pb-20 md:pb-8">
 
-export default function App() {
-  const [activeTab, setActiveTab] = useState('pengenalan');
-
-  const tabs = [
-    { id: 'pengenalan', label: 'Polisi Asas', icon: Store },
-    { id: 'operasi', label: 'Operasi Jualan', icon: ShoppingBag },
-    { id: 'pembayaran', label: 'Pembayaran', icon: Wallet },
-    { id: 'waranti', label: 'Waranti (RW)', icon: RefreshCcw },
-    { id: 'keahlian', label: 'PlusOne®', icon: Award },
-    { id: 'tugas', label: 'Tugas Staf', icon: ClipboardList },
-  ];
-
-  return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-emerald-200 pb-20 md:pb-8">
-      {/* Header - Compact for Mobile */}
-      <header className="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
-        <div className="px-4 py-4 md:py-6">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
-              <Store className="w-6 h-6 md:w-8 md:h-8 text-emerald-300" />
-              Kit Latihan New Joiner
-            </h1>
-            <p className="text-emerald-100 text-xs md:text-sm opacity-90">
-              Grand Senheng Temerloh
-            </p>
-          </div>
+    <!-- Header -->
+    <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
+        <div class="px-4 py-4 md:py-6">
+            <div class="flex flex-col gap-2">
+                <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+                    <i data-lucide="store" class="w-6 h-6 md:w-8 md:h-8 text-emerald-300"></i>
+                    Kit Latihan New Joiner
+                </h1>
+                <p class="text-emerald-100 text-xs md:text-sm opacity-90">
+                    Grand Senheng Temerloh
+                </p>
+            </div>
         </div>
         
-        {/* Navigation Tabs - Mobile Optimized Swipeable */}
-        <div className="bg-emerald-800/60 shadow-inner">
-          <div className="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 ${
-                    isActive 
-                      ? 'border-emerald-300 text-white bg-emerald-800/80' 
-                      : 'border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 md:w-5 md:h-5" />
-                  {tab.label}
+        <!-- Navigation Tabs -->
+        <div class="bg-emerald-800/60 shadow-inner">
+            <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="tab-container">
+                <!-- Tabs will be controlled by JS -->
+                <button data-tab="pengenalan" onclick="switchTab('pengenalan')" class="tab-btn active-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-emerald-300 text-white bg-emerald-800/80">
+                    <i data-lucide="store" class="w-4 h-4 md:w-5 md:h-5"></i> Polisi Asas
                 </button>
-              );
-            })}
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content Area */}
-      <main className="max-w-4xl mx-auto px-4 py-6 md:py-8">
-        {activeTab === 'pengenalan' && <PengenalanSection />}
-        {activeTab === 'operasi' && <OperasiJualanSection />}
-        {activeTab === 'pembayaran' && <PembayaranSection />}
-        {activeTab === 'waranti' && <WarantiSection />}
-        {activeTab === 'tugas' && <TugasStaffSection />}
-        {activeTab === 'keahlian' && <KeahlianSection />}
-      </main>
-    </div>
-  );
-}
-
-// --- SECTION: PENGENALAN & POLISI ---
-function PengenalanSection() {
-  return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2">Polisi Kedai & Aplikasi</h2>
-        <p className="text-sm text-slate-600">Perkara paling asas yang staf wajib tahu tentang operasi digital Senheng.</p>
-      </div>
-
-      {/* Card 1: 100% Digital */}
-      <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-        <div className="flex items-center gap-3 mb-3 border-b border-slate-100 pb-3">
-          <div className="bg-emerald-100 p-2 rounded-full">
-            <Smartphone className="w-5 h-5 text-emerald-600" />
-          </div>
-          <h3 className="font-bold text-slate-800">Senheng 100% Digital</h3>
-        </div>
-        <p className="text-sm text-slate-600 leading-relaxed">
-          Semua urusan resit, waranti, dan ganjaran P1 diuruskan terus melalui <strong>Senheng App</strong>. Tiada lagi penggunaan kad keahlian fizikal.
-        </p>
-      </div>
-
-      {/* Card 2: Larangan Resit (CRITICAL) */}
-      <div className="bg-rose-50 rounded-xl p-5 shadow-sm border border-rose-200 relative overflow-hidden">
-        <div className="absolute right-[-10px] top-[-10px] opacity-10">
-          <FileWarning className="w-24 h-24 text-rose-600" />
-        </div>
-        <div className="flex items-center gap-2 mb-3">
-          <AlertTriangle className="w-5 h-5 text-rose-600" />
-          <h3 className="font-bold text-rose-800">LARANGAN Resit Fizikal</h3>
-        </div>
-        <ul className="space-y-2.5 text-sm text-rose-900/80 relative z-10">
-          <li className="flex items-start gap-2">
-            <span className="text-rose-500 font-bold mt-[-1px]">×</span>
-            <span>Outlet <strong>TIDAK BOLEH</strong> print resit fizikal atau bagi softcopy. Sistem di-block.</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-emerald-500 font-bold mt-[-1px]">✓</span>
-            <span>Ajar customer <strong>download Senheng App</strong> untuk check dan download resit mereka sendiri.</span>
-          </li>
-        </ul>
-      </div>
-
-      {/* Card 3: Privasi S-Coin */}
-      <div className="bg-orange-50 rounded-xl p-5 shadow-sm border border-orange-200 relative overflow-hidden">
-        <div className="absolute right-[-10px] top-[-10px] opacity-10">
-          <ShieldCheck className="w-24 h-24 text-orange-600" />
-        </div>
-        <div className="flex items-center gap-2 mb-3">
-          <AlertCircle className="w-5 h-5 text-orange-600" />
-          <h3 className="font-bold text-orange-800">Privasi Point / S-Coin</h3>
-        </div>
-        <ul className="space-y-2.5 text-sm text-orange-900/80 relative z-10">
-          <li className="flex items-start gap-2">
-            <span className="text-orange-500 font-bold mt-[-1px]">×</span>
-            <span>Staf <strong>TIDAK BOLEH</strong> check baki S-Coin customer guna sistem kedai.</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-emerald-500 font-bold mt-[-1px]">✓</span>
-            <span>Hanya customer sahaja boleh check S-Coin dalam Senheng App masing-masing (atas faktor keselamatan).</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-  );
-}
-
-// --- SECTION: OPERASI & JUALAN ---
-function OperasiJualanSection() {
-  return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      
-      {/* Info Penghantaran */}
-      <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
-        <h3 className="font-bold text-blue-900 mb-4 flex items-center gap-2">
-          <Truck className="w-5 h-5" /> Caj Penghantaran (Delivery)
-        </h3>
-        <div className="space-y-3">
-          <div className="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
-            <span className="text-sm font-medium text-slate-700">Kadar Rata (Flat Rate)</span>
-            <span className="font-black text-blue-700">RM 35</span>
-          </div>
-          <p className="text-xs text-blue-800 px-1">*Jauh atau dekat caj tetap sama RM35.</p>
-          
-          <div className="flex items-center justify-between bg-gradient-to-r from-amber-100 to-amber-50 p-3 rounded-lg border border-amber-200 mt-2">
-            <span className="text-sm font-bold text-amber-900 flex items-center gap-1">
-              <Star className="w-4 h-4 text-amber-500" /> P1 Prime Member
-            </span>
-            <span className="font-black text-emerald-600">FREE</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Set Display */}
-      <div className="bg-purple-50 rounded-xl p-5 border border-purple-200">
-        <h3 className="font-bold text-purple-900 mb-2 flex items-center gap-2">
-          <MonitorPlay className="w-5 h-5" /> Jualan Set Display
-        </h3>
-        <p className="text-sm text-purple-800 leading-relaxed mb-3">
-          Kadangkala ada customer nak beli barang pameran (display).
-        </p>
-        <div className="bg-white p-3 rounded-lg border border-purple-100 flex items-start gap-2">
-          <AlertTriangle className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
-          <span className="text-xs font-semibold text-slate-700">
-            Wajib pastikan customer tengok depan-depan dan BERSETUJU penuh dengan keadaan fizikal barang sebelum bayar.
-          </span>
-        </div>
-      </div>
-
-      {/* SOP Check Stock */}
-      <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-3">
-          <Box className="w-5 h-5 text-emerald-600" /> SOP Check & Order Stok
-        </h3>
-        
-        <div className="space-y-4 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-emerald-300 before:to-slate-200">
-          
-          {/* Step 1 */}
-          <div className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-emerald-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">1</div>
-            <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
-              <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                <h4 className="font-bold text-slate-800 text-sm">Check Kedai Dulu</h4>
-                <p className="text-xs text-slate-600 mt-1">Rak produk atau stor cawangan. Biasanya Small Appliances (SA) adalah <em>ready stock</em>.</p>
-              </div>
+                <button data-tab="operasi" onclick="switchTab('operasi')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                    <i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i> Operasi Jualan
+                </button>
+                <button data-tab="pembayaran" onclick="switchTab('pembayaran')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                    <i data-lucide="wallet" class="w-4 h-4 md:w-5 md:h-5"></i> Pembayaran
+                </button>
+                <button data-tab="waranti" onclick="switchTab('waranti')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                    <i data-lucide="refresh-ccw" class="w-4 h-4 md:w-5 md:h-5"></i> Waranti (RW)
+                </button>
+                <button data-tab="keahlian" onclick="switchTab('keahlian')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                    <i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i> PlusOne®
+                </button>
+                <button data-tab="tugas" onclick="switchTab('tugas')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                    <i data-lucide="clipboard-list" class="w-4 h-4 md:w-5 md:h-5"></i> Tugas Staf
+                </button>
             </div>
-          </div>
+        </div>
+    </header>
 
-          {/* Step 2 */}
-          <div className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-amber-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">2</div>
-            <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
-              <div className="bg-amber-50 p-3 rounded-lg border border-amber-100">
-                <h4 className="font-bold text-amber-900 text-sm">Kalau Kedai Kosong?</h4>
-                <p className="text-xs text-amber-800 mt-1">Cuba <em>push</em> customer tukar ke model lain yang <em>ready stock</em>, ATAU model <em>clearance</em>.</p>
-              </div>
+    <!-- Main Content Area -->
+    <main class="max-w-4xl mx-auto px-4 py-6 md:py-8">
+
+        <!-- SECTION: PENGENALAN & POLISI -->
+        <section id="section-pengenalan" class="tab-section space-y-6 animate-slide-up">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Polisi Kedai & Aplikasi</h2>
+                <p class="text-sm text-slate-600">Perkara paling asas yang staf wajib tahu tentang operasi digital Senheng.</p>
             </div>
-          </div>
 
-          {/* Step 3 */}
-          <div className="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-blue-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">3</div>
-            <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
-              <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
-                <h4 className="font-bold text-blue-900 text-sm">Customer Nak Order Juga</h4>
-                <p className="text-xs text-blue-800 mt-1 mb-2">Check sistem stok di <strong>CDC (Pusat Pengedaran)</strong>.</p>
-                <div className="space-y-1 text-xs">
-                  <div className="bg-white p-1.5 rounded flex gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0"/> Ada di CDC: Boleh sampai esok (kecuali Ahad).</div>
-                  <div className="bg-white p-1.5 rounded flex gap-2"><XCircle className="w-3.5 h-3.5 text-rose-500 shrink-0"/> Tiada di CDC: JANGAN janji tarikh sampai! Minta customer tunggu.</div>
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
+                <div class="flex items-center gap-3 mb-3 border-b border-slate-100 pb-3">
+                    <div class="bg-emerald-100 p-2 rounded-full">
+                        <i data-lucide="smartphone" class="w-5 h-5 text-emerald-600"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-800">Senheng 100% Digital</h3>
                 </div>
-              </div>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Semua urusan resit, waranti, dan ganjaran P1 diuruskan terus melalui <strong>Senheng App</strong>. Tiada lagi penggunaan kad keahlian fizikal.
+                </p>
             </div>
-          </div>
 
-        </div>
-      </div>
-
-    </div>
-  );
-}
-
-// --- SECTION: PEMBAYARAN ---
-function PembayaranSection() {
-  return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      
-      {/* Amaran Debit vs Kredit */}
-      <div className="bg-rose-600 rounded-xl p-4 text-white shadow-sm flex gap-3">
-        <AlertTriangle className="w-8 h-8 shrink-0 opacity-90" />
-        <div>
-          <h3 className="font-bold text-sm mb-1 uppercase tracking-wider">Penting: Semak Kad!</h3>
-          <p className="text-xs text-rose-100 leading-relaxed">
-            Staf wajib mahir bezakan antara <strong>Kad Debit</strong> dan <strong>Kad Kredit</strong>. Customer selalu keliru. Pelan ansuran 0% IPP HANYA sah untuk Kad Kredit sahaja.
-          </p>
-        </div>
-      </div>
-
-      {/* Pilihan Ansuran */}
-      <h3 className="font-bold text-slate-800 pt-2 border-b pb-2 flex items-center gap-2">
-        <Banknote className="w-5 h-5 text-emerald-600" /> Pilihan Ansuran Bulanan
-      </h3>
-
-      <div className="grid gap-4">
-        {/* Hire Purchase */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
-          <div className="bg-blue-100 p-2.5 rounded-lg shrink-0 h-fit">
-            <Landmark className="w-5 h-5 text-blue-700" />
-          </div>
-          <div>
-            <h4 className="font-bold text-slate-800 text-sm">Sewa Beli (Aeon/Chailease)</h4>
-            <ul className="text-xs text-slate-600 mt-2 space-y-1.5">
-              <li>• Interest Flat Rate <strong>1.25% sebulan</strong> (Max)</li>
-              <li>• Perlu hantar dokumen (slip gaji dll)</li>
-              <li>• Proses kelulusan makan masa 2-3 hari bekerja</li>
-            </ul>
-          </div>
-        </div>
-
-        {/* BNPL */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
-          <div className="bg-orange-100 p-2.5 rounded-lg shrink-0 h-fit">
-            <QrCode className="w-5 h-5 text-orange-700" />
-          </div>
-          <div className="w-full">
-            <h4 className="font-bold text-slate-800 text-sm">BNPL (Atome/SPayLater/Grab)</h4>
-            <div className="bg-orange-50 p-2 rounded text-xs text-orange-800 mt-2 mb-2">
-              SOP: Pilih barang &rarr; Buka QR Code &rarr; Customer Scan & Key-in Amaun &rarr; Customer nampak tenure di app mereka.
-            </div>
-            <p className="text-[11px] text-rose-600 font-medium leading-tight">
-              *Jika ditanya berapa bulanan? Jawab kita TIDAK TAHU. Customer kena check kelayakan dalam app BNPL mereka sendiri.
-            </p>
-          </div>
-        </div>
-
-        {/* 0% IPP */}
-        <div className="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
-          <div className="bg-purple-100 p-2.5 rounded-lg shrink-0 h-fit">
-            <Percent className="w-5 h-5 text-purple-700" />
-          </div>
-          <div className="w-full">
-            <h4 className="font-bold text-slate-800 text-sm">0% IPP (Kad Kredit)</h4>
-            <ul className="text-xs text-slate-600 mt-2 space-y-1.5 mb-3">
-              <li>• Sah untuk hampir semua bank.</li>
-              <li>• Ada caj Yuran Proses (Admin Fee) sekali sahaja. Rujuk jadual.</li>
-            </ul>
-            <div className="bg-purple-600 text-white text-xs p-2 rounded-lg flex items-start gap-2">
-              <Info className="w-4 h-4 shrink-0 mt-0.5" />
-              <span><strong>PROMO:</strong> Beli barang Apple, Yuran Proses PERCUMA (waived) buat masa ini!</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Points & S-Coin */}
-      <h3 className="font-bold text-slate-800 pt-4 border-b pb-2 flex items-center gap-2">
-        <Coins className="w-5 h-5 text-emerald-600" /> Bayaran Guna Points
-      </h3>
-
-      <div className="grid gap-4">
-        <div className="bg-indigo-50 rounded-xl p-4 border border-indigo-100">
-          <h4 className="font-bold text-indigo-900 text-sm mb-2">Bank Treat Points</h4>
-          <p className="text-xs text-indigo-800 mb-2">Maybank, CIMB, Hong Leong, RHB. (Boleh check di terminal kad).</p>
-          <div className="bg-white text-indigo-900 font-bold text-xs p-2 rounded text-center border border-indigo-200">
-            Formula: 500 Points = RM 1
-          </div>
-          <p className="text-[11px] text-slate-500 mt-2 text-center">Anggap seperti tunai, tiada syarat minimun belian.</p>
-        </div>
-
-        <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
-          <h4 className="font-bold text-emerald-900 text-sm mb-2 flex items-center gap-2">
-            <Coins className="w-4 h-4" /> Senheng S-Coins
-          </h4>
-          
-          <div className="space-y-2">
-            <div className="bg-white p-2 rounded border border-emerald-100">
-              <span className="text-xs font-bold text-emerald-800 block">Beli Barang "Selected Items"</span>
-              <span className="text-xs text-slate-600">Boleh guna S-Coin bayar 100% full amount (Rujuk Redemption Corner).</span>
-            </div>
-            
-            <div className="bg-white p-2 rounded border border-emerald-100">
-              <span className="text-xs font-bold text-amber-800 block">Beli Barang BIASA (Bukan selected)</span>
-              <span className="text-xs text-slate-600 block mt-1">Syarat: Harga barang wajib <strong>RM1,000 ke atas</strong>.</span>
-              <span className="text-xs text-slate-600 block mt-1">Syarat: Hanya boleh tolak <strong>Max 10%</strong> dari harga barang.</span>
-              
-              <div className="mt-2 bg-slate-50 p-2 rounded border border-slate-200 text-[11px] leading-tight text-slate-600">
-                <strong>Cth:</strong> Beli TV RM2,000. Customer ada RM500 S-Coin.<br/>
-                Hanya boleh tolak <strong>RM200 sahaja</strong> (10% dari RM2000). Baki kena bayar tunai/kad.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  );
-}
-
-// --- SECTION: WARANTI (RW) ---
-function WarantiSection() {
-  return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2">1-to-1 Replacement (RW)</h2>
-        <p className="text-sm text-slate-600">Fokus utama ketika menjual <strong>Small Appliances (SA)</strong>.</p>
-      </div>
-
-      <div className="grid gap-4">
-        {/* ADD ON RW - Prioritized */}
-        <div className="bg-blue-600 rounded-xl shadow-md border border-blue-700 relative overflow-hidden">
-          <div className="absolute right-[-10px] top-[-10px] opacity-10">
-            <RefreshCcw className="w-32 h-32 text-white" />
-          </div>
-          <div className="p-4 relative z-10 text-white">
-            <div className="flex justify-between items-center mb-4 border-b border-blue-500 pb-3">
-              <h3 className="font-bold text-lg flex items-center gap-2">
-                <ThumbsUp className="w-5 h-5 text-blue-200" /> Beli dengan RW
-              </h3>
-              <span className="bg-blue-800 text-xs px-2 py-1 rounded-full font-bold">Disarankan</span>
-            </div>
-            
-            <ul className="space-y-3 text-sm text-blue-50 mb-4">
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]" />
-                <span><strong>Extra 1 Tahun.</strong> (Cth: Kilang 1 Thn + RW 1 Thn = 2 Tahun).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle2 className="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]" />
-                <span>Rosak dalam tempoh? <strong>Tukar BARU On-The-Spot!</strong></span>
-              </li>
-              <li className="flex items-start gap-2">
-                <RefreshCcw className="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]" />
-                <span>Jika model lama dah habis (obsolete), customer boleh pilih model baru ikut harga asal masa beli.</span>
-              </li>
-            </ul>
-            
-            <div className="bg-blue-800/50 p-3 rounded-lg text-xs flex gap-2">
-              <Info className="w-4 h-4 shrink-0" />
-              <span><strong>Contoh:</strong> Beli Periuk Nasi RM150. Customer cuma perlu add-on <strong>RM11</strong> sahaja untuk RW. Sangat berbaloi!</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Tanpa RW */}
-        <div className="bg-white rounded-xl shadow-sm border border-rose-200 p-4">
-          <h3 className="font-bold text-rose-800 text-sm mb-3 flex items-center gap-2">
-            <ThumbsDown className="w-4 h-4" /> Menolak (TIDAK) Add-on RW
-          </h3>
-          <ul className="space-y-2 text-xs text-slate-600">
-            <li className="flex items-start gap-2">
-              <span className="text-rose-500 font-bold mt-[-1px]">×</span>
-              <span>Hanya waranti kilang (biasa 1 tahun).</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-rose-500 font-bold mt-[-1px]">×</span>
-              <span><strong>TIADA</strong> tukar baru on-the-spot.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-rose-500 font-bold mt-[-1px]">×</span>
-              <span>Jika rosak, kena hantar kilang (repair/tunggu 1-2 bulan).</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Syarat Claim */}
-      <div className="bg-slate-100 rounded-xl p-4 border border-slate-200">
-        <h3 className="font-bold text-slate-800 text-sm mb-3">SOP Claim Waranti:</h3>
-        <div className="space-y-2 text-xs">
-          <div className="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><Store className="w-4 h-4 text-emerald-600"/> Boleh claim di mana-mana cawangan. (Wajib ada P1).</div>
-          <div className="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><CheckCircle2 className="w-4 h-4 text-emerald-600"/> <strong>Hanya cover:</strong> Kerosakan Mekanikal & Elektrikal kilang.</div>
-          <div className="bg-white p-2 rounded flex items-start gap-2 shadow-sm text-rose-700">
-            <XCircle className="w-4 h-4 shrink-0 mt-0.5"/> 
-            <span><strong>TIDAK cover:</strong> Jatuh pecah, kilat, masuk air, calar, bateri/filter.</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  );
-}
-
-// --- SECTION: PLUSONE MEMBERSHIP ---
-function KeahlianSection() {
-  return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      
-      <div className="text-center mb-4">
-        <h2 className="text-2xl font-bold text-slate-800">Senheng PlusOne®</h2>
-        <p className="text-sm text-slate-600">3 Peringkat Keahlian Utama</p>
-      </div>
-
-      <div className="space-y-5">
-        
-        {/* Basic */}
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="bg-slate-100 p-3 border-b border-slate-200 flex justify-between items-center">
-            <h3 className="font-bold text-slate-700">P1 Basic</h3>
-            <span className="bg-slate-200 text-slate-700 text-xs px-2 py-1 rounded font-bold">PERCUMA</span>
-          </div>
-          <div className="p-4 space-y-2">
-            <FeatureItem active={true} text="Kumpul S-Coin" />
-            <FeatureItem active={false} text="TAK BOLEH Redeem S-Coin" alert />
-            <FeatureItem active={false} text="TIADA Extra 1 Tahun Waranti" alert />
-            <div className="text-[11px] text-slate-500 mt-2 pt-2 border-t">
-              *Nak Extra Waranti / RW SA: Perlu Add-on RM9.90.
-            </div>
-          </div>
-        </div>
-
-        {/* Classic */}
-        <div className="bg-white border-2 border-emerald-500 rounded-xl overflow-hidden shadow-md">
-          <div className="bg-emerald-500 p-3 flex justify-between items-center text-white">
-            <h3 className="font-bold">P1 Classic</h3>
-            <span className="bg-white text-emerald-700 text-xs px-2 py-1 rounded font-bold shadow-sm">PILIHAN RAMAI</span>
-          </div>
-          <div className="p-4 space-y-3">
-            <div className="flex items-end gap-2 mb-2">
-              <span className="text-2xl font-black text-emerald-700">RM 12</span><span className="text-xs text-slate-500 pb-1">/ 1 Tahun</span>
-              <span className="text-xs text-slate-400 pb-1 px-1">atau</span>
-              <span className="text-lg font-bold text-emerald-600">RM 36</span><span className="text-xs text-slate-500 pb-1">/ 5 Tahun</span>
-            </div>
-            
-            <FeatureItem active={true} text="Kumpul & REDEEM S-Coin" />
-            <FeatureItem active={true} text="FREE Extra 1 Tahun Waranti" highlight="Contoh: Kilang 1 thn + P1 1 thn = 2 thn" />
-            
-            <div className="bg-emerald-50 p-2.5 rounded border border-emerald-100 mt-2">
-              <div className="text-[11px] font-bold text-rose-600 flex items-center gap-1 mb-1">
-                <AlertCircle className="w-3 h-3" /> Syarat Extra Waranti:
-              </div>
-              <ul className="text-[10px] text-slate-600 space-y-0.5 ml-4 list-disc">
-                <li>Sah untuk barang RM400 ke atas sahaja.</li>
-                <li><strong>TV TIDAK DAPAT</strong> Extra Waranti ini.</li>
-              </ul>
-              <div className="text-[10px] text-slate-600 mt-2 ml-1">
-                *RW Small Appliances (SA): Harga bergantung pada pricetag.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Prime */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-lg">
-          <div className="p-4 border-b border-slate-700 flex justify-between items-center">
-            <h3 className="font-bold text-amber-400 flex items-center gap-1"><Star className="w-4 h-4 fill-amber-400" /> P1 Prime</h3>
-            <span className="text-xl font-black text-white">RM 120</span>
-          </div>
-          <div className="p-4 space-y-3">
-            <p className="text-xs font-bold text-amber-200 mb-2">Sah Seumur Hidup (Lifetime)</p>
-            <FeatureItem active={true} text="Semua benefit P1 Classic" lightText />
-            <FeatureItem active={true} text="FREE Delivery untuk 12 Tahun" iconColor="text-amber-400" lightText />
-            <p className="text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-700">
-              *Syarat Extra Waranti (Barang {'>'}RM400, Kecuali TV) sama seperti Classic.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
-}
-
-// --- SECTION: TUGAS STAFF ---
-function TugasStaffSection() {
-  const duties = [
-    { title: 'Key-in Pembelian', desc: 'Merekod transaksi jualan ke dalam sistem.', icon: MonitorPlay },
-    { title: 'Semak Warranty', desc: 'Check tempoh waranti barang customer.', icon: ShieldCheck },
-    { title: 'Report Claim', desc: 'Bantu customer masuk report claim waranti.', icon: FileWarning },
-    { title: 'Check Keahlian', desc: 'Semak tier dan status aktif PlusOne customer.', icon: Award },
-    { title: 'Check Stok', desc: 'Semak stok kedai atau CDC.', icon: PackageCheck },
-  ];
-
-  return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-        <h2 className="text-xl font-bold text-slate-800 mb-3">Akses Sistem Outlet</h2>
-        <p className="text-sm text-slate-600 mb-5">
-          Tugas utama anda di kaunter (sistem hanya beri akses perkara di bawah):
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {duties.map((duty, idx) => {
-            const Icon = duty.icon;
-            return (
-              <div key={idx} className="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
-                <div className="bg-white p-2 rounded shadow-sm shrink-0">
-                  <Icon className="w-5 h-5 text-emerald-600" />
+            <!-- Card 2: CRITICAL -->
+            <div class="bg-rose-50 rounded-xl p-5 shadow-sm border border-rose-200 relative overflow-hidden">
+                <div class="absolute right-[-10px] top-[-10px] opacity-10">
+                    <i data-lucide="file-warning" class="w-24 h-24 text-rose-600"></i>
                 </div>
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600"></i>
+                    <h3 class="font-bold text-rose-800">LARANGAN Resit Fizikal</h3>
+                </div>
+                <ul class="space-y-2.5 text-sm text-rose-900/80 relative z-10">
+                    <li class="flex items-start gap-2">
+                        <span class="text-rose-500 font-bold mt-[-1px]">×</span>
+                        <span>Outlet <strong>TIDAK BOLEH</strong> print resit fizikal atau bagi softcopy. Sistem di-block.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-500 font-bold mt-[-1px]">✓</span>
+                        <span>Ajar customer <strong>download Senheng App</strong> untuk check dan download resit mereka sendiri.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-orange-50 rounded-xl p-5 shadow-sm border border-orange-200 relative overflow-hidden">
+                <div class="absolute right-[-10px] top-[-10px] opacity-10">
+                    <i data-lucide="shield-check" class="w-24 h-24 text-orange-600"></i>
+                </div>
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="alert-circle" class="w-5 h-5 text-orange-600"></i>
+                    <h3 class="font-bold text-orange-800">Privasi Point / S-Coin</h3>
+                </div>
+                <ul class="space-y-2.5 text-sm text-orange-900/80 relative z-10">
+                    <li class="flex items-start gap-2">
+                        <span class="text-orange-500 font-bold mt-[-1px]">×</span>
+                        <span>Staf <strong>TIDAK BOLEH</strong> check baki S-Coin customer guna sistem kedai.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-500 font-bold mt-[-1px]">✓</span>
+                        <span>Hanya customer sahaja boleh check S-Coin dalam Senheng App masing-masing (atas faktor keselamatan).</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION: OPERASI & JUALAN -->
+        <section id="section-operasi" class="tab-section hidden space-y-6 animate-slide-up">
+            <!-- Info Penghantaran -->
+            <div class="bg-blue-50 rounded-xl p-5 border border-blue-200">
+                <h3 class="font-bold text-blue-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="truck" class="w-5 h-5"></i> Caj Penghantaran (Delivery)
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
+                        <span class="text-sm font-medium text-slate-700">Kadar Rata (Flat Rate)</span>
+                        <span class="font-black text-blue-700">RM 35</span>
+                    </div>
+                    <p class="text-xs text-blue-800 px-1">*Jauh atau dekat caj tetap sama RM35.</p>
+                    
+                    <div class="flex items-center justify-between bg-gradient-to-r from-amber-100 to-amber-50 p-3 rounded-lg border border-amber-200 mt-2">
+                        <span class="text-sm font-bold text-amber-900 flex items-center gap-1">
+                            <i data-lucide="star" class="w-4 h-4 text-amber-500 fill-amber-500"></i> P1 Prime Member
+                        </span>
+                        <span class="font-black text-emerald-600">FREE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Set Display -->
+            <div class="bg-purple-50 rounded-xl p-5 border border-purple-200">
+                <h3 class="font-bold text-purple-900 mb-2 flex items-center gap-2">
+                    <i data-lucide="monitor-play" class="w-5 h-5"></i> Jualan Set Display
+                </h3>
+                <p class="text-sm text-purple-800 leading-relaxed mb-3">
+                    Kadangkala ada customer nak beli barang pameran (display).
+                </p>
+                <div class="bg-white p-3 rounded-lg border border-purple-100 flex items-start gap-2">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-xs font-semibold text-slate-700">
+                        Wajib pastikan customer tengok depan-depan dan BERSETUJU penuh dengan keadaan fizikal barang sebelum bayar.
+                    </span>
+                </div>
+            </div>
+
+            <!-- SOP Check Stock -->
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
+                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-3">
+                    <i data-lucide="box" class="w-5 h-5 text-emerald-600"></i> SOP Check & Order Stok
+                </h3>
+                
+                <div class="space-y-4 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-emerald-300 before:to-slate-200">
+                    
+                    <!-- Step 1 -->
+                    <div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-emerald-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">1</div>
+                        <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <h4 class="font-bold text-slate-800 text-sm">Check Kedai Dulu</h4>
+                                <p class="text-xs text-slate-600 mt-1">Rak produk atau stor cawangan. Biasanya Small Appliances (SA) adalah <em>ready stock</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-amber-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">2</div>
+                        <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
+                            <div class="bg-amber-50 p-3 rounded-lg border border-amber-100">
+                                <h4 class="font-bold text-amber-900 text-sm">Kalau Kedai Kosong?</h4>
+                                <p class="text-xs text-amber-800 mt-1">Cuba <em>push</em> customer tukar ke model lain yang <em>ready stock</em>, ATAU model <em>clearance</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-blue-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">3</div>
+                        <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
+                            <div class="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                                <h4 class="font-bold text-blue-900 text-sm">Customer Nak Order Juga</h4>
+                                <p class="text-xs text-blue-800 mt-1 mb-2">Check sistem stok di <strong>CDC (Pusat Pengedaran)</strong>.</p>
+                                <div class="space-y-1 text-xs">
+                                    <div class="bg-white p-1.5 rounded flex gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-500 shrink-0"></i> Ada di CDC: Boleh sampai esok (kecuali Ahad).</div>
+                                    <div class="bg-white p-1.5 rounded flex gap-2"><i data-lucide="x-circle" class="w-3.5 h-3.5 text-rose-500 shrink-0"></i> Tiada di CDC: JANGAN janji tarikh sampai! Minta customer tunggu.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: PEMBAYARAN -->
+        <section id="section-pembayaran" class="tab-section hidden space-y-6 animate-slide-up">
+            <!-- Amaran Debit vs Kredit -->
+            <div class="bg-rose-600 rounded-xl p-4 text-white shadow-sm flex gap-3">
+                <i data-lucide="alert-triangle" class="w-8 h-8 shrink-0 opacity-90"></i>
                 <div>
-                  <h3 className="font-bold text-sm text-slate-800">{duty.title}</h3>
-                  <p className="text-[11px] text-slate-500 mt-0.5">{duty.desc}</p>
+                    <h3 class="font-bold text-sm mb-1 uppercase tracking-wider">Penting: Semak Kad!</h3>
+                    <p class="text-xs text-rose-100 leading-relaxed">
+                        Staf wajib mahir bezakan antara <strong>Kad Debit</strong> dan <strong>Kad Kredit</strong>. Customer selalu keliru. Pelan ansuran 0% IPP HANYA sah untuk Kad Kredit sahaja.
+                    </p>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
+            </div>
 
-// Utility component for list items
-function FeatureItem({ active, text, alert = false, highlight, iconColor = "text-emerald-500", lightText = false }) {
-  const textColorClass = lightText 
-    ? (active ? 'text-slate-200' : 'text-slate-400')
-    : (alert ? 'text-rose-600' : (active ? 'text-slate-700' : 'text-slate-400'));
+            <!-- Pilihan Ansuran -->
+            <h3 class="font-bold text-slate-800 pt-2 border-b pb-2 flex items-center gap-2">
+                <i data-lucide="banknote" class="w-5 h-5 text-emerald-600"></i> Pilihan Ansuran Bulanan
+            </h3>
 
-  return (
-    <div className="flex items-start gap-2 text-sm">
-      {active ? (
-        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-[2px] ${iconColor}`} />
-      ) : (
-        <AlertCircle className={`w-4 h-4 shrink-0 mt-[2px] ${alert ? 'text-rose-500' : 'text-slate-300'}`} />
-      )}
-      <div>
-        <span className={`font-medium ${textColorClass}`}>{text}</span>
-        {highlight && (
-          <p className="text-[11px] text-emerald-600 mt-1 font-medium bg-emerald-50/50 p-1 rounded inline-block border border-emerald-100">
-            {highlight}
-          </p>
-        )}
-      </div>
-    </div>
-  );
-}
+            <div class="grid gap-4">
+                <!-- Hire Purchase -->
+                <div class="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
+                    <div class="bg-blue-100 p-2.5 rounded-lg shrink-0 h-fit">
+                        <i data-lucide="landmark" class="w-5 h-5 text-blue-700"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm">Sewa Beli (Aeon/Chailease)</h4>
+                        <ul class="text-xs text-slate-600 mt-2 space-y-1.5">
+                            <li>• Interest Flat Rate <strong>1.25% sebulan</strong> (Max)</li>
+                            <li>• Perlu hantar dokumen (slip gaji dll)</li>
+                            <li>• Proses kelulusan makan masa 2-3 hari bekerja</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- BNPL -->
+                <div class="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
+                    <div class="bg-orange-100 p-2.5 rounded-lg shrink-0 h-fit">
+                        <i data-lucide="qr-code" class="w-5 h-5 text-orange-700"></i>
+                    </div>
+                    <div class="w-full">
+                        <h4 class="font-bold text-slate-800 text-sm">BNPL (Atome/SPayLater/Grab)</h4>
+                        <div class="bg-orange-50 p-2 rounded text-xs text-orange-800 mt-2 mb-2">
+                            SOP: Pilih barang &rarr; Buka QR Code &rarr; Customer Scan & Key-in Amaun &rarr; Customer nampak tenure di app mereka.
+                        </div>
+                        <p class="text-[11px] text-rose-600 font-medium leading-tight">
+                            *Jika ditanya berapa bulanan? Jawab kita TIDAK TAHU. Customer kena check kelayakan dalam app BNPL mereka sendiri.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 0% IPP -->
+                <div class="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
+                    <div class="bg-purple-100 p-2.5 rounded-lg shrink-0 h-fit">
+                        <i data-lucide="percent" class="w-5 h-5 text-purple-700"></i>
+                    </div>
+                    <div class="w-full">
+                        <h4 class="font-bold text-slate-800 text-sm">0% IPP (Kad Kredit)</h4>
+                        <ul class="text-xs text-slate-600 mt-2 space-y-1.5 mb-3">
+                            <li>• Sah untuk hampir semua bank.</li>
+                            <li>• Ada caj Yuran Proses (Admin Fee) sekali sahaja. Rujuk jadual.</li>
+                        </ul>
+                        <div class="bg-purple-600 text-white text-xs p-2 rounded-lg flex items-start gap-2">
+                            <i data-lucide="info" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                            <span><strong>PROMO:</strong> Beli barang Apple, Yuran Proses PERCUMA (waived) buat masa ini!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Points & S-Coin -->
+            <h3 class="font-bold text-slate-800 pt-4 border-b pb-2 flex items-center gap-2">
+                <i data-lucide="coins" class="w-5 h-5 text-emerald-600"></i> Bayaran Guna Points
+            </h3>
+
+            <div class="grid gap-4">
+                <div class="bg-indigo-50 rounded-xl p-4 border border-indigo-100">
+                    <h4 class="font-bold text-indigo-900 text-sm mb-2">Bank Treat Points</h4>
+                    <p class="text-xs text-indigo-800 mb-2">Maybank, CIMB, Hong Leong, RHB. (Boleh check di terminal kad).</p>
+                    <div class="bg-white text-indigo-900 font-bold text-xs p-2 rounded text-center border border-indigo-200">
+                        Formula: 500 Points = RM 1
+                    </div>
+                    <p class="text-[11px] text-slate-500 mt-2 text-center">Anggap seperti tunai, tiada syarat minimun belian.</p>
+                </div>
+
+                <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-200">
+                    <h4 class="font-bold text-emerald-900 text-sm mb-2 flex items-center gap-2">
+                        <i data-lucide="coins" class="w-4 h-4"></i> Senheng S-Coins
+                    </h4>
+                    
+                    <div class="space-y-2">
+                        <div class="bg-white p-2 rounded border border-emerald-100">
+                            <span class="text-xs font-bold text-emerald-800 block">Beli Barang "Selected Items"</span>
+                            <span class="text-xs text-slate-600">Boleh guna S-Coin bayar 100% full amount (Rujuk Redemption Corner).</span>
+                        </div>
+                        
+                        <div class="bg-white p-2 rounded border border-emerald-100">
+                            <span class="text-xs font-bold text-amber-800 block">Beli Barang BIASA (Bukan selected)</span>
+                            <span class="text-xs text-slate-600 block mt-1">Syarat: Harga barang wajib <strong>RM1,000 ke atas</strong>.</span>
+                            <span class="text-xs text-slate-600 block mt-1">Syarat: Hanya boleh tolak <strong>Max 10%</strong> dari harga barang.</span>
+                            
+                            <div class="mt-2 bg-slate-50 p-2 rounded border border-slate-200 text-[11px] leading-tight text-slate-600">
+                                <strong>Cth:</strong> Beli TV RM2,000. Customer ada RM500 S-Coin.<br/>
+                                Hanya boleh tolak <strong>RM200 sahaja</strong> (10% dari RM2000). Baki kena bayar tunai/kad.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: WARANTI (RW) -->
+        <section id="section-waranti" class="tab-section hidden space-y-6 animate-slide-up">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">1-to-1 Replacement (RW)</h2>
+                <p class="text-sm text-slate-600">Fokus utama ketika menjual <strong>Small Appliances (SA)</strong>.</p>
+            </div>
+
+            <div class="grid gap-4">
+                <!-- ADD ON RW -->
+                <div class="bg-blue-600 rounded-xl shadow-md border border-blue-700 relative overflow-hidden">
+                    <div class="absolute right-[-10px] top-[-10px] opacity-10">
+                        <i data-lucide="refresh-ccw" class="w-32 h-32 text-white"></i>
+                    </div>
+                    <div class="p-4 relative z-10 text-white">
+                        <div class="flex justify-between items-center mb-4 border-b border-blue-500 pb-3">
+                            <h3 class="font-bold text-lg flex items-center gap-2">
+                                <i data-lucide="thumbs-up" class="w-5 h-5 text-blue-200"></i> Beli dengan RW
+                            </h3>
+                            <span class="bg-blue-800 text-xs px-2 py-1 rounded-full font-bold">Disarankan</span>
+                        </div>
+                        
+                        <ul class="space-y-3 text-sm text-blue-50 mb-4">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]"></i>
+                                <span><strong>Extra 1 Tahun.</strong> (Cth: Kilang 1 Thn + RW 1 Thn = 2 Tahun).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]"></i>
+                                <span>Rosak dalam tempoh? <strong>Tukar BARU On-The-Spot!</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="refresh-ccw" class="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]"></i>
+                                <span>Jika model lama dah habis (obsolete), customer boleh pilih model baru ikut harga asal masa beli.</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="bg-blue-800/50 p-3 rounded-lg text-xs flex gap-2">
+                            <i data-lucide="info" class="w-4 h-4 shrink-0"></i>
+                            <span><strong>Contoh:</strong> Beli Periuk Nasi RM150. Customer cuma perlu add-on <strong>RM11</strong> sahaja untuk RW. Sangat berbaloi!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tanpa RW -->
+                <div class="bg-white rounded-xl shadow-sm border border-rose-200 p-4">
+                    <h3 class="font-bold text-rose-800 text-sm mb-3 flex items-center gap-2">
+                        <i data-lucide="thumbs-down" class="w-4 h-4"></i> Menolak (TIDAK) Add-on RW
+                    </h3>
+                    <ul class="space-y-2 text-xs text-slate-600">
+                        <li class="flex items-start gap-2">
+                            <span class="text-rose-500 font-bold mt-[-1px]">×</span>
+                            <span>Hanya waranti kilang (biasa 1 tahun).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-rose-500 font-bold mt-[-1px]">×</span>
+                            <span><strong>TIADA</strong> tukar baru on-the-spot.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-rose-500 font-bold mt-[-1px]">×</span>
+                            <span>Jika rosak, kena hantar kilang (repair/tunggu 1-2 bulan).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Syarat Claim -->
+            <div class="bg-slate-100 rounded-xl p-4 border border-slate-200">
+                <h3 class="font-bold text-slate-800 text-sm mb-3">SOP Claim Waranti:</h3>
+                <div class="space-y-2 text-xs">
+                    <div class="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><i data-lucide="store" class="w-4 h-4 text-emerald-600"></i> Boleh claim di mana-mana cawangan. (Wajib ada P1).</div>
+                    <div class="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> <strong>Hanya cover:</strong> Kerosakan Mekanikal & Elektrikal kilang.</div>
+                    <div class="bg-white p-2 rounded flex items-start gap-2 shadow-sm text-rose-700">
+                        <i data-lucide="x-circle" class="w-4 h-4 shrink-0 mt-0.5"></i> 
+                        <span><strong>TIDAK cover:</strong> Jatuh pecah, kilat, masuk air, calar, bateri/filter.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: PLUSONE MEMBERSHIP -->
+        <section id="section-keahlian" class="tab-section hidden space-y-6 animate-slide-up">
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-bold text-slate-800">Senheng PlusOne®</h2>
+                <p class="text-sm text-slate-600">3 Peringkat Keahlian Utama</p>
+            </div>
+
+            <div class="space-y-5">
+                <!-- Basic -->
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-slate-100 p-3 border-b border-slate-200 flex justify-between items-center">
+                        <h3 class="font-bold text-slate-700">P1 Basic</h3>
+                        <span class="bg-slate-200 text-slate-700 text-xs px-2 py-1 rounded font-bold">PERCUMA</span>
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <div class="flex items-start gap-2 text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
+                            <div><span class="font-medium text-slate-700">Kumpul S-Coin</span></div>
+                        </div>
+                        <div class="flex items-start gap-2 text-sm">
+                            <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 mt-[2px] text-rose-500"></i>
+                            <div><span class="font-medium text-rose-600">TAK BOLEH Redeem S-Coin</span></div>
+                        </div>
+                        <div class="flex items-start gap-2 text-sm">
+                            <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 mt-[2px] text-rose-500"></i>
+                            <div><span class="font-medium text-rose-600">TIADA Extra 1 Tahun Waranti</span></div>
+                        </div>
+                        <div class="text-[11px] text-slate-500 mt-2 pt-2 border-t">
+                            *Nak Extra Waranti / RW SA: Perlu Add-on RM9.90.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classic -->
+                <div class="bg-white border-2 border-emerald-500 rounded-xl overflow-hidden shadow-md">
+                    <div class="bg-emerald-500 p-3 flex justify-between items-center text-white">
+                        <h3 class="font-bold">P1 Classic</h3>
+                        <span class="bg-white text-emerald-700 text-xs px-2 py-1 rounded font-bold shadow-sm">PILIHAN RAMAI</span>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex items-end gap-2 mb-2">
+                            <span class="text-2xl font-black text-emerald-700">RM 12</span><span class="text-xs text-slate-500 pb-1">/ 1 Tahun</span>
+                            <span class="text-xs text-slate-400 pb-1 px-1">atau</span>
+                            <span class="text-lg font-bold text-emerald-600">RM 36</span><span class="text-xs text-slate-500 pb-1">/ 5 Tahun</span>
+                        </div>
+                        
+                        <div class="flex items-start gap-2 text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
+                            <div><span class="font-medium text-slate-700">Kumpul & REDEEM S-Coin</span></div>
+                        </div>
+                        <div class="flex items-start gap-2 text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
+                            <div>
+                                <span class="font-medium text-slate-700">FREE Extra 1 Tahun Waranti</span>
+                                <p class="text-[11px] text-emerald-600 mt-1 font-medium bg-emerald-50/50 p-1 rounded inline-block border border-emerald-100">Contoh: Kilang 1 thn + P1 1 thn = 2 thn</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-emerald-50 p-2.5 rounded border border-emerald-100 mt-2">
+                            <div class="text-[11px] font-bold text-rose-600 flex items-center gap-1 mb-1">
+                                <i data-lucide="alert-circle" class="w-3 h-3"></i> Syarat Extra Waranti:
+                            </div>
+                            <ul class="text-[10px] text-slate-600 space-y-0.5 ml-4 list-disc">
+                                <li>Sah untuk barang RM400 ke atas sahaja.</li>
+                                <li><strong>TV TIDAK DAPAT</strong> Extra Waranti ini.</li>
+                            </ul>
+                            <div class="text-[10px] text-slate-600 mt-2 ml-1">
+                                *RW Small Appliances (SA): Harga bergantung pada pricetag.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prime -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-lg">
+                    <div class="p-4 border-b border-slate-700 flex justify-between items-center">
+                        <h3 class="font-bold text-amber-400 flex items-center gap-1"><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i> P1 Prime</h3>
+                        <span class="text-xl font-black text-white">RM 120</span>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <p class="text-xs font-bold text-amber-200 mb-2">Sah Seumur Hidup (Lifetime)</p>
+                        
+                        <div class="flex items-start gap-2 text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
+                            <div><span class="font-medium text-slate-200">Semua benefit P1 Classic</span></div>
+                        </div>
+                        <div class="flex items-start gap-2 text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-amber-400"></i>
+                            <div><span class="font-medium text-slate-200">FREE Delivery untuk 12 Tahun</span></div>
+                        </div>
+
+                        <p class="text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-700">
+                            *Syarat Extra Waranti (Barang &gt;RM400, Kecuali TV) sama seperti Classic.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TUGAS STAFF -->
+        <section id="section-tugas" class="tab-section hidden space-y-6 animate-slide-up">
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-800 mb-3">Akses Sistem Outlet</h2>
+                <p class="text-sm text-slate-600 mb-5">
+                    Tugas utama anda di kaunter (sistem hanya beri akses perkara di bawah):
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
+                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
+                            <i data-lucide="monitor-play" class="w-5 h-5 text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-slate-800">Key-in Pembelian</h3>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Merekod transaksi jualan ke dalam sistem.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
+                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-slate-800">Semak Warranty</h3>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Check tempoh waranti barang customer.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
+                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
+                            <i data-lucide="file-warning" class="w-5 h-5 text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-slate-800">Report Claim</h3>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Bantu customer masuk report claim waranti.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
+                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
+                            <i data-lucide="award" class="w-5 h-5 text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-slate-800">Check Keahlian</h3>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Semak tier dan status aktif PlusOne customer.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
+                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
+                            <i data-lucide="package-check" class="w-5 h-5 text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-slate-800">Check Stok</h3>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Semak stok kedai atau CDC.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- App Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            // 1. Hide all sections
+            const sections = document.querySelectorAll('.tab-section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                // Remove animation class to re-trigger it when shown again
+                section.classList.remove('animate-slide-up'); 
+            });
+
+            // 2. Show the active section and trigger animation
+            const targetSection = document.getElementById('section-' + tabId);
+            if(targetSection) {
+                targetSection.classList.remove('hidden');
+                // Small trick to restart animation
+                void targetSection.offsetWidth; 
+                targetSection.classList.add('animate-slide-up');
+            }
+
+            // 3. Update Tab Button Styles
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            // Classes for Active State
+            const activeClasses = ['border-emerald-300', 'text-white', 'bg-emerald-800/80'];
+            // Classes for Inactive State
+            const inactiveClasses = ['border-transparent', 'text-emerald-200/70', 'hover:text-white', 'hover:bg-emerald-800/40'];
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.classList.add(...activeClasses);
+                    btn.classList.remove(...inactiveClasses);
+                } else {
+                    btn.classList.add(...inactiveClasses);
+                    btn.classList.remove(...activeClasses);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
