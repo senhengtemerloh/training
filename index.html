@@ -35,49 +35,88 @@
         .animate-slide-up {
             animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        /* Animation for the swipe hint arrow */
+        @keyframes bounce-x {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+        .animate-bounce-x {
+            animation: bounce-x 1s infinite;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-emerald-200 pb-20 md:pb-8">
 
     <!-- Header -->
     <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
-        <div class="px-4 py-4 md:py-6">
-            <div class="flex flex-col gap-2">
+        <div class="px-4 py-4 md:py-6 relative overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-600 rounded-full blur-3xl opacity-20 -mr-10 -mt-10"></div>
+            
+            <div class="flex flex-col gap-2 relative z-10">
                 <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
-                    <i data-lucide="store" class="w-6 h-6 md:w-8 md:h-8 text-emerald-300"></i>
+                    <div class="bg-white/10 p-1.5 rounded-lg backdrop-blur-sm">
+                        <i data-lucide="store" class="w-6 h-6 md:w-8 md:h-8 text-emerald-300"></i>
+                    </div>
                     Kit Latihan New Joiner
                 </h1>
-                <p class="text-emerald-100 text-xs md:text-sm opacity-90">
+                <p class="text-emerald-100 text-xs md:text-sm opacity-90 pl-1">
                     Grand Senheng Temerloh
                 </p>
             </div>
         </div>
         
-        <!-- Navigation Tabs -->
-        <div class="bg-emerald-800/60 shadow-inner">
-            <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="tab-container">
-                <!-- Tabs will be controlled by JS -->
-                <button data-tab="pengenalan" onclick="switchTab('pengenalan')" class="tab-btn active-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-emerald-300 text-white bg-emerald-800/80">
-                    <i data-lucide="store" class="w-4 h-4 md:w-5 md:h-5"></i> Polisi Asas
-                </button>
-                <button data-tab="operasi" onclick="switchTab('operasi')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                    <i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i> Operasi Jualan
-                </button>
-                <button data-tab="pembayaran" onclick="switchTab('pembayaran')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                    <i data-lucide="wallet" class="w-4 h-4 md:w-5 md:h-5"></i> Pembayaran
-                </button>
-                <button data-tab="waranti" onclick="switchTab('waranti')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                    <i data-lucide="refresh-ccw" class="w-4 h-4 md:w-5 md:h-5"></i> Waranti (RW)
-                </button>
-                <button data-tab="keahlian" onclick="switchTab('keahlian')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                    <i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i> PlusOne®
-                </button>
-                <button data-tab="scoin" onclick="switchTab('scoin')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                    <i data-lucide="coins" class="w-4 h-4 md:w-5 md:h-5"></i> Sistem S-Coin
-                </button>
-                <button data-tab="tugas" onclick="switchTab('tugas')" class="tab-btn inactive-tab flex items-center gap-2 px-4 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                    <i data-lucide="clipboard-list" class="w-4 h-4 md:w-5 md:h-5"></i> Tugas Staf
-                </button>
+        <!-- Navigation Tabs Container -->
+        <div class="bg-emerald-800/60 shadow-inner relative group">
+            
+            <!-- Swipe Hint Text -->
+            <div class="flex justify-between items-center px-4 py-1 bg-emerald-900/30 text-[10px] text-emerald-200 font-medium tracking-wide uppercase">
+                <span>Pilih Kategori</span>
+                <span class="flex items-center gap-1 animate-pulse">
+                    Gesek Kiri <i data-lucide="arrow-right" class="w-3 h-3 animate-bounce-x"></i>
+                </span>
+            </div>
+
+            <div class="relative">
+                <!-- Left Fade Gradient (Visible when scrolled) -->
+                <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-emerald-900/80 to-transparent pointer-events-none z-10 hidden md:hidden" id="left-fade"></div>
+
+                <!-- Scrollable Container -->
+                <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory scroll-smooth pb-1" id="tab-container" onscroll="handleScroll()">
+                    <!-- Tabs will be controlled by JS -->
+                    <button data-tab="pengenalan" onclick="switchTab('pengenalan')" class="tab-btn active-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-emerald-300 text-white bg-emerald-800/80">
+                        <i data-lucide="store" class="w-4 h-4 md:w-5 md:h-5"></i> Polisi Asas
+                    </button>
+                    <button data-tab="operasi" onclick="switchTab('operasi')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                        <i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i> Operasi Jualan
+                    </button>
+                    <button data-tab="pembayaran" onclick="switchTab('pembayaran')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                        <i data-lucide="wallet" class="w-4 h-4 md:w-5 md:h-5"></i> Pembayaran
+                    </button>
+                    <button data-tab="waranti" onclick="switchTab('waranti')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                        <i data-lucide="refresh-ccw" class="w-4 h-4 md:w-5 md:h-5"></i> Waranti (RW)
+                    </button>
+                    <button data-tab="vcare" onclick="switchTab('vcare')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                        <i data-lucide="shield-plus" class="w-4 h-4 md:w-5 md:h-5"></i> V-Care
+                    </button>
+                    <button data-tab="keahlian" onclick="switchTab('keahlian')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                        <i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i> PlusOne®
+                    </button>
+                    <button data-tab="scoin" onclick="switchTab('scoin')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                        <i data-lucide="coins" class="w-4 h-4 md:w-5 md:h-5"></i> Sistem S-Coin
+                    </button>
+                    <button data-tab="tugas" onclick="switchTab('tugas')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
+                        <i data-lucide="clipboard-list" class="w-4 h-4 md:w-5 md:h-5"></i> Tugas Staf
+                    </button>
+                    <!-- Padding element to ensure last item is fully visible/clickable without being stuck to edge -->
+                    <div class="w-4 flex-shrink-0"></div>
+                </div>
+
+                <!-- Right Fade Gradient (Always visible initially) -->
+                <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-emerald-900/90 to-transparent pointer-events-none z-10 flex items-center justify-end pr-1" id="right-fade">
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-emerald-200/50 animate-pulse"></i>
+                </div>
             </div>
         </div>
     </header>
@@ -409,6 +448,99 @@
                 </div>
             </div>
         </section>
+        
+        <!-- SECTION: V-CARE (BAHARU) -->
+        <section id="section-vcare" class="tab-section hidden space-y-6 animate-slide-up">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">V-Care (Vision Care)</h2>
+                <p class="text-sm text-slate-600">Insurans Extended Warranty untuk perlindungan tambahan sehingga 5 tahun.</p>
+            </div>
+
+            <!-- Card 1: Konsep & Kiraan -->
+            <div class="bg-indigo-50 rounded-xl p-5 shadow-sm border border-indigo-200">
+                <h3 class="font-bold text-indigo-900 mb-3 flex items-center gap-2">
+                    <i data-lucide="calculator" class="w-5 h-5 text-indigo-700"></i> Cara Kira Tahun Waranti
+                </h3>
+                <p class="text-xs text-indigo-800 mb-3 leading-relaxed">
+                    V-Care menyambung waranti selepas waranti kilang & waranti percuma Senheng tamat. <br><strong>Maksimum Total = 5 Tahun.</strong>
+                </p>
+                
+                <div class="space-y-2">
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
+                        <span class="text-xs font-bold text-slate-500 block mb-1">Contoh 1: Smartphone (Standard)</span>
+                        <div class="flex items-center gap-1 text-xs font-bold text-slate-800 flex-wrap">
+                            <span class="bg-slate-200 px-2 py-1 rounded">1 Thn Kilang</span> + 
+                            <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded">1 Thn P1 Free</span> + 
+                            <span class="bg-indigo-600 text-white px-2 py-1 rounded">2 Thn V-Care</span>
+                            <span class="ml-auto text-indigo-700 text-sm">= 4 TAHUN</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
+                        <span class="text-xs font-bold text-slate-500 block mb-1">Contoh 2: TV (Tiada Free P1 Extra Year)</span>
+                        <div class="flex items-center gap-1 text-xs font-bold text-slate-800 flex-wrap">
+                            <span class="bg-slate-200 px-2 py-1 rounded">2 Thn Kilang</span> + 
+                            <span class="bg-indigo-600 text-white px-2 py-1 rounded">2 Thn V-Care</span>
+                            <span class="ml-auto text-indigo-700 text-sm">= 4 TAHUN</span>
+                        </div>
+                        <p class="text-[10px] text-rose-500 mt-1 italic">*TV tiada free extra 1 year P1, tapi boleh add-on V-Care.</p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
+                        <span class="text-xs font-bold text-slate-500 block mb-1">Contoh 3: Lain-lain (Max 5 Tahun)</span>
+                        <div class="text-xs text-slate-600 space-y-1">
+                            <div class="flex justify-between"><span>2 Thn Kilang + 1 Thn Free + 2 Thn V-Care</span> <strong>= 5 TAHUN</strong></div>
+                            <div class="flex justify-between"><span>1 Thn Kilang + 1 Thn Free + 3 Thn V-Care</span> <strong>= 5 TAHUN</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Coverage Limit -->
+            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
+                <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i> Had Perlindungan (Repair Credit)
+                </h3>
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 text-xs text-slate-600 leading-relaxed mb-3">
+                    <p class="mb-2">Insurans cover kos <strong>Labour, Transport & Parts</strong>. Tetapi ada had (limit):</p>
+                    <ul class="list-disc ml-4 space-y-1">
+                        <li>Insurans cover kos repair sehingga <strong>Harga Beli Asal</strong> barang.</li>
+                        <li>Contoh: Peti Sejuk RM2000. Customer ada "Repair Credit" RM2000.</li>
+                        <li>Jika repair credit habis digunakan, waranti tamat automatik.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Card 3: Replacement Voucher (PENTING) -->
+            <div class="bg-rose-50 rounded-xl p-5 shadow-sm border border-rose-200 relative overflow-hidden">
+                <div class="absolute right-[-10px] top-[-10px] opacity-10">
+                    <i data-lucide="ticket" class="w-24 h-24 text-rose-600"></i>
+                </div>
+                <h3 class="font-bold text-rose-900 mb-3 flex items-center gap-2 relative z-10">
+                    <i data-lucide="alert-octagon" class="w-5 h-5 text-rose-600"></i> Replacement Voucher (BER)
+                </h3>
+                <p class="text-xs text-rose-800 mb-4 relative z-10">
+                    Jika kos repair terlalu mahal atau parts tiada (*Beyond Economic Repair*), insurans akan bagi <strong>Replacement Voucher</strong>.
+                </p>
+
+                <div class="bg-white p-3 rounded-lg border border-rose-100 relative z-10">
+                    <span class="text-xs font-bold text-rose-700 block mb-2 underline">Nilai Voucher Berdasarkan Apa?</span>
+                    
+                    <div class="flex items-center gap-2 mb-2">
+                        <i data-lucide="x" class="w-4 h-4 text-rose-500"></i>
+                        <span class="text-xs text-slate-500 line-through">Harga Beli Dulu (RM 3000)</span>
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
+                        <span class="text-xs font-bold text-slate-800">Harga Pasaran Semasa (Market Value)</span>
+                    </div>
+
+                    <div class="bg-rose-100 p-2 rounded text-[11px] text-rose-900 leading-relaxed italic border border-rose-200">
+                        <strong>Analogi untuk Customer:</strong> "Dulu beli TV RM3000. Sekarang rosak, insurans 'beli balik' TV rosak tu dengan harga RM1800 (sebab market value specs tu sekarang dah murah). Sangat berbaloi sebab kalau jual besi buruk tak laku."
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- SECTION: PLUSONE MEMBERSHIP -->
         <section id="section-keahlian" class="tab-section hidden space-y-6 animate-slide-up">
@@ -708,7 +840,38 @@
                     btn.classList.remove(...activeClasses);
                 }
             });
+
+            // 4. Scroll active tab into view
+            const activeBtn = document.querySelector(`button[data-tab="${tabId}"]`);
+            if(activeBtn) {
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
         }
+
+        // Logic to show/hide fade effect based on scroll position
+        function handleScroll() {
+            const container = document.getElementById('tab-container');
+            const leftFade = document.getElementById('left-fade');
+            const rightFade = document.getElementById('right-fade');
+            
+            // Show/Hide Left Fade
+            if (container.scrollLeft > 20) {
+                leftFade.classList.remove('hidden');
+            } else {
+                leftFade.classList.add('hidden');
+            }
+
+            // Show/Hide Right Fade
+            // Use 5px buffer for better UX
+            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
+                rightFade.classList.add('hidden');
+            } else {
+                rightFade.classList.remove('hidden');
+            }
+        }
+        
+        // Initial check on load
+        document.addEventListener('DOMContentLoaded', handleScroll);
     </script>
 </body>
 </html>
