@@ -1,877 +1,610 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kit Latihan Grand Senheng Temerloh</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@0.292.0"></script>
-    
-    <style>
-        /* Custom scrollbar hiding for mobile swipeable tabs */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        
-        /* Custom animation for tab switching */
-        @keyframes slideUpFade {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-slide-up {
-            animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Training Kit New Staff - Payment & Financing</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --red: #d62828;
+      --green: #0f9d58;
+      --blue: #2563eb;
+      --orange: #f97316;
+      --yellow: #facc15;
+      --shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
 
-        /* Animation for the swipe hint arrow */
-        @keyframes bounce-x {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(3px); }
-        }
-        .animate-bounce-x {
-            animation: bounce-x 1s infinite;
-        }
-    </style>
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ffe169, #fff4bf);
+      border: 1px solid #f4dd78;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #4b5563;
+      font-size: 0.96rem;
+    }
+
+    .notice {
+      margin-top: 12px;
+      background: rgba(255,255,255,0.72);
+      border-left: 5px solid var(--red);
+      padding: 12px 13px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+    }
+
+    .topnav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 2px 2px 10px;
+      margin-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .topnav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .topnav a {
+      flex: 0 0 auto;
+      text-decoration: none;
+      color: #111827;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 0.86rem;
+      font-weight: bold;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .red { background: var(--red); }
+    .green { background: var(--green); }
+    .blue { background: var(--blue); }
+    .orange { background: var(--orange); }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.16rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin: 16px 0 8px;
+      font-size: 0.98rem;
+    }
+
+    p {
+      margin: 8px 0;
+      font-size: 0.95rem;
+    }
+
+    ul, ol {
+      margin: 8px 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin: 7px 0;
+      font-size: 0.95rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fafafa;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .formula, .example, .warn, .good, .mini {
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 0.93rem;
+    }
+
+    .formula {
+      background: #f9fafb;
+      border: 1px dashed #cbd5e1;
+      font-family: "Courier New", monospace;
+      overflow-x: auto;
+    }
+
+    .example {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+
+    .warn {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+    }
+
+    .good {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+    }
+
+    .mini {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+    }
+
+    .chat {
+      background: #111827;
+      color: #f9fafb;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 0.93rem;
+      white-space: pre-line;
+      margin-top: 10px;
+    }
+
+    .qa {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .qa-item {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .q {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.84rem;
+      padding: 10px 0 18px;
+    }
+
+    @media (min-width: 768px) {
+      .wrap {
+        padding: 20px;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
-<body class="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-emerald-200 pb-20 md:pb-8">
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Training Kit Staff Baru</h1>
+      <p>Versi mudah faham untuk explain pembayaran, bulanan, AEON, Atome, SPayLater, kad kredit, dan S-Coin kepada customer.</p>
+      <div class="notice"><strong>Ingat:</strong> Kalau ada caj, syarat, atau dokumen diperlukan, explain awal-awal. Jangan bagi customer terkejut kemudian.</div>
+    </section>
 
-    <!-- Header -->
-    <header class="bg-emerald-700 text-white shadow-md sticky top-0 z-50">
-        <div class="px-4 py-4 md:py-6 relative overflow-hidden">
-            <!-- Background Decoration -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-600 rounded-full blur-3xl opacity-20 -mr-10 -mt-10"></div>
-            
-            <div class="flex flex-col gap-2 relative z-10">
-                <h1 class="text-xl md:text-2xl font-bold flex items-center gap-2">
-                    <div class="bg-white/10 p-1.5 rounded-lg backdrop-blur-sm">
-                        <i data-lucide="store" class="w-6 h-6 md:w-8 md:h-8 text-emerald-300"></i>
-                    </div>
-                    Kit Latihan New Joiner
-                </h1>
-                <p class="text-emerald-100 text-xs md:text-sm opacity-90 pl-1">
-                    Grand Senheng Temerloh
-                </p>
-            </div>
+    <div class="topnav">
+      <a href="#asas">Asas</a>
+      <a href="#kadkredit">Kad Kredit</a>
+      <a href="#aeon">AEON</a>
+      <a href="#kiraan">Kiraan</a>
+      <a href="#paylater">Atome / SPayLater</a>
+      <a href="#scoin">S-Coin</a>
+      <a href="#ayat">Ayat Ringkas</a>
+    </div>
+
+    <section class="card" id="asas">
+      <span class="tag blue">Asas</span>
+      <h2>Apa staff kena tanya dulu</h2>
+      <ul>
+        <li><strong>Barang apa customer nak beli?</strong></li>
+        <li><strong>Customer nak bayar macam mana?</strong></li>
+        <li>Kalau customer tanya <strong>bulanan</strong>, staff mesti tahu harga barang dulu.</li>
+        <li><strong>Jangan janji lulus.</strong> Kelulusan ikut bank, AEON, atau platform.</li>
+      </ul>
+      <div class="mini"><strong>Senang ingat:</strong> Tahu barang dulu, baru boleh cerita pasal bulanan.</div>
+    </section>
+
+    <section class="card" id="kadkredit">
+      <span class="tag green">Kad Kredit</span>
+      <h2>Bayaran kad kredit</h2>
+      <ul>
+        <li><strong>Semua barang</strong> boleh beli guna kad kredit.</li>
+        <li>Customer boleh pilih <strong>swipe biasa</strong> atau <strong>0% IPP</strong>.</li>
+        <li>Untuk <strong>0% IPP</strong>, ikut <strong>bank</strong> dan biasanya ada <strong>minimum purchase</strong>.</li>
+        <li>Ada <strong>admin fee</strong>. Staff kena <strong>refer table</strong>.</li>
+        <li>Kalau <strong>Apple product + 0% IPP</strong>, buat masa ni <strong>admin fee waive</strong>.</li>
+      </ul>
+
+      <h3>Kiraan 0% IPP</h3>
+      <div class="formula">Bulanan = jumlah swipe ÷ bilangan bulan</div>
+      <div class="example">
+        <strong>Contoh:</strong><br>
+        RM2400 ÷ 12 bulan = <strong>RM200 sebulan</strong>
+      </div>
+
+      <div class="chat">Contoh ayat:
+“Kalau guna kad kredit, boss boleh swipe biasa terus. Kalau nak buat 0% IPP pun boleh, tapi ikut bank dan minimum purchase. Admin fee pun ikut bank. Kalau Apple, buat masa ni admin fee waive.”</div>
+    </section>
+
+    <section class="card">
+      <span class="tag orange">Kad</span>
+      <h2>Beza debit card dan credit card</h2>
+      <div class="steps">
+        <div class="step">
+          <strong>Debit card</strong>
+          Duit terus potong dari akaun bank customer.
         </div>
-        
-        <!-- Navigation Tabs Container -->
-        <div class="bg-emerald-800/60 shadow-inner relative group">
-            
-            <!-- Swipe Hint Text -->
-            <div class="flex justify-between items-center px-4 py-1 bg-emerald-900/30 text-[10px] text-emerald-200 font-medium tracking-wide uppercase">
-                <span>Pilih Kategori</span>
-                <span class="flex items-center gap-1 animate-pulse">
-                    Gesek Kiri <i data-lucide="arrow-right" class="w-3 h-3 animate-bounce-x"></i>
-                </span>
-            </div>
-
-            <div class="relative">
-                <!-- Left Fade Gradient (Visible when scrolled) -->
-                <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-emerald-900/80 to-transparent pointer-events-none z-10 hidden md:hidden" id="left-fade"></div>
-
-                <!-- Scrollable Container -->
-                <div class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory scroll-smooth pb-1" id="tab-container" onscroll="handleScroll()">
-                    <!-- Tabs will be controlled by JS -->
-                    <button data-tab="pengenalan" onclick="switchTab('pengenalan')" class="tab-btn active-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-emerald-300 text-white bg-emerald-800/80">
-                        <i data-lucide="store" class="w-4 h-4 md:w-5 md:h-5"></i> Polisi Asas
-                    </button>
-                    <button data-tab="operasi" onclick="switchTab('operasi')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                        <i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i> Operasi Jualan
-                    </button>
-                    <button data-tab="pembayaran" onclick="switchTab('pembayaran')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                        <i data-lucide="wallet" class="w-4 h-4 md:w-5 md:h-5"></i> Pembayaran
-                    </button>
-                    <button data-tab="waranti" onclick="switchTab('waranti')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                        <i data-lucide="refresh-ccw" class="w-4 h-4 md:w-5 md:h-5"></i> Waranti (RW)
-                    </button>
-                    <button data-tab="vcare" onclick="switchTab('vcare')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                        <i data-lucide="shield-plus" class="w-4 h-4 md:w-5 md:h-5"></i> V-Care
-                    </button>
-                    <button data-tab="keahlian" onclick="switchTab('keahlian')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                        <i data-lucide="award" class="w-4 h-4 md:w-5 md:h-5"></i> PlusOne®
-                    </button>
-                    <button data-tab="scoin" onclick="switchTab('scoin')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                        <i data-lucide="coins" class="w-4 h-4 md:w-5 md:h-5"></i> Sistem S-Coin
-                    </button>
-                    <button data-tab="tugas" onclick="switchTab('tugas')" class="tab-btn inactive-tab flex items-center gap-2 px-5 py-3 text-xs md:text-sm font-semibold transition-all whitespace-nowrap snap-start border-b-[3px] flex-shrink-0 border-transparent text-emerald-200/70 hover:text-white hover:bg-emerald-800/40">
-                        <i data-lucide="clipboard-list" class="w-4 h-4 md:w-5 md:h-5"></i> Tugas Staf
-                    </button>
-                    <!-- Padding element to ensure last item is fully visible/clickable without being stuck to edge -->
-                    <div class="w-4 flex-shrink-0"></div>
-                </div>
-
-                <!-- Right Fade Gradient (Always visible initially) -->
-                <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-emerald-900/90 to-transparent pointer-events-none z-10 flex items-center justify-end pr-1" id="right-fade">
-                    <i data-lucide="chevron-right" class="w-5 h-5 text-emerald-200/50 animate-pulse"></i>
-                </div>
-            </div>
+        <div class="step">
+          <strong>Credit card</strong>
+          Guna limit kredit yang bank beri.
         </div>
-    </header>
+        <div class="step">
+          <strong>Untuk instalment</strong>
+          Biasanya yang digunakan ialah <strong>credit card</strong>, bukan debit card.
+        </div>
+      </div>
+    </section>
 
-    <!-- Main Content Area -->
-    <main class="max-w-4xl mx-auto px-4 py-6 md:py-8">
+    <section class="card" id="aeon">
+      <span class="tag red">AEON</span>
+      <h2>AEON Credit - cara explain paling mudah</h2>
+      <ul>
+        <li><strong>Semua barang</strong> boleh beli guna AEON.</li>
+        <li>Syarat utama: <strong>bulanan tak boleh kurang daripada RM48</strong>.</li>
+        <li>Bila customer tanya AEON, tanya dulu <strong>pernah buat AEON atau belum</strong>.</li>
+        <li>Kalau tak pernah, minta <strong>slip gaji terkini</strong>. 1 bulan boleh, 3 bulan lagi bagus.</li>
+      </ul>
 
-        <!-- SECTION: PENGENALAN & POLISI -->
-        <section id="section-pengenalan" class="tab-section space-y-6 animate-slide-up">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-slate-800 mb-2">Polisi Kedai & Aplikasi</h2>
-                <p class="text-sm text-slate-600">Perkara paling asas yang staf wajib tahu tentang operasi digital Senheng.</p>
-            </div>
+      <h3>Flow ringkas AEON</h3>
+      <div class="steps">
+        <div class="step">
+          <strong>1. Staff buat eKYC</strong>
+          Masuk portal merchant AEON dan key in maklumat customer.
+        </div>
+        <div class="step">
+          <strong>2. Customer mesti ada email aktif</strong>
+          Email diperlukan untuk terima OTP.
+        </div>
+        <div class="step">
+          <strong>3. Lepas eKYC</strong>
+          Terus nampak customer layak apply atau tak.
+        </div>
+        <div class="step">
+          <strong>4. Kalau rekod buruk</strong>
+          Kalau CTOS / blacklist teruk, sistem boleh terus keluar tak boleh apply.
+        </div>
+        <div class="step">
+          <strong>5. Kalau layak</strong>
+          Kadang-kadang AEON bagi limit. Ada kes document required, ada kes tak perlu document income.
+        </div>
+        <div class="step">
+          <strong>6. Tunggu keputusan</strong>
+          Biasanya 24 jam hari bekerja untuk tahu lulus atau reject.
+        </div>
+      </div>
 
-            <!-- Card 1 -->
-            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-                <div class="flex items-center gap-3 mb-3 border-b border-slate-100 pb-3">
-                    <div class="bg-emerald-100 p-2 rounded-full">
-                        <i data-lucide="smartphone" class="w-5 h-5 text-emerald-600"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-800">Senheng 100% Digital</h3>
-                </div>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    Semua urusan resit, waranti, dan ganjaran P1 diuruskan terus melalui <strong>Senheng App</strong>. Tiada lagi penggunaan kad keahlian fizikal.
-                </p>
-            </div>
+      <div class="warn"><strong>Nota:</strong> Kalau reject, staff biasanya tak tahu sebab sebenar. Itu hal private antara customer dan AEON.</div>
 
-            <!-- Card 2: CRITICAL -->
-            <div class="bg-rose-50 rounded-xl p-5 shadow-sm border border-rose-200 relative overflow-hidden">
-                <div class="absolute right-[-10px] top-[-10px] opacity-10">
-                    <i data-lucide="file-warning" class="w-24 h-24 text-rose-600"></i>
-                </div>
-                <div class="flex items-center gap-2 mb-3">
-                    <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600"></i>
-                    <h3 class="font-bold text-rose-800">LARANGAN Resit Fizikal</h3>
-                </div>
-                <ul class="space-y-2.5 text-sm text-rose-900/80 relative z-10">
-                    <li class="flex items-start gap-2">
-                        <span class="text-rose-500 font-bold mt-[-1px]">×</span>
-                        <span>Outlet <strong>TIDAK BOLEH</strong> print resit fizikal atau bagi softcopy. Sistem di-block.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-500 font-bold mt-[-1px]">✓</span>
-                        <span>Ajar customer <strong>download Senheng App</strong> untuk check dan download resit mereka sendiri.</span>
-                    </li>
-                </ul>
-            </div>
+      <h3>Kalau lulus</h3>
+      <ul>
+        <li>Tunggu lebih kurang <strong>3 hari bekerja</strong> untuk agreement keluar.</li>
+        <li>Lepas agreement keluar, baru boleh ambil barang atau order delivery.</li>
+      </ul>
+    </section>
 
-            <!-- Card 3 -->
-            <div class="bg-orange-50 rounded-xl p-5 shadow-sm border border-orange-200 relative overflow-hidden">
-                <div class="absolute right-[-10px] top-[-10px] opacity-10">
-                    <i data-lucide="shield-check" class="w-24 h-24 text-orange-600"></i>
-                </div>
-                <div class="flex items-center gap-2 mb-3">
-                    <i data-lucide="alert-circle" class="w-5 h-5 text-orange-600"></i>
-                    <h3 class="font-bold text-orange-800">Privasi Point / S-Coin</h3>
-                </div>
-                <ul class="space-y-2.5 text-sm text-orange-900/80 relative z-10">
-                    <li class="flex items-start gap-2">
-                        <span class="text-orange-500 font-bold mt-[-1px]">×</span>
-                        <span>Staf <strong>TIDAK BOLEH</strong> check baki S-Coin customer guna sistem kedai.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-500 font-bold mt-[-1px]">✓</span>
-                        <span>Hanya customer sahaja boleh check S-Coin dalam Senheng App masing-masing (atas faktor keselamatan).</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
+    <section class="card">
+      <span class="tag red">AEON Charges</span>
+      <h2>Caj yang kena explain awal</h2>
+      <p><strong>Bukan bayar masa apply.</strong> Customer cuma perlu standby bayar selepas lulus.</p>
+      <ul>
+        <li>Yuran proses</li>
+        <li>Membership kalau tiada atau expired</li>
+        <li>Delivery fee kalau nak kedai hantar</li>
+        <li>Stamp fee</li>
+      </ul>
 
-        <!-- SECTION: OPERASI & JUALAN -->
-        <section id="section-operasi" class="tab-section hidden space-y-6 animate-slide-up">
-            <!-- Info Penghantaran -->
-            <div class="bg-blue-50 rounded-xl p-5 border border-blue-200">
-                <h3 class="font-bold text-blue-900 mb-4 flex items-center gap-2">
-                    <i data-lucide="truck" class="w-5 h-5"></i> Caj Penghantaran (Delivery)
-                </h3>
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
-                        <span class="text-sm font-medium text-slate-700">Kadar Rata (Flat Rate)</span>
-                        <span class="font-black text-blue-700">RM 35</span>
-                    </div>
-                    <p class="text-xs text-blue-800 px-1">*Jauh atau dekat caj tetap sama RM35.</p>
-                    
-                    <div class="flex items-center justify-between bg-gradient-to-r from-amber-100 to-amber-50 p-3 rounded-lg border border-amber-200 mt-2">
-                        <span class="text-sm font-bold text-amber-900 flex items-center gap-1">
-                            <i data-lucide="star" class="w-4 h-4 text-amber-500 fill-amber-500"></i> P1 Prime Member
-                        </span>
-                        <span class="font-black text-emerald-600">FREE</span>
-                    </div>
-                </div>
-            </div>
+      <div class="formula">Stamp fee = 0.5% × jumlah pinjaman</div>
+      <div class="example">
+        <strong>Contoh:</strong><br>
+        Pinjaman RM2500<br>
+        0.5% = RM12.50<br>
+        Biasanya dibulatkan jadi <strong>RM15</strong>
+      </div>
 
-            <!-- Set Display -->
-            <div class="bg-purple-50 rounded-xl p-5 border border-purple-200">
-                <h3 class="font-bold text-purple-900 mb-2 flex items-center gap-2">
-                    <i data-lucide="monitor-play" class="w-5 h-5"></i> Jualan Set Display
-                </h3>
-                <p class="text-sm text-purple-800 leading-relaxed mb-3">
-                    Kadangkala ada customer nak beli barang pameran (display).
-                </p>
-                <div class="bg-white p-3 rounded-lg border border-purple-100 flex items-start gap-2">
-                    <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-xs font-semibold text-slate-700">
-                        Wajib pastikan customer tengok depan-depan dan BERSETUJU penuh dengan keadaan fizikal barang sebelum bayar.
-                    </span>
-                </div>
-            </div>
+      <div class="warn"><strong>Penting:</strong> Explain awal-awal. Jangan tunggu customer dah lulus baru cerita pasal caj.</div>
+    </section>
 
-            <!-- SOP Check Stock -->
-            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-3">
-                    <i data-lucide="box" class="w-5 h-5 text-emerald-600"></i> SOP Check & Order Stok
-                </h3>
-                
-                <div class="space-y-4 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-emerald-300 before:to-slate-200">
-                    
-                    <!-- Step 1 -->
-                    <div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
-                        <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-emerald-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">1</div>
-                        <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
-                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                                <h4 class="font-bold text-slate-800 text-sm">Check Kedai Dulu</h4>
-                                <p class="text-xs text-slate-600 mt-1">Rak produk atau stor cawangan. Biasanya Small Appliances (SA) adalah <em>ready stock</em>.</p>
-                            </div>
-                        </div>
-                    </div>
+    <section class="card">
+      <span class="tag red">AEON Staff</span>
+      <h2>Lepas customer lulus, staff kena buat apa?</h2>
+      <div class="steps">
+        <div class="step">
+          <strong>1. Minta customer sign agreement</strong>
+        </div>
+        <div class="step">
+          <strong>2. Compile dokumen</strong>
+        </div>
+        <div class="step">
+          <strong>3. Submit claim ke AEON</strong>
+        </div>
+        <div class="step">
+          <strong>4. Courier dokumen ke HQ AEON</strong>
+        </div>
+      </div>
+      <div class="warn"><strong>Jangan lambat submit claim.</strong> Kalau customer dah ambil barang tapi claim tak submit, gaji atau komisen boleh kena hold.</div>
+    </section>
 
-                    <!-- Step 2 -->
-                    <div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
-                        <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-amber-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">2</div>
-                        <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
-                            <div class="bg-amber-50 p-3 rounded-lg border border-amber-100">
-                                <h4 class="font-bold text-amber-900 text-sm">Kalau Kedai Kosong?</h4>
-                                <p class="text-xs text-amber-800 mt-1">Cuba <em>push</em> customer tukar ke model lain yang <em>ready stock</em>, ATAU model <em>clearance</em>.</p>
-                            </div>
-                        </div>
-                    </div>
+    <section class="card" id="kiraan">
+      <span class="tag red">Kiraan</span>
+      <h2>Cara kira bulanan AEON</h2>
+      <p>Kalau customer tanya <strong>“berapa bulanan?”</strong>, jangan jawab umum. Tanya dulu <strong>barang apa customer nak beli</strong>.</p>
 
-                    <!-- Step 3 -->
-                    <div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
-                        <div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-blue-500 text-white font-bold text-sm shrink-0 z-10 shadow-sm">3</div>
-                        <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] pl-3 md:pl-0 md:group-odd:pr-3">
-                            <div class="bg-blue-50 p-3 rounded-lg border border-blue-100">
-                                <h4 class="font-bold text-blue-900 text-sm">Customer Nak Order Juga</h4>
-                                <p class="text-xs text-blue-800 mt-1 mb-2">Check sistem stok di <strong>CDC (Pusat Pengedaran)</strong>.</p>
-                                <div class="space-y-1 text-xs">
-                                    <div class="bg-white p-1.5 rounded flex gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-500 shrink-0"></i> Ada di CDC: Boleh sampai esok (kecuali Ahad).</div>
-                                    <div class="bg-white p-1.5 rounded flex gap-2"><i data-lucide="x-circle" class="w-3.5 h-3.5 text-rose-500 shrink-0"></i> Tiada di CDC: JANGAN janji tarikh sampai! Minta customer tunggu.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <ul>
+        <li>Kadar biasa: <strong>1.25% sebulan</strong></li>
+        <li>Bersamaan <strong>15% setahun</strong></li>
+        <li>Ini kadar maksimum biasa</li>
+        <li>Ada customer tertentu boleh dapat <strong>1.1% sebulan</strong></li>
+      </ul>
 
-        <!-- SECTION: PEMBAYARAN -->
-        <section id="section-pembayaran" class="tab-section hidden space-y-6 animate-slide-up">
-            <!-- Amaran Debit vs Kredit -->
-            <div class="bg-rose-600 rounded-xl p-4 text-white shadow-sm flex gap-3">
-                <i data-lucide="alert-triangle" class="w-8 h-8 shrink-0 opacity-90"></i>
-                <div>
-                    <h3 class="font-bold text-sm mb-1 uppercase tracking-wider">Penting: Semak Kad!</h3>
-                    <p class="text-xs text-rose-100 leading-relaxed">
-                        Staf wajib mahir bezakan antara <strong>Kad Debit</strong> dan <strong>Kad Kredit</strong>. Customer selalu keliru. Pelan ansuran 0% IPP HANYA sah untuk Kad Kredit sahaja.
-                    </p>
-                </div>
-            </div>
+      <div class="formula">[[Jumlah pinjaman × kadar bulanan] × bilangan bulan + jumlah pinjaman] ÷ bilangan bulan</div>
 
-            <!-- Pilihan Ansuran -->
-            <h3 class="font-bold text-slate-800 pt-2 border-b pb-2 flex items-center gap-2">
-                <i data-lucide="banknote" class="w-5 h-5 text-emerald-600"></i> Pilihan Ansuran Bulanan
-            </h3>
+      <div class="example">
+        <strong>Contoh:</strong><br><br>
+        Jumlah pinjaman = RM2500<br>
+        Tempoh = 24 bulan<br>
+        Kadar = 1.25%<br><br>
+        RM2500 × 1.25% = RM31.25<br>
+        RM31.25 × 24 = RM750<br>
+        RM750 + RM2500 = RM3250<br>
+        RM3250 ÷ 24 = <strong>RM135.42 sebulan</strong>
+      </div>
 
-            <div class="grid gap-4">
-                <!-- Hire Purchase -->
-                <div class="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
-                    <div class="bg-blue-100 p-2.5 rounded-lg shrink-0 h-fit">
-                        <i data-lucide="landmark" class="w-5 h-5 text-blue-700"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 text-sm">Sewa Beli (Aeon/Chailease)</h4>
-                        <ul class="text-xs text-slate-600 mt-2 space-y-1.5">
-                            <li>• Interest Flat Rate <strong>1.25% sebulan</strong> (Max)</li>
-                            <li>• Perlu hantar dokumen (slip gaji dll)</li>
-                            <li>• Proses kelulusan makan masa 2-3 hari bekerja</li>
-                        </ul>
-                    </div>
-                </div>
+      <div class="mini"><strong>Ayat paling mudah:</strong> “Kalau ikut kiraan kasar, lebih kurang RM135 sebulan.”</div>
+    </section>
 
-                <!-- BNPL -->
-                <div class="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
-                    <div class="bg-orange-100 p-2.5 rounded-lg shrink-0 h-fit">
-                        <i data-lucide="qr-code" class="w-5 h-5 text-orange-700"></i>
-                    </div>
-                    <div class="w-full">
-                        <h4 class="font-bold text-slate-800 text-sm">BNPL (Atome/SPayLater/Grab)</h4>
-                        <div class="bg-orange-50 p-2 rounded text-xs text-orange-800 mt-2 mb-2">
-                            SOP: Pilih barang &rarr; Buka QR Code &rarr; Customer Scan & Key-in Amaun &rarr; Customer nampak tenure di app mereka.
-                        </div>
-                        <p class="text-[11px] text-rose-600 font-medium leading-tight">
-                            *Jika ditanya berapa bulanan? Jawab kita TIDAK TAHU. Customer kena check kelayakan dalam app BNPL mereka sendiri.
-                        </p>
-                    </div>
-                </div>
+    <section class="card" id="paylater">
+      <span class="tag blue">Atome / SPayLater</span>
+      <h2>Kalau customer tak ada credit card dan tak nak buat AEON</h2>
+      <ul>
+        <li>Boleh cuba <strong>Atome</strong> atau <strong>SPayLater</strong>.</li>
+        <li>Untuk dua-dua ini, customer kena <strong>download app dan register sendiri</strong>.</li>
+        <li>Limit ikut <strong>platform masing-masing</strong>.</li>
+        <li>Senheng ada <strong>yuran proses</strong>. Refer table.</li>
+        <li>Lepas scan dan proceed, customer akan nampak sendiri <strong>berapa bulanan</strong>.</li>
+        <li>Customer boleh pilih mana satu yang sesuai.</li>
+      </ul>
 
-                <!-- 0% IPP -->
-                <div class="bg-white rounded-xl p-4 border border-slate-200 flex gap-4">
-                    <div class="bg-purple-100 p-2.5 rounded-lg shrink-0 h-fit">
-                        <i data-lucide="percent" class="w-5 h-5 text-purple-700"></i>
-                    </div>
-                    <div class="w-full">
-                        <h4 class="font-bold text-slate-800 text-sm">0% IPP (Kad Kredit)</h4>
-                        <ul class="text-xs text-slate-600 mt-2 space-y-1.5 mb-3">
-                            <li>• Sah untuk hampir semua bank.</li>
-                            <li>• Ada caj Yuran Proses (Admin Fee) sekali sahaja. Rujuk jadual.</li>
-                        </ul>
-                        <div class="bg-purple-600 text-white text-xs p-2 rounded-lg flex items-start gap-2">
-                            <i data-lucide="info" class="w-4 h-4 shrink-0 mt-0.5"></i>
-                            <span><strong>PROMO:</strong> Beli barang Apple, Yuran Proses PERCUMA (waived) buat masa ini!</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="chat">Contoh ayat:
+“Kalau boss tak ada credit card dan tak nak buat AEON, boleh try Atome atau SPayLater. Cuma boss kena daftar sendiri dalam app. Lepas proceed nanti, sistem akan tunjuk berapa bulanan dan option yang available.”</div>
+    </section>
 
-            <!-- Points & S-Coin (Now points primarily to the main S-Coin tab) -->
-            <h3 class="font-bold text-slate-800 pt-4 border-b pb-2 flex items-center gap-2">
-                <i data-lucide="coins" class="w-5 h-5 text-emerald-600"></i> Bayaran Guna Points
-            </h3>
+    <section class="card" id="scoin">
+      <span class="tag green">S-Coin</span>
+      <h2>S-Coin - cara dapat dan cara guna</h2>
+      <div class="mini"><strong>Staff kena faham:</strong> S-Coin ada <strong>2 bahagian penting</strong>. Pertama, <strong>cara customer dapat S-Coin</strong>. Kedua, <strong>cara customer guna S-Coin</strong>.</div>
 
-            <div class="grid gap-4">
-                <div class="bg-indigo-50 rounded-xl p-4 border border-indigo-100">
-                    <h4 class="font-bold text-indigo-900 text-sm mb-2">Bank Treat Points</h4>
-                    <p class="text-xs text-indigo-800 mb-2">Maybank, CIMB, Hong Leong, RHB. (Boleh check di terminal kad).</p>
-                    <div class="bg-white text-indigo-900 font-bold text-xs p-2 rounded text-center border border-indigo-200">
-                        Formula: 500 Points = RM 1
-                    </div>
-                    <p class="text-[11px] text-slate-500 mt-2 text-center">Anggap seperti tunai, tiada syarat minimun belian.</p>
-                </div>
+      <h3>1. Cara customer dapat S-Coin</h3>
+      <ul>
+        <li>Customer kena beli <strong>barang yang memang ada offer S-Coin cashback</strong>.</li>
+        <li>Biasanya dekat <strong>pricetag</strong> atau bahan promo akan ada tulis barang itu dapat <strong>berapa % S-Coin cashback</strong>.</li>
+        <li><strong>Tak semua barang</strong> customer beli akan dapat S-Coin.</li>
+        <li>Staff kena <strong>refer pricetag, promo, atau info semasa</strong>.</li>
+      </ul>
 
-                <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-200 flex items-center justify-between cursor-pointer hover:bg-emerald-100 transition-colors" onclick="switchTab('scoin')">
-                    <div>
-                        <h4 class="font-bold text-emerald-900 text-sm mb-1 flex items-center gap-2">
-                            <i data-lucide="coins" class="w-4 h-4"></i> Senheng S-Coins
-                        </h4>
-                        <p class="text-xs text-emerald-800">Klik di sini untuk lihat cara pengiraan dan syarat penebusan S-Coin di tab <strong>Sistem S-Coin</strong>.</p>
-                    </div>
-                    <i data-lucide="chevron-right" class="w-5 h-5 text-emerald-700 shrink-0"></i>
-                </div>
-            </div>
-        </section>
+      <div class="example">
+        <strong>Contoh:</strong><br>
+        TV TCL 55 inci harga <strong>RM2799</strong><br>
+        Offer <strong>20% S-Coin cashback</strong><br><br>
+        RM2799 × 20% = <strong>RM559.80</strong><br>
+        Nilai itu bersamaan <strong>55,980 S-Coin</strong>
+      </div>
 
-        <!-- SECTION: WARANTI (RW) -->
-        <section id="section-waranti" class="tab-section hidden space-y-6 animate-slide-up">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-slate-800 mb-2">1-to-1 Replacement (RW)</h2>
-                <p class="text-sm text-slate-600">Fokus utama ketika menjual <strong>Small Appliances (SA)</strong>.</p>
-            </div>
+      <h3>2. Maintenance fee 5%</h3>
+      <ul>
+        <li>Daripada jumlah S-Coin yang customer patut dapat, <strong>5%</strong> akan ditolak terus sebagai <strong>maintenance fee</strong>.</li>
+        <li>Jadi jumlah S-Coin yang customer terima sebenar ialah selepas tolak 5% ini.</li>
+      </ul>
 
-            <div class="grid gap-4">
-                <!-- ADD ON RW -->
-                <div class="bg-blue-600 rounded-xl shadow-md border border-blue-700 relative overflow-hidden">
-                    <div class="absolute right-[-10px] top-[-10px] opacity-10">
-                        <i data-lucide="refresh-ccw" class="w-32 h-32 text-white"></i>
-                    </div>
-                    <div class="p-4 relative z-10 text-white">
-                        <div class="flex justify-between items-center mb-4 border-b border-blue-500 pb-3">
-                            <h3 class="font-bold text-lg flex items-center gap-2">
-                                <i data-lucide="thumbs-up" class="w-5 h-5 text-blue-200"></i> Beli dengan RW
-                            </h3>
-                            <span class="bg-blue-800 text-xs px-2 py-1 rounded-full font-bold">Disarankan</span>
-                        </div>
-                        
-                        <ul class="space-y-3 text-sm text-blue-50 mb-4">
-                            <li class="flex items-start gap-2">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]"></i>
-                                <span><strong>Extra 1 Tahun.</strong> (Cth: Kilang 1 Thn + RW 1 Thn = 2 Tahun).</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]"></i>
-                                <span>Rosak dalam tempoh? <strong>Tukar BARU On-The-Spot!</strong></span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i data-lucide="refresh-ccw" class="w-5 h-5 text-blue-300 shrink-0 mt-[-2px]"></i>
-                                <span>Jika model lama dah habis (obsolete), customer boleh pilih model baru ikut harga asal masa beli.</span>
-                            </li>
-                        </ul>
-                        
-                        <div class="bg-blue-800/50 p-3 rounded-lg text-xs flex gap-2">
-                            <i data-lucide="info" class="w-4 h-4 shrink-0"></i>
-                            <span><strong>Contoh:</strong> Beli Periuk Nasi RM150. Customer cuma perlu add-on <strong>RM11</strong> sahaja untuk RW. Sangat berbaloi!</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="example">
+        <strong>Contoh sambungan:</strong><br>
+        S-Coin asal = <strong>55,980</strong><br>
+        5% maintenance fee ditolak = <strong>2,799</strong><br>
+        Jadi S-Coin sebenar yang customer dapat = <strong>53,181 S-Coin</strong>
+      </div>
 
-                <!-- Tanpa RW -->
-                <div class="bg-white rounded-xl shadow-sm border border-rose-200 p-4">
-                    <h3 class="font-bold text-rose-800 text-sm mb-3 flex items-center gap-2">
-                        <i data-lucide="thumbs-down" class="w-4 h-4"></i> Menolak (TIDAK) Add-on RW
-                    </h3>
-                    <ul class="space-y-2 text-xs text-slate-600">
-                        <li class="flex items-start gap-2">
-                            <span class="text-rose-500 font-bold mt-[-1px]">×</span>
-                            <span>Hanya waranti kilang (biasa 1 tahun).</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-rose-500 font-bold mt-[-1px]">×</span>
-                            <span><strong>TIADA</strong> tukar baru on-the-spot.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-rose-500 font-bold mt-[-1px]">×</span>
-                            <span>Jika rosak, kena hantar kilang (repair/tunggu 1-2 bulan).</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+      <ul>
+        <li>S-Coin yang customer dapat ini <strong>valid 1 tahun</strong>.</li>
+        <li>Kalau tak guna dalam tempoh setahun, S-Coin itu akan <strong>burn</strong>.</li>
+        <li>S-Coin juga <strong>tak masuk serta-merta</strong> selepas pembelian.</li>
+        <li>S-Coin akan dikreditkan ke dalam <strong>Senheng App customer dalam masa 24 jam selepas pembelian</strong>.</li>
+        <li>Senang cakap, biasanya <strong>esok baru masuk</strong>.</li>
+      </ul>
 
-            <!-- Syarat Claim -->
-            <div class="bg-slate-100 rounded-xl p-4 border border-slate-200">
-                <h3 class="font-bold text-slate-800 text-sm mb-3">SOP Claim Waranti:</h3>
-                <div class="space-y-2 text-xs">
-                    <div class="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><i data-lucide="store" class="w-4 h-4 text-emerald-600"></i> Boleh claim di mana-mana cawangan. (Wajib ada P1).</div>
-                    <div class="bg-white p-2 rounded flex items-center gap-2 shadow-sm"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i> <strong>Hanya cover:</strong> Kerosakan Mekanikal & Elektrikal kilang.</div>
-                    <div class="bg-white p-2 rounded flex items-start gap-2 shadow-sm text-rose-700">
-                        <i data-lucide="x-circle" class="w-4 h-4 shrink-0 mt-0.5"></i> 
-                        <span><strong>TIDAK cover:</strong> Jatuh pecah, kilat, masuk air, calar, bateri/filter.</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- SECTION: V-CARE (BAHARU) -->
-        <section id="section-vcare" class="tab-section hidden space-y-6 animate-slide-up">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-slate-800 mb-2">V-Care (Vision Care)</h2>
-                <p class="text-sm text-slate-600">Insurans Extended Warranty untuk perlindungan tambahan sehingga 5 tahun.</p>
-            </div>
+      <div class="chat">Contoh ayat:
+“Boss akan dapat S-Coin kalau beli barang yang memang ada offer S-Coin cashback pada pricetag atau promo. Tapi tak semua barang ada. Lepas beli pun coin tak masuk terus. Biasanya dalam masa 24 jam, maknanya esok baru masuk dalam app. Dan coin yang dapat tu valid setahun sahaja.”</div>
 
-            <!-- Card 1: Konsep & Kiraan -->
-            <div class="bg-indigo-50 rounded-xl p-5 shadow-sm border border-indigo-200">
-                <h3 class="font-bold text-indigo-900 mb-3 flex items-center gap-2">
-                    <i data-lucide="calculator" class="w-5 h-5 text-indigo-700"></i> Cara Kira Tahun Waranti
-                </h3>
-                <p class="text-xs text-indigo-800 mb-3 leading-relaxed">
-                    V-Care menyambung waranti selepas waranti kilang & waranti percuma Senheng tamat. <br><strong>Maksimum Total = 5 Tahun.</strong>
-                </p>
-                
-                <div class="space-y-2">
-                    <div class="bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
-                        <span class="text-xs font-bold text-slate-500 block mb-1">Contoh 1: Smartphone (Standard)</span>
-                        <div class="flex items-center gap-1 text-xs font-bold text-slate-800 flex-wrap">
-                            <span class="bg-slate-200 px-2 py-1 rounded">1 Thn Kilang</span> + 
-                            <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded">1 Thn P1 Free</span> + 
-                            <span class="bg-indigo-600 text-white px-2 py-1 rounded">2 Thn V-Care</span>
-                            <span class="ml-auto text-indigo-700 text-sm">= 4 TAHUN</span>
-                        </div>
-                    </div>
+      <h3>3. Redeem barang terpilih</h3>
+      <ul>
+        <li>Customer boleh guna S-Coin untuk <strong>redeem barang terpilih</strong>.</li>
+        <li>Redeem ini boleh jadi <strong>100%</strong>, maksudnya customer boleh dapat barang itu macam <strong>free</strong>, <strong>kalau S-Coin cukup</strong>.</li>
+        <li>Kalau S-Coin <strong>tak cukup</strong>, customer <strong>tak boleh topup duit</strong> untuk cukupkan beza.</li>
+      </ul>
 
-                    <div class="bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
-                        <span class="text-xs font-bold text-slate-500 block mb-1">Contoh 2: TV (Tiada Free P1 Extra Year)</span>
-                        <div class="flex items-center gap-1 text-xs font-bold text-slate-800 flex-wrap">
-                            <span class="bg-slate-200 px-2 py-1 rounded">2 Thn Kilang</span> + 
-                            <span class="bg-indigo-600 text-white px-2 py-1 rounded">2 Thn V-Care</span>
-                            <span class="ml-auto text-indigo-700 text-sm">= 4 TAHUN</span>
-                        </div>
-                        <p class="text-[10px] text-rose-500 mt-1 italic">*TV tiada free extra 1 year P1, tapi boleh add-on V-Care.</p>
-                    </div>
+      <div class="example">
+        <strong>Contoh:</strong><br>
+        Blender perlukan <strong>15,000 S-Coin</strong> untuk tebus.<br>
+        Kalau customer cuma ada <strong>14,000 S-Coin</strong>, customer <strong>tak boleh tambah RM10</strong> untuk cukupkan.<br>
+        <strong>S-Coin mesti cukup tepat ikut jumlah yang diperlukan.</strong>
+      </div>
 
-                    <div class="bg-white p-3 rounded-lg border border-indigo-100 shadow-sm">
-                        <span class="text-xs font-bold text-slate-500 block mb-1">Contoh 3: Lain-lain (Max 5 Tahun)</span>
-                        <div class="text-xs text-slate-600 space-y-1">
-                            <div class="flex justify-between"><span>2 Thn Kilang + 1 Thn Free + 2 Thn V-Care</span> <strong>= 5 TAHUN</strong></div>
-                            <div class="flex justify-between"><span>1 Thn Kilang + 1 Thn Free + 3 Thn V-Care</span> <strong>= 5 TAHUN</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <ul>
+        <li>Barang terpilih ini <strong>tak semestinya barang yang dipamer dalam kedai sahaja</strong>.</li>
+        <li>Kalau customer tak berminat barang redeem dalam kedai, customer boleh tengok dalam <strong>Senheng App</strong>.</li>
+        <li>Dalam Senheng App ada <strong>lebih 2400+ produk</strong> yang boleh ditebus guna S-Coin.</li>
+        <li>Kebanyakan produk app ini datang daripada <strong>third party seller</strong>.</li>
+        <li>Barang akan dihantar ke rumah customer guna <strong>courier service pilihan seller masing-masing</strong>.</li>
+      </ul>
 
-            <!-- Card 2: Coverage Limit -->
-            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-                <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                    <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i> Had Perlindungan (Repair Credit)
-                </h3>
-                <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 text-xs text-slate-600 leading-relaxed mb-3">
-                    <p class="mb-2">Insurans cover kos <strong>Labour, Transport & Parts</strong>. Tetapi ada had (limit):</p>
-                    <ul class="list-disc ml-4 space-y-1">
-                        <li>Insurans cover kos repair sehingga <strong>Harga Beli Asal</strong> barang.</li>
-                        <li>Contoh: Peti Sejuk RM2000. Customer ada "Repair Credit" RM2000.</li>
-                        <li>Jika repair credit habis digunakan, waranti tamat automatik.</li>
-                    </ul>
-                </div>
-            </div>
+      <h3>4. Tolak untuk next purchase</h3>
+      <ul>
+        <li><strong>Boleh</strong>, tapi ada syarat.</li>
+        <li>Pembelian mesti <strong>RM1000 ke atas</strong>.</li>
+        <li>Customer hanya boleh tolak <strong>maksimum 10%</strong> daripada harga barang.</li>
+        <li>Cara ini <strong>tak boleh guna</strong> untuk <strong>produk Apple</strong>, <strong>barang promosi Untung Gila</strong>, <strong>Xiaomi</strong>, dan <strong>Dyson</strong>.</li>
+      </ul>
 
-            <!-- Card 3: Replacement Voucher (PENTING) -->
-            <div class="bg-rose-50 rounded-xl p-5 shadow-sm border border-rose-200 relative overflow-hidden">
-                <div class="absolute right-[-10px] top-[-10px] opacity-10">
-                    <i data-lucide="ticket" class="w-24 h-24 text-rose-600"></i>
-                </div>
-                <h3 class="font-bold text-rose-900 mb-3 flex items-center gap-2 relative z-10">
-                    <i data-lucide="alert-octagon" class="w-5 h-5 text-rose-600"></i> Replacement Voucher (BER)
-                </h3>
-                <p class="text-xs text-rose-800 mb-4 relative z-10">
-                    Jika kos repair terlalu mahal atau parts tiada (*Beyond Economic Repair*), insurans akan bagi <strong>Replacement Voucher</strong>.
-                </p>
+      <div class="example">
+        <strong>Contoh:</strong><br>
+        Customer ada <strong>500,000 S-Coin</strong> = nilai <strong>RM500</strong>.<br>
+        Customer beli TV harga <strong>RM2000</strong>.<br>
+        Walaupun S-Coin customer banyak, customer tetap hanya boleh tolak <strong>10%</strong> sahaja.<br>
+        Jadi maksimum potongan cuma <strong>RM200</strong>.
+      </div>
 
-                <div class="bg-white p-3 rounded-lg border border-rose-100 relative z-10">
-                    <span class="text-xs font-bold text-rose-700 block mb-2 underline">Nilai Voucher Berdasarkan Apa?</span>
-                    
-                    <div class="flex items-center gap-2 mb-2">
-                        <i data-lucide="x" class="w-4 h-4 text-rose-500"></i>
-                        <span class="text-xs text-slate-500 line-through">Harga Beli Dulu (RM 3000)</span>
-                    </div>
-                    <div class="flex items-center gap-2 mb-3">
-                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
-                        <span class="text-xs font-bold text-slate-800">Harga Pasaran Semasa (Market Value)</span>
-                    </div>
+      <div class="warn"><strong>Nota penting:</strong> Jangan cakap pada customer semua S-Coin boleh guna ikut suka. Staff kena check dulu sama ada customer nak <strong>redeem barang terpilih</strong> atau nak <strong>tolak next purchase</strong>, dan kena semak juga sama ada barang yang dibeli itu memang <strong>layak dapat S-Coin</strong> atau tidak.</div>
 
-                    <div class="bg-rose-100 p-2 rounded text-[11px] text-rose-900 leading-relaxed italic border border-rose-200">
-                        <strong>Analogi untuk Customer:</strong> "Dulu beli TV RM3000. Sekarang rosak, insurans 'beli balik' TV rosak tu dengan harga RM1800 (sebab market value specs tu sekarang dah murah). Sangat berbaloi sebab kalau jual besi buruk tak laku."
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="chat">Contoh ayat:
+“S-Coin ada dua bahagian. Pertama, cara dapat coin. Customer kena beli barang yang memang ada offer S-Coin cashback, dan coin biasanya masuk dalam app esok sebab ambil masa 24 jam. Kedua, cara guna coin. Boss boleh redeem barang terpilih kalau coin cukup, atau boleh guna untuk tolak next purchase dengan syarat tertentu.”</div>
+    </section>
 
-        <!-- SECTION: PLUSONE MEMBERSHIP -->
-        <section id="section-keahlian" class="tab-section hidden space-y-6 animate-slide-up">
-            <div class="text-center mb-4">
-                <h2 class="text-2xl font-bold text-slate-800">Senheng PlusOne®</h2>
-                <p class="text-sm text-slate-600">3 Peringkat Keahlian Utama</p>
-            </div>
+    <section class="card" id="ayat">
+      <span class="tag orange">Ayat Ringkas</span>
+      <h2>Ayat mudah untuk layan customer</h2>
+      <div class="qa">
+        <div class="qa-item">
+          <div class="q">Boleh buat bulanan?</div>
+          <div class="a">Boleh. Ikut barang dan cara bayaran. Boleh guna kad kredit, AEON, Atome, atau SPayLater.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">Berapa bulanan?</div>
+          <div class="a">Boleh kira, tapi saya kena tahu dulu boss nak barang apa.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">Kad kredit boleh?</div>
+          <div class="a">Boleh. Semua barang boleh swipe kad kredit. Kalau nak 0% IPP pun boleh kalau layak.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">AEON macam mana?</div>
+          <div class="a">Kita boleh buat semakan dulu. Kena buat eKYC dulu, lepas tu baru nampak layak apply atau tak.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">Atome atau SPayLater macam mana?</div>
+          <div class="a">Boss kena ada app dan daftar sendiri. Lepas proceed, sistem akan tunjuk bulanan yang available.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">Macam mana customer dapat S-Coin?</div>
+          <div class="a">Customer kena beli barang yang memang ada offer S-Coin cashback pada pricetag atau promo. Lepas beli, coin biasanya masuk dalam app dalam masa 24 jam, selalunya esok.</div>
+        </div>
+        <div class="qa-item">
+          <div class="q">S-Coin boleh tolak next purchase?</div>
+          <div class="a">Boleh, tapi pembelian mesti RM1000 ke atas dan maksimum potongan cuma 10% sahaja. Tak boleh guna untuk Apple, promosi Untung Gila, Xiaomi, dan Dyson.</div>
+        </div>
+      </div>
+    </section>
 
-            <div class="space-y-5">
-                <!-- Basic -->
-                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                    <div class="bg-slate-100 p-3 border-b border-slate-200 flex justify-between items-center">
-                        <h3 class="font-bold text-slate-700">P1 Basic</h3>
-                        <span class="bg-slate-200 text-slate-700 text-xs px-2 py-1 rounded font-bold">PERCUMA</span>
-                    </div>
-                    <div class="p-4 space-y-2">
-                        <div class="flex items-start gap-2 text-sm">
-                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
-                            <div><span class="font-medium text-slate-700">Kumpul S-Coin</span></div>
-                        </div>
-                        <div class="flex items-start gap-2 text-sm">
-                            <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 mt-[2px] text-rose-500"></i>
-                            <div><span class="font-medium text-rose-600">TAK BOLEH Redeem S-Coin</span></div>
-                        </div>
-                        <div class="flex items-start gap-2 text-sm">
-                            <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 mt-[2px] text-rose-500"></i>
-                            <div><span class="font-medium text-rose-600">TIADA Extra 1 Tahun Waranti</span></div>
-                        </div>
-                        <div class="text-[11px] text-slate-500 mt-2 pt-2 border-t">
-                            *Nak Extra Waranti / RW SA: Perlu Add-on RM9.90.
-                        </div>
-                    </div>
-                </div>
+    <section class="card">
+      <span class="tag blue">Do & Don't</span>
+      <h2>Perkara penting untuk staff baru</h2>
+      <div class="good">
+        <strong>Buat:</strong>
+        <ul>
+          <li>Tanya barang dulu sebelum kira bulanan.</li>
+          <li>Explain semua caj awal-awal.</li>
+          <li>Refer table untuk admin fee dan process fee.</li>
+          <li>Pastikan customer ada email aktif untuk eKYC AEON.</li>
+        </ul>
+      </div>
+      <div class="warn">
+        <strong>Jangan buat:</strong>
+        <ul>
+          <li>Jangan janji customer confirm lulus.</li>
+          <li>Jangan sorok caj sampai customer dah lulus.</li>
+          <li>Jangan main agak caj. Refer table.</li>
+          <li>Jangan lambat submit claim AEON.</li>
+        </ul>
+      </div>
+    </section>
 
-                <!-- Classic -->
-                <div class="bg-white border-2 border-emerald-500 rounded-xl overflow-hidden shadow-md">
-                    <div class="bg-emerald-500 p-3 flex justify-between items-center text-white">
-                        <h3 class="font-bold">P1 Classic</h3>
-                        <span class="bg-white text-emerald-700 text-xs px-2 py-1 rounded font-bold shadow-sm">PILIHAN RAMAI</span>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <div class="flex items-end gap-2 mb-2">
-                            <span class="text-2xl font-black text-emerald-700">RM 12</span><span class="text-xs text-slate-500 pb-1">/ 1 Tahun</span>
-                            <span class="text-xs text-slate-400 pb-1 px-1">atau</span>
-                            <span class="text-lg font-bold text-emerald-600">RM 36</span><span class="text-xs text-slate-500 pb-1">/ 5 Tahun</span>
-                        </div>
-                        
-                        <div class="flex items-start gap-2 text-sm">
-                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
-                            <div><span class="font-medium text-slate-700">Kumpul & REDEEM S-Coin</span></div>
-                        </div>
-                        <div class="flex items-start gap-2 text-sm">
-                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
-                            <div>
-                                <span class="font-medium text-slate-700">FREE Extra 1 Tahun Waranti</span>
-                                <p class="text-[11px] text-emerald-600 mt-1 font-medium bg-emerald-50/50 p-1 rounded inline-block border border-emerald-100">Contoh: Kilang 1 thn + P1 1 thn = 2 thn</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-emerald-50 p-2.5 rounded border border-emerald-100 mt-2">
-                            <div class="text-[11px] font-bold text-rose-600 flex items-center gap-1 mb-1">
-                                <i data-lucide="alert-circle" class="w-3 h-3"></i> Syarat Extra Waranti:
-                            </div>
-                            <ul class="text-[10px] text-slate-600 space-y-0.5 ml-4 list-disc">
-                                <li>Sah untuk barang RM400 ke atas sahaja.</li>
-                                <li><strong>TV TIDAK DAPAT</strong> Extra Waranti ini.</li>
-                            </ul>
-                            <div class="text-[10px] text-slate-600 mt-2 ml-1">
-                                *RW Small Appliances (SA): Harga bergantung pada pricetag.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prime -->
-                <div class="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-lg">
-                    <div class="p-4 border-b border-slate-700 flex justify-between items-center">
-                        <h3 class="font-bold text-amber-400 flex items-center gap-1"><i data-lucide="star" class="w-4 h-4 fill-amber-400"></i> P1 Prime</h3>
-                        <span class="text-xl font-black text-white">RM 120</span>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <p class="text-xs font-bold text-amber-200 mb-2">Sah Seumur Hidup (Lifetime)</p>
-                        
-                        <div class="flex items-start gap-2 text-sm">
-                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-emerald-500"></i>
-                            <div><span class="font-medium text-slate-200">Semua benefit P1 Classic</span></div>
-                        </div>
-                        <div class="flex items-start gap-2 text-sm">
-                            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 mt-[2px] text-amber-400"></i>
-                            <div><span class="font-medium text-slate-200">FREE Delivery untuk 12 Tahun</span></div>
-                        </div>
-
-                        <p class="text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-700">
-                            *Syarat Extra Waranti (Barang &gt;RM400, Kecuali TV) sama seperti Classic.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION: S-COIN (BAHARU) -->
-        <section id="section-scoin" class="tab-section hidden space-y-6 animate-slide-up">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-slate-800 mb-2">Sistem S-Coin</h2>
-                <p class="text-sm text-slate-600">Kelebihan utama Senheng. Fahami cara kumpul, kiraan, dan penebusan.</p>
-            </div>
-
-            <!-- Cara Kumpul -->
-            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-                <h3 class="font-bold text-emerald-800 mb-3 flex items-center gap-2">
-                    <i data-lucide="arrow-down-circle" class="w-5 h-5 text-emerald-600"></i> Cara Mendapatkan S-Coin
-                </h3>
-                <p class="text-sm text-slate-600 mb-3">
-                    Pelanggan akan mendapat <strong>S-Coin Cashback</strong> pada model-model terpilih. Promosi utama Senheng banyak memfokuskan kepada ganjaran ini (Contoh: Beli TV dapat 50% S-Coin).
-                </p>
-                <div class="bg-emerald-50 border border-emerald-100 p-3 rounded-lg text-xs text-emerald-800 flex gap-2 items-start">
-                    <i data-lucide="clock" class="w-4 h-4 shrink-0 mt-0.5"></i>
-                    <span>S-Coin akan dikreditkan ke dalam akaun P1 pelanggan <strong>dalam masa 24 jam</strong> selepas barang dihantar ke rumah atau dibawa balik (self-pickup).</span>
-                </div>
-            </div>
-
-            <!-- Formula Pengiraan & Maintenance Fee -->
-            <div class="bg-amber-50 rounded-xl p-5 shadow-sm border border-amber-200">
-                <h3 class="font-bold text-amber-900 mb-3 flex items-center gap-2">
-                    <i data-lucide="calculator" class="w-5 h-5 text-amber-600"></i> Formula & Maintenance Fee (PENTING)
-                </h3>
-                <p class="text-xs text-amber-800 mb-3">
-                    Staf perlu tahu cara pengiraan sebenar sebelum berjanji dengan pelanggan. Terdapat <strong>5% Maintenance Fee</strong> yang akan ditolak dari nilai ganjaran.
-                </p>
-                
-                <div class="bg-white p-4 rounded-lg border border-amber-100 shadow-sm text-sm">
-                    <strong class="text-slate-800 block mb-2 border-b pb-1">Contoh Pengiraan:</strong>
-                    <ul class="space-y-2 text-slate-600 text-xs">
-                        <li>Beli TV Harga: <strong>RM 2,000</strong></li>
-                        <li>Iklan S-Coin: <strong>Dapat 50%</strong></li>
-                        <li>Nilai Sepatutnya: <span class="line-through text-rose-500">RM 1,000</span> (50% dari RM 2,000)</li>
-                        <li>Tolak 5% Fee: <strong>- RM 50</strong> (5% dari RM 1,000)</li>
-                    </ul>
-                    <div class="mt-3 bg-amber-100 p-2 rounded text-amber-900 font-bold flex justify-between">
-                        <span>Nilai Akhir Diterima:</span>
-                        <span>RM 950 (95,000 Coins)</span>
-                    </div>
-                </div>
-
-                <div class="mt-4 flex gap-2 items-center bg-white p-2 rounded border border-slate-200 text-xs text-slate-700 font-bold justify-center">
-                    <i data-lucide="coins" class="w-4 h-4 text-emerald-500"></i> 100 Coins = RM 1
-                </div>
-            </div>
-
-            <!-- Tempoh Sah -->
-            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex gap-4">
-                <div class="bg-rose-100 p-3 rounded-lg shrink-0 h-fit">
-                    <i data-lucide="calendar-off" class="w-6 h-6 text-rose-600"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-slate-800 text-sm">Tempoh Sah S-Coin (Validity)</h3>
-                    <p class="text-sm text-slate-600 mt-1">S-Coin hanya sah selama <strong>1 Tahun</strong> sahaja. Galakkan pelanggan untuk terus *redeem* sebaik sahaja S-Coin masuk bagi mengelakkan *expired*.</p>
-                </div>
-            </div>
-
-            <!-- Cara Redeem -->
-            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-                <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2 border-b pb-2">
-                    <i data-lucide="shopping-cart" class="w-5 h-5 text-blue-600"></i> Cara Penebusan (Redeem)
-                </h3>
-                
-                <div class="grid md:grid-cols-2 gap-4">
-                    <!-- In-Store -->
-                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-lg">
-                        <h4 class="font-bold text-blue-800 text-sm mb-2 flex items-center gap-2">
-                            <i data-lucide="store" class="w-4 h-4"></i> Di Outlet (Kedai)
-                        </h4>
-                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc ml-4">
-                            <li>Boleh tebus 100% untuk barang <strong>Selected Items / Redemption Corner</strong>.</li>
-                            <li>Barang biasa: Wajib harga >RM1000 & hanya boleh tolak max <strong>10%</strong>.</li>
-                        </ul>
-                    </div>
-
-                    <!-- In-App -->
-                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg">
-                        <h4 class="font-bold text-emerald-800 text-sm mb-2 flex items-center gap-2">
-                            <i data-lucide="smartphone" class="w-4 h-4"></i> Melalui Senheng App
-                        </h4>
-                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc ml-4">
-                            <li>Jika pelanggan tidak berminat dengan barang di kedai, arahkan mereka ke App.</li>
-                            <li>Ada lebih <strong>2,000+ items</strong> (termasuk *seller* pihak ketiga).</li>
-                            <li>Barang dihantar terus ke rumah (Lori/Courier).</li>
-                            <li>Pelanggan hanya perlu bayar <strong>kos penghantaran (Shipping)</strong> sahaja.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION: TUGAS STAFF -->
-        <section id="section-tugas" class="tab-section hidden space-y-6 animate-slide-up">
-            <div class="bg-white rounded-xl p-5 shadow-sm border border-slate-200">
-                <h2 class="text-xl font-bold text-slate-800 mb-3">Akses Sistem Outlet</h2>
-                <p class="text-sm text-slate-600 mb-5">
-                    Tugas utama anda di kaunter (sistem hanya beri akses perkara di bawah):
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
-                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
-                            <i data-lucide="monitor-play" class="w-5 h-5 text-emerald-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-800">Key-in Pembelian</h3>
-                            <p class="text-[11px] text-slate-500 mt-0.5">Merekod transaksi jualan ke dalam sistem.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
-                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
-                            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-800">Semak Warranty</h3>
-                            <p class="text-[11px] text-slate-500 mt-0.5">Check tempoh waranti barang customer.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
-                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
-                            <i data-lucide="file-warning" class="w-5 h-5 text-emerald-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-800">Report Claim</h3>
-                            <p class="text-[11px] text-slate-500 mt-0.5">Bantu customer masuk report claim waranti.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
-                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
-                            <i data-lucide="award" class="w-5 h-5 text-emerald-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-800">Check Keahlian</h3>
-                            <p class="text-[11px] text-slate-500 mt-0.5">Semak tier dan status aktif PlusOne customer.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex items-start gap-3">
-                        <div class="bg-white p-2 rounded shadow-sm shrink-0">
-                            <i data-lucide="package-check" class="w-5 h-5 text-emerald-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-sm text-slate-800">Check Stok</h3>
-                            <p class="text-[11px] text-slate-500 mt-0.5">Semak stok kedai atau CDC.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- App Logic -->
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // Tab Switching Logic
-        function switchTab(tabId) {
-            // 1. Hide all sections
-            const sections = document.querySelectorAll('.tab-section');
-            sections.forEach(section => {
-                section.classList.add('hidden');
-                // Remove animation class to re-trigger it when shown again
-                section.classList.remove('animate-slide-up'); 
-            });
-
-            // 2. Show the active section and trigger animation
-            const targetSection = document.getElementById('section-' + tabId);
-            if(targetSection) {
-                targetSection.classList.remove('hidden');
-                // Small trick to restart animation
-                void targetSection.offsetWidth; 
-                targetSection.classList.add('animate-slide-up');
-            }
-
-            // 3. Update Tab Button Styles
-            const buttons = document.querySelectorAll('.tab-btn');
-            
-            // Classes for Active State
-            const activeClasses = ['border-emerald-300', 'text-white', 'bg-emerald-800/80'];
-            // Classes for Inactive State
-            const inactiveClasses = ['border-transparent', 'text-emerald-200/70', 'hover:text-white', 'hover:bg-emerald-800/40'];
-
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-tab') === tabId) {
-                    btn.classList.add(...activeClasses);
-                    btn.classList.remove(...inactiveClasses);
-                } else {
-                    btn.classList.add(...inactiveClasses);
-                    btn.classList.remove(...activeClasses);
-                }
-            });
-
-            // 4. Scroll active tab into view
-            const activeBtn = document.querySelector(`button[data-tab="${tabId}"]`);
-            if(activeBtn) {
-                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-            }
-        }
-
-        // Logic to show/hide fade effect based on scroll position
-        function handleScroll() {
-            const container = document.getElementById('tab-container');
-            const leftFade = document.getElementById('left-fade');
-            const rightFade = document.getElementById('right-fade');
-            
-            // Show/Hide Left Fade
-            if (container.scrollLeft > 20) {
-                leftFade.classList.remove('hidden');
-            } else {
-                leftFade.classList.add('hidden');
-            }
-
-            // Show/Hide Right Fade
-            // Use 5px buffer for better UX
-            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
-                rightFade.classList.add('hidden');
-            } else {
-                rightFade.classList.remove('hidden');
-            }
-        }
-        
-        // Initial check on load
-        document.addEventListener('DOMContentLoaded', handleScroll);
-    </script>
+    <div class="footer">Training Kit Internal Use Only - Versi smartphone friendly</div>
+  </div>
 </body>
 </html>
